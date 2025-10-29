@@ -1,7 +1,7 @@
-#include <iostream>
+#include "Interface.h"
 
 int main() {
-
-    std::cout << "OLA " << std::endl;
+    Interface ui;
+    ui.inicia();
     return 0;
 }
