@@ -4,6 +4,8 @@
 
 #include "EstaSolo.h"
 
+#include <string>
+
 class BocadoSolo {
     public:
       BocadoSolo();
@@ -21,6 +23,8 @@ class BocadoSolo {
 
       void colocaJardineiro();
       void removeJardineiro();
+
+        std::string mostra();
 
     private:
       int agua;

@@ -6,13 +6,13 @@
 
 
 
-3\. Fazer commit das alterações:
+2\. Fazer commit das alterações:
 
 &nbsp;  git commit -m "Mensagem do commit"
 
 
 
-4\. Enviar alterações para o repositório remoto: !PARA MANDAR AS TUAS MODIFCACOES NO PC PAR AO REPOSTIRIO
+3\. Enviar alterações para o repositório remoto: !PARA MANDAR AS TUAS MODIFCACOES NO PC PAR AO REPOSTIRIO
 
 
 
@@ -20,19 +20,19 @@
 
 
 
-5\. Trazer as últimas alterações do repositório remoto: !SEMPRE QUE HA MODIFICACOES NO REPOSITORIO E NAO NO TEU PC
+4\. Trazer as últimas alterações do repositório remoto: !SEMPRE QUE HA MODIFICACOES NO REPOSITORIO E NAO NO TEU PC
 
 &nbsp;  git pull origin main
 
 
 
-6\. Criar nova branch (opcional):
+5\. Criar nova branch (opcional):
 
 &nbsp;  git checkout -b <nome\_branch>
 
 
 
-7\. Mudar para uma branch existente (opcional):
+6\. Mudar para uma branch existente (opcional):
 
 &nbsp;  git checkout <nome\_branch>
 

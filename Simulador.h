@@ -3,10 +3,12 @@
 #define SIMULADOR_H
 
 #include "Jardim.h"
-#include "Comando.h"
 #include "Jardineiro.h"
 #include <sstream>
 
+// ************** IMPORTANTE *********************
+// em vez do include, para nao haver um loop de includes
+class Comando;
 
 class Simulador {
 
@@ -21,13 +23,15 @@ class Simulador {
     void criaJardim(int nLinhas, int nColunas);
     void mostraInterface() const ;
 
+    const Jardim * devolveJardim() const { return jardim; }
+
     Comando* parse(const std::string &input, std::istringstream& parametros);
     bool executa(const std::string &input);
 
   private:
     static const int MAX_CMDS = 30;
 
-    Jardim jardim;
+    Jardim* jardim;
     Jardineiro jardineiro;
 
     Comando *cmds[MAX_CMDS];

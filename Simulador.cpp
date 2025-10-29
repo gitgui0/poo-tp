@@ -1,19 +1,29 @@
 
 #include "Simulador.h"
 #include "Comando.h"
+#include "ComandoAvanca.h"
+#include "ComandoJardim.h"
 
 #include <iostream>
 #include <sstream>
 
 using namespace std;
 
-Simulador::Simulador(){
-  cout << "construtor simulador" << endl;
-  for(int i = 0; i < MAX_CMDS; i++){
+Simulador::Simulador()
+  : jardim(nullptr), nComandos(0), nInstantes(0)
+{
+  for (int i = 0; i < MAX_CMDS; i++)
     cmds[i] = nullptr;
-  }
-  nComandos = 0;
-}; // por agora
+
+
+  //isto t apodre, mas por agora é assim
+  Comando* ca = new ComandoAvanca();
+  Comando* cj = new ComandoJardim();
+  adicionaComando(*ca);
+  adicionaComando(*cj);
+
+  std::cout << "construtor simulador" << std::endl;
+}
 
 bool Simulador::adicionaComando(Comando & cmd){
   for(int i = 0; i < MAX_CMDS;i++){
@@ -30,8 +40,9 @@ void Simulador::avancaInstante(){
   nInstantes++;
 }
 
-void Simulador::criaJardim(int nLinhas, int nColunas){
-  jardim = Jardim(nLinhas,nColunas); //TODO: ISTO ANIDA NAO ESTA DEVIDAMENTE TESTADO
+void Simulador::criaJardim(int nLinhas, int nColunas) {
+  delete jardim;
+  jardim = new Jardim(nLinhas, nColunas);
 }
 void Simulador::mostraInterface() const { cout << "placeholder para interface" << endl;} ;
 

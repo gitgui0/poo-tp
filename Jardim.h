@@ -3,6 +3,7 @@
 #define JARDIM_H
 
 #include "BocadoSolo.h"
+#include <string>
 
 class Jardim {
 
@@ -14,6 +15,8 @@ class Jardim {
 
     int getLinhas() const noexcept;
     int getColunas() const noexcept;
+
+    std::string mostraJardim() const noexcept;
 
     BocadoSolo & getBocado(int l, int c);
 

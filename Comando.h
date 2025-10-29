@@ -3,10 +3,7 @@
 #define COMANDO_H
 
 #include <sstream>
-
-// ************** IMPORTANTE *********************
-// em vez do include, para nao haver um loop de includes
-class Simulador;
+#include "Simulador.h"
 
 
 class Comando {
