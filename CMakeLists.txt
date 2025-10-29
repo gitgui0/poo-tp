@@ -3,4 +3,4 @@ project(TP)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(TP main.cpp Adubo.cpp BocadoSolo.cpp Cacto.cpp ErvaDaninha.cpp EstaSolo.cpp Ferramenta.cpp Jardim.cpp Planta.cpp Regador.cpp Roseira.cpp TesouraPoda.cpp )
+add_executable(TP main.cpp Adubo.cpp BocadoSolo.cpp Cacto.cpp Comando.cpp ComandoAvanca.cpp ErvaDaninha.cpp EstaSolo.cpp Ferramenta.cpp Jardim.cpp Planta.cpp Regador.cpp Roseira.cpp Simulador.cpp TesouraPoda.cpp )

@@ -73,6 +73,18 @@ build CMakeFiles/TP.dir/Cacto.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/User
   OBJECT_DIR = CMakeFiles\TP.dir
   OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
+build CMakeFiles/TP.dir/Comando.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/Comando.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\Comando.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\TP.dir
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
+
+build CMakeFiles/TP.dir/ComandoAvanca.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/ComandoAvanca.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\ComandoAvanca.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\TP.dir
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
+
 build CMakeFiles/TP.dir/ErvaDaninha.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/ErvaDaninha.cpp || cmake_object_order_depends_target_TP
   DEP_FILE = CMakeFiles\TP.dir\ErvaDaninha.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
@@ -115,6 +127,12 @@ build CMakeFiles/TP.dir/Roseira.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Us
   OBJECT_DIR = CMakeFiles\TP.dir
   OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
+build CMakeFiles/TP.dir/Simulador.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/Simulador.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\Simulador.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\TP.dir
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
+
 build CMakeFiles/TP.dir/TesouraPoda.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/TesouraPoda.cpp || cmake_object_order_depends_target_TP
   DEP_FILE = CMakeFiles\TP.dir\TesouraPoda.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
@@ -129,7 +147,7 @@ build CMakeFiles/TP.dir/TesouraPoda.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$
 #############################################
 # Link the executable TP.exe
 
-build TP.exe: CXX_EXECUTABLE_LINKER__TP_Debug CMakeFiles/TP.dir/main.cpp.obj CMakeFiles/TP.dir/Adubo.cpp.obj CMakeFiles/TP.dir/BocadoSolo.cpp.obj CMakeFiles/TP.dir/Cacto.cpp.obj CMakeFiles/TP.dir/ErvaDaninha.cpp.obj CMakeFiles/TP.dir/EstaSolo.cpp.obj CMakeFiles/TP.dir/Ferramenta.cpp.obj CMakeFiles/TP.dir/Jardim.cpp.obj CMakeFiles/TP.dir/Planta.cpp.obj CMakeFiles/TP.dir/Regador.cpp.obj CMakeFiles/TP.dir/Roseira.cpp.obj CMakeFiles/TP.dir/TesouraPoda.cpp.obj
+build TP.exe: CXX_EXECUTABLE_LINKER__TP_Debug CMakeFiles/TP.dir/main.cpp.obj CMakeFiles/TP.dir/Adubo.cpp.obj CMakeFiles/TP.dir/BocadoSolo.cpp.obj CMakeFiles/TP.dir/Cacto.cpp.obj CMakeFiles/TP.dir/Comando.cpp.obj CMakeFiles/TP.dir/ComandoAvanca.cpp.obj CMakeFiles/TP.dir/ErvaDaninha.cpp.obj CMakeFiles/TP.dir/EstaSolo.cpp.obj CMakeFiles/TP.dir/Ferramenta.cpp.obj CMakeFiles/TP.dir/Jardim.cpp.obj CMakeFiles/TP.dir/Planta.cpp.obj CMakeFiles/TP.dir/Regador.cpp.obj CMakeFiles/TP.dir/Roseira.cpp.obj CMakeFiles/TP.dir/Simulador.cpp.obj CMakeFiles/TP.dir/TesouraPoda.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\TP.dir

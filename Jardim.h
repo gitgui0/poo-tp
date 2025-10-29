@@ -8,6 +8,7 @@ class Jardim {
 
   public:
 
+    Jardim() = default;
     Jardim(int nLinhas, int nColunas);
     ~Jardim();
 
