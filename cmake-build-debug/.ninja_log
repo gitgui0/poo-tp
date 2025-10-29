@@ -1,0 +1,27 @@
+# ninja log v6
+8	428	7834643956313123	build.ninja	d216b15d0cdfa766
+20	102	7834643956745961	CMakeFiles/TP.dir/src/jardim/EstaSolo.cpp.obj	a0d7688fc071a261
+8	104	7834643956613601	CMakeFiles/TP.dir/src/ferramentas/Ferramenta.cpp.obj	864102a2fce92eab
+23	121	7834643956776006	CMakeFiles/TP.dir/src/jardim/Jardim.cpp.obj	b2580756c089ec82
+33	483	7834643956871208	CMakeFiles/TP.dir/src/plantas/Planta.cpp.obj	7ef47baf4c441b7f
+14	487	7834643956680938	CMakeFiles/TP.dir/src/ferramentas/TesouraPoda.cpp.obj	f8881718daa44d0a
+2	495	7834643956563547	CMakeFiles/TP.dir/main.cpp.obj	5d185cd3677c93d
+5	496	7834643956593582	CMakeFiles/TP.dir/src/ferramentas/Adubo.cpp.obj	62161bc49bc5038c
+10	504	7834643956643592	CMakeFiles/TP.dir/src/ferramentas/Regador.cpp.obj	60c7c92b129af2d0
+28	531	7834643956826029	CMakeFiles/TP.dir/src/plantas/ErvaDaninha.cpp.obj	d0d0e4e2db0528f8
+26	543	7834643956806019	CMakeFiles/TP.dir/src/plantas/Cacto.cpp.obj	745a4f1ab954f7fb
+37	554	7834643956911212	CMakeFiles/TP.dir/src/plantas/Roseira.cpp.obj	65cf1794de46cbfa
+4	847	7834644256291470	CMakeFiles/TP.dir/src/jardim/BocadoSolo.cpp.obj	1d98a73031a9e54f
+1	11	7834644890211767	clean	567f01a6bad3308b
+12	91	7834644890984955	CMakeFiles/TP.dir/src/ferramentas/Ferramenta.cpp.obj	864102a2fce92eab
+41	117	7834644891275277	CMakeFiles/TP.dir/src/jardim/Jardim.cpp.obj	b2580756c089ec82
+35	124	7834644891210018	CMakeFiles/TP.dir/src/jardim/EstaSolo.cpp.obj	a0d7688fc071a261
+4	530	7834644890908363	CMakeFiles/TP.dir/main.cpp.obj	5d185cd3677c93d
+54	532	7834644891404510	CMakeFiles/TP.dir/src/plantas/Planta.cpp.obj	7ef47baf4c441b7f
+20	553	7834644891070255	CMakeFiles/TP.dir/src/ferramentas/Regador.cpp.obj	60c7c92b129af2d0
+8	554	7834644890943422	CMakeFiles/TP.dir/src/ferramentas/Adubo.cpp.obj	62161bc49bc5038c
+25	569	7834644891110217	CMakeFiles/TP.dir/src/ferramentas/TesouraPoda.cpp.obj	f8881718daa44d0a
+46	606	7834644891319248	CMakeFiles/TP.dir/src/plantas/Cacto.cpp.obj	745a4f1ab954f7fb
+50	634	7834644891364449	CMakeFiles/TP.dir/src/plantas/ErvaDaninha.cpp.obj	d0d0e4e2db0528f8
+60	639	7834644891459647	CMakeFiles/TP.dir/src/plantas/Roseira.cpp.obj	65cf1794de46cbfa
+29	769	7834644891155350	CMakeFiles/TP.dir/src/jardim/BocadoSolo.cpp.obj	1d98a73031a9e54f
