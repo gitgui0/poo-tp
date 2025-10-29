@@ -52,86 +52,74 @@ build cmake_object_order_depends_target_TP: phony || .
 build CMakeFiles/TP.dir/main.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/main.cpp || cmake_object_order_depends_target_TP
   DEP_FILE = CMakeFiles\TP.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
   OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
-build CMakeFiles/TP.dir/src/ferramentas/Adubo.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/src/ferramentas/Adubo.cpp || cmake_object_order_depends_target_TP
-  DEP_FILE = CMakeFiles\TP.dir\src\ferramentas\Adubo.cpp.obj.d
+build CMakeFiles/TP.dir/Adubo.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/Adubo.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\Adubo.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
-  OBJECT_FILE_DIR = CMakeFiles\TP.dir\src\ferramentas
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
-build CMakeFiles/TP.dir/src/ferramentas/Ferramenta.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/src/ferramentas/Ferramenta.cpp || cmake_object_order_depends_target_TP
-  DEP_FILE = CMakeFiles\TP.dir\src\ferramentas\Ferramenta.cpp.obj.d
+build CMakeFiles/TP.dir/BocadoSolo.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/BocadoSolo.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\BocadoSolo.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
-  OBJECT_FILE_DIR = CMakeFiles\TP.dir\src\ferramentas
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
-build CMakeFiles/TP.dir/src/ferramentas/Regador.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/src/ferramentas/Regador.cpp || cmake_object_order_depends_target_TP
-  DEP_FILE = CMakeFiles\TP.dir\src\ferramentas\Regador.cpp.obj.d
+build CMakeFiles/TP.dir/Cacto.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/Cacto.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\Cacto.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
-  OBJECT_FILE_DIR = CMakeFiles\TP.dir\src\ferramentas
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
-build CMakeFiles/TP.dir/src/ferramentas/TesouraPoda.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/src/ferramentas/TesouraPoda.cpp || cmake_object_order_depends_target_TP
-  DEP_FILE = CMakeFiles\TP.dir\src\ferramentas\TesouraPoda.cpp.obj.d
+build CMakeFiles/TP.dir/ErvaDaninha.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/ErvaDaninha.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\ErvaDaninha.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
-  OBJECT_FILE_DIR = CMakeFiles\TP.dir\src\ferramentas
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
-build CMakeFiles/TP.dir/src/jardim/BocadoSolo.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/src/jardim/BocadoSolo.cpp || cmake_object_order_depends_target_TP
-  DEP_FILE = CMakeFiles\TP.dir\src\jardim\BocadoSolo.cpp.obj.d
+build CMakeFiles/TP.dir/EstaSolo.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/EstaSolo.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\EstaSolo.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
-  OBJECT_FILE_DIR = CMakeFiles\TP.dir\src\jardim
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
-build CMakeFiles/TP.dir/src/jardim/EstaSolo.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/src/jardim/EstaSolo.cpp || cmake_object_order_depends_target_TP
-  DEP_FILE = CMakeFiles\TP.dir\src\jardim\EstaSolo.cpp.obj.d
+build CMakeFiles/TP.dir/Ferramenta.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/Ferramenta.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\Ferramenta.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
-  OBJECT_FILE_DIR = CMakeFiles\TP.dir\src\jardim
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
-build CMakeFiles/TP.dir/src/jardim/Jardim.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/src/jardim/Jardim.cpp || cmake_object_order_depends_target_TP
-  DEP_FILE = CMakeFiles\TP.dir\src\jardim\Jardim.cpp.obj.d
+build CMakeFiles/TP.dir/Jardim.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/Jardim.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\Jardim.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
-  OBJECT_FILE_DIR = CMakeFiles\TP.dir\src\jardim
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
-build CMakeFiles/TP.dir/src/plantas/Cacto.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/src/plantas/Cacto.cpp || cmake_object_order_depends_target_TP
-  DEP_FILE = CMakeFiles\TP.dir\src\plantas\Cacto.cpp.obj.d
+build CMakeFiles/TP.dir/Planta.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/Planta.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\Planta.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
-  OBJECT_FILE_DIR = CMakeFiles\TP.dir\src\plantas
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
-build CMakeFiles/TP.dir/src/plantas/ErvaDaninha.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/src/plantas/ErvaDaninha.cpp || cmake_object_order_depends_target_TP
-  DEP_FILE = CMakeFiles\TP.dir\src\plantas\ErvaDaninha.cpp.obj.d
+build CMakeFiles/TP.dir/Regador.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/Regador.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\Regador.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
-  OBJECT_FILE_DIR = CMakeFiles\TP.dir\src\plantas
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
-build CMakeFiles/TP.dir/src/plantas/Planta.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/src/plantas/Planta.cpp || cmake_object_order_depends_target_TP
-  DEP_FILE = CMakeFiles\TP.dir\src\plantas\Planta.cpp.obj.d
+build CMakeFiles/TP.dir/Roseira.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/Roseira.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\Roseira.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
-  OBJECT_FILE_DIR = CMakeFiles\TP.dir\src\plantas
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
-build CMakeFiles/TP.dir/src/plantas/Roseira.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/src/plantas/Roseira.cpp || cmake_object_order_depends_target_TP
-  DEP_FILE = CMakeFiles\TP.dir\src\plantas\Roseira.cpp.obj.d
+build CMakeFiles/TP.dir/TesouraPoda.cpp.obj: CXX_COMPILER__TP_unscanned_Debug C$:/Users/deepz/Desktop/isec/2$ ANO/POO/TP/TesouraPoda.cpp || cmake_object_order_depends_target_TP
+  DEP_FILE = CMakeFiles\TP.dir\TesouraPoda.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/plantas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/ferramentas" -I"C:/Users/deepz/Desktop/isec/2 ANO/POO/TP/include/jardim"
   OBJECT_DIR = CMakeFiles\TP.dir
-  OBJECT_FILE_DIR = CMakeFiles\TP.dir\src\plantas
+  OBJECT_FILE_DIR = CMakeFiles\TP.dir
 
 
 # =============================================================================
@@ -141,7 +129,7 @@ build CMakeFiles/TP.dir/src/plantas/Roseira.cpp.obj: CXX_COMPILER__TP_unscanned_
 #############################################
 # Link the executable TP.exe
 
-build TP.exe: CXX_EXECUTABLE_LINKER__TP_Debug CMakeFiles/TP.dir/main.cpp.obj CMakeFiles/TP.dir/src/ferramentas/Adubo.cpp.obj CMakeFiles/TP.dir/src/ferramentas/Ferramenta.cpp.obj CMakeFiles/TP.dir/src/ferramentas/Regador.cpp.obj CMakeFiles/TP.dir/src/ferramentas/TesouraPoda.cpp.obj CMakeFiles/TP.dir/src/jardim/BocadoSolo.cpp.obj CMakeFiles/TP.dir/src/jardim/EstaSolo.cpp.obj CMakeFiles/TP.dir/src/jardim/Jardim.cpp.obj CMakeFiles/TP.dir/src/plantas/Cacto.cpp.obj CMakeFiles/TP.dir/src/plantas/ErvaDaninha.cpp.obj CMakeFiles/TP.dir/src/plantas/Planta.cpp.obj CMakeFiles/TP.dir/src/plantas/Roseira.cpp.obj
+build TP.exe: CXX_EXECUTABLE_LINKER__TP_Debug CMakeFiles/TP.dir/main.cpp.obj CMakeFiles/TP.dir/Adubo.cpp.obj CMakeFiles/TP.dir/BocadoSolo.cpp.obj CMakeFiles/TP.dir/Cacto.cpp.obj CMakeFiles/TP.dir/ErvaDaninha.cpp.obj CMakeFiles/TP.dir/EstaSolo.cpp.obj CMakeFiles/TP.dir/Ferramenta.cpp.obj CMakeFiles/TP.dir/Jardim.cpp.obj CMakeFiles/TP.dir/Planta.cpp.obj CMakeFiles/TP.dir/Regador.cpp.obj CMakeFiles/TP.dir/Roseira.cpp.obj CMakeFiles/TP.dir/TesouraPoda.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\TP.dir

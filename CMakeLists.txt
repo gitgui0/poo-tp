@@ -3,18 +3,4 @@ project(TP)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# Include de todas as pastas header
-include_directories(
-        include
-        include/plantas
-        include/ferramentas
-        include/jardim
-)
-
-# encontra todos os .cpp ---
-file(GLOB_RECURSE SOURCES
-        "src/*.cpp"
-        "main.cpp"
-)
-
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(TP main.cpp Adubo.cpp BocadoSolo.cpp Cacto.cpp ErvaDaninha.cpp EstaSolo.cpp Ferramenta.cpp Jardim.cpp Planta.cpp Regador.cpp Roseira.cpp TesouraPoda.cpp )

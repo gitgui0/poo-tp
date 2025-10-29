@@ -8,3 +8,5 @@ Planta::Planta(int agua, int nutrientes, char letra, const std::string& beleza) 
   this->beleza = beleza;
   this->countInstantes = 0;
 }
+
+Planta::~Planta() = default;

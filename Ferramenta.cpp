@@ -10,3 +10,5 @@ Ferramenta::Ferramenta(const char letra) : EstaSolo(letra){
   numSerie = seq;
   seq++;
 }
+
+Ferramenta::~Ferramenta() = default;

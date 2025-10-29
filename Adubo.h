@@ -9,6 +9,8 @@ class Adubo : public Ferramenta{
 
       Adubo();
 
+      ~Adubo() override;
+
     private:
       int capacidade;
 };

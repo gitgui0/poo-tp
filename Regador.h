@@ -10,6 +10,7 @@ class Regador : Ferramenta{
       void aplica() override;
 
       Regador();
+      ~Regador() override;
 
     private:
       int capacidade;

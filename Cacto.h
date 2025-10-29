@@ -8,7 +8,7 @@ class Cacto : public Planta {
       void cadaInstante() override;
 
       Cacto();
-      ~Cacto();
+      ~Cacto() override;
 
 };
 
