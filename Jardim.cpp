@@ -51,6 +51,6 @@ string Jardim::mostraJardim() const noexcept {
 }
 
 BocadoSolo * Jardim::getBocado(int l, int c) {
-    if (l > nLinhas || l < 0  || c > nColunas || c < 0) return nullptr;
+    if (l > nLinhas-1 || l < 0  || c > nColunas-1 || c < 0) return nullptr;
     return &area[l][c];
 }
