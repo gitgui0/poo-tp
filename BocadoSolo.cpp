@@ -28,5 +28,6 @@ void BocadoSolo::removeJardineiro(){ ocupado = false; }
 
 //POR AGORA
 std::string BocadoSolo::mostra() {
+    if (estaJardineiro()) return "*";
     return "a";
 }

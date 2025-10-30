@@ -20,6 +20,11 @@ public:
     const char* getNome() override { return "jardim"; }
 };
 
-
+class ComandoEntraJardim : public Comando {
+public:
+    ComandoEntraJardim() = default;
+    bool executa(Simulador & sim, std::istringstream & params) const override;
+    const char* getNome() override { return "entra"; }
+};
 
 #endif

@@ -12,17 +12,17 @@ using namespace std;
 
 class Jardineiro {
 private:
-    BocadoSolo* localAtual = nullptr; //onde esta no jardim
-    bool dentroDoJardim = false;
+    BocadoSolo* localAtual;
+    bool dentroDoJardim;
 
     vector<unique_ptr<Ferramenta>> ferramentas; //inventario
     //por agora pus assim mas secalhar isso muda-se vi que com o vector ajuda
     //mas nao o sei usar muito bem
-    Ferramenta* ferramentaNaMao = nullptr;//ativa
+    Ferramenta* ferramentaNaMao;//ativa
 
-    int movimentosRestantes = 10;
-    int colheitasRestantes = 5;
-    int plantasRestantes = 2;
+    int movimentosRestantes;
+    int colheitasRestantes;
+    int plantasRestantes;
     //bool podeEntrarSair = true; jorge sugeriu isto mas nao sei se meto
 
 
@@ -30,17 +30,16 @@ public:
     Jardineiro();
     ~Jardineiro();
 
-    //estados lá do jardineiro e assim
-    bool estaDentro() const; //resposta rápida a “está dentro ou fora?”
-                             //é conveniente para os comandos
-    BocadoSolo* getLocalAtual() const;
-    void entrarNoJardim(BocadoSolo* novoLocal);
-    void sairDoJardim();
-    void mover(const string& direcao); //isto depende depois de como os comandos foram feitos então
+    bool estaDentro() const { return dentroDoJardim; }
+    BocadoSolo* getLocalAtual() const { return localAtual;}
+    void mudaLocal(BocadoSolo * b) { localAtual = b; };
 
     //pa tratar das ferramentas
     void adicionarFerramenta(unique_ptr<Ferramenta> f); //tenho que ver melhor isto
-    void pegarFerramenta();
+
+    void pegaFerramenta();
+    void largaFerramenta();
+
     Ferramenta* getFerramentaNaMao() const;
 
     //acoes

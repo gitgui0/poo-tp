@@ -23,6 +23,10 @@ class Simulador {
     void corre();
 
     const Jardim * devolveJardim() const { return jardim; }
+    Jardim * devolveJardim() { return jardim; }// ainda ns sobre este overload
+
+    const Jardineiro * devolveJardineiro() const { return jardineiro; }
+    Jardineiro * devolveJardineiro() { return jardineiro; }// ainda ns sobre este overload
 
     Comando* parse(const std::string &input, std::istringstream& parametros);
     bool executa(const std::string &input);
@@ -32,7 +36,7 @@ class Simulador {
     static const int MAX_CMDS = 30;
 
     Jardim* jardim;
-    Jardineiro jardineiro;
+    Jardineiro* jardineiro;
 
     Comando *cmds[MAX_CMDS];
 

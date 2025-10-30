@@ -50,3 +50,7 @@ string Jardim::mostraJardim() const noexcept {
     return oss.str();
 }
 
+BocadoSolo * Jardim::getBocado(int l, int c) {
+    if (l > nLinhas || c > nColunas) return nullptr;
+    return &area[l][c];
+}

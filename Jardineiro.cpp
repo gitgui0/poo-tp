@@ -4,24 +4,16 @@
 
 using namespace std;
 
-Jardineiro::Jardineiro() = default;
+Jardineiro::Jardineiro() : ferramentaNaMao(nullptr),
+                           movimentosRestantes(10),
+                           colheitasRestantes(5),
+                           plantasRestantes(2),
+						   localAtual(nullptr),
+                           dentroDoJardim(false){
+
+}
 Jardineiro::~Jardineiro() = default;
 
-bool Jardineiro::estaDentro() const {
-    return dentroDoJardim;
-}
-
-BocadoSolo* Jardineiro::getLocalAtual() const {
-    return localAtual;
-}
-
-void Jardineiro::entrarNoJardim(BocadoSolo* novoLocal) {
-    // TODO: Validar se pode entrar e definir posição inicial
-}
-
-void Jardineiro::sairDoJardim() {
-    // TODO: Implementar saída do jardim
-}
 
 //finge que esta nao ta aqui depende bue de como vais fazer os comandos
 //void Jardineiro::mover(const string& direcao) {
@@ -33,12 +25,14 @@ void Jardineiro::adicionarFerramenta(unique_ptr<Ferramenta> f) {
     // TODO: Adicionar ao inventário
 }
 
-void Jardineiro::pegarFerramenta(int numeroSerie) {
+void Jardineiro::pegaFerramenta() {
     // TODO: Escolher ferramenta ativa
+    std::cout << "Jardineiro pegou na ferramenta" << std::endl;
 }
 
-void Jardineiro::largarFerramenta() {
+void Jardineiro::largaFerramenta() {
     // TODO: Largar ferramenta ativa
+    std::cout << "Jardineiro largou a ferramenta na mao" << std::endl;
 }
 
 Ferramenta* Jardineiro::getFerramentaNaMao() const {
@@ -54,7 +48,6 @@ void Jardineiro::resetTurno() {
     movimentosRestantes = 10;
     colheitasRestantes = 5;
     plantasRestantes = 2;
-    podeEntrarSair = true;
 }
 
 // --- Informação ---

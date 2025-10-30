@@ -23,3 +23,28 @@ bool ComandoJardim::executa(Simulador &sim, std::istringstream & params) const{
     sim.criaJardim(nL,nC);
     return true;
 }
+
+bool ComandoEntraJardim::executa(Simulador & sim, std::istringstream & params) const {
+    if (sim.devolveJardim() == nullptr)
+        return false;
+    int l,c;
+
+    if (!(params>>l) || !(params>>c))
+        return false;
+
+    Jardim* jar = sim.devolveJardim();
+    BocadoSolo* b = jar->getBocado(l,c);
+    Jardineiro* j = sim.devolveJardineiro();
+
+    if (j == nullptr || b == nullptr )
+        return false;
+
+    if (j->getLocalAtual() != nullptr )
+        // teletransportar q diz no enunciado
+        j->getLocalAtual()->removeJardineiro();
+
+    j->mudaLocal(b);
+    b->colocaJardineiro();
+
+    return true;
+}

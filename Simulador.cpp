@@ -2,7 +2,7 @@
 #include "Simulador.h"
 #include "Comando.h"
 #include "ComandosTodos.h"
-
+#include "Jardineiro.h"
 
 #include <iostream>
 #include <sstream>
@@ -16,9 +16,9 @@ Simulador::Simulador()
     cmds[i] = nullptr;
 
   interface = new Interface(this);
-  registaComandos();
+  jardineiro = new Jardineiro();
 
-  std::cout << "construtor simulador" << std::endl;
+  registaComandos();
 }
 
 
@@ -72,6 +72,8 @@ void Simulador::registaComandos() {
 
   cmds[nComandos++] = new ComandoAvanca();
   cmds[nComandos++] = new ComandoJardim();
+  cmds[nComandos++] = new ComandoEntraJardim();
+
 
 }
 

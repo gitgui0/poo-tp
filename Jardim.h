@@ -18,7 +18,7 @@ class Jardim {
 
     std::string mostraJardim() const noexcept;
 
-    BocadoSolo & getBocado(int l, int c);
+    BocadoSolo * getBocado(int l, int c);
 
   private:
     int nLinhas;
