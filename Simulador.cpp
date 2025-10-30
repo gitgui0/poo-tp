@@ -28,15 +28,16 @@ void Simulador::avancaInstante(){
 }
 
 void Simulador::criaJardim(int nLinhas, int nColunas) {
+  // Validacoes ja estao no comando
   delete jardim;
   jardim = new Jardim(nLinhas, nColunas);
 }
-void Simulador::mostraInterface() const { cout << "placeholder para interface" << endl;} ;
 
 Comando* Simulador::parse(const string &input, istringstream& parametros) {
   istringstream iss(input);
   string cmd;
   iss >> cmd;
+  if (cmd.empty()) throw 1; // nao pode ser 1
 
   for(int i = 0; i < nComandos; i++){
     if(cmds[i]->getNome() == cmd){

@@ -13,7 +13,7 @@ Interface::~Interface() {
 void Interface::inicia() {
     string linha;
 
-    cout << "===== POO TP 25/26 =====" << endl;
+    cout << "===== POO TP 25/26 | SIMULADOR JARDIM =====" << endl;
 
     while (ligado) {
         mostraJardim();

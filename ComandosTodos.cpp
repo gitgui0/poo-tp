@@ -8,6 +8,7 @@ bool ComandoAvanca::executa(Simulador &sim, std::istringstream & params) const{
     if (!(params >> n)) { //tenta ler dos params, se nao, fica com o default
         n = 1;
     }
+    if (n < 1) return false;
     std::cout << "comando avanca com n=" << std::to_string(n) << std::endl;
     return true;
 }
@@ -18,7 +19,7 @@ bool ComandoJardim::executa(Simulador &sim, std::istringstream & params) const{
     int nL, nC;
     if(!(params >> nL)) return false;
     if(!(params >> nC)) return false;
-    if(nL == 0 || nC == 0) return false;
+    if(nL <= 0 || nC <= 0) return false;
 
     sim.criaJardim(nL,nC);
     return true;
