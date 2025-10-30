@@ -5,13 +5,12 @@
 #include <string>
 #include <iostream>
 
-#include "Simulador.h"
-
 using namespace std;
+class Simulador;
 
 class Interface {
-    bool running;
     Simulador* sim;
+    bool ligado;
 
     public:
         explicit Interface(Simulador * sim);

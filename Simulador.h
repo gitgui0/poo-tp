@@ -4,6 +4,7 @@
 
 #include "Jardim.h"
 #include "Jardineiro.h"
+#include "Interface.h"
 #include <sstream>
 
 // ************** IMPORTANTE *********************
@@ -22,6 +23,7 @@ class Simulador {
 
     void criaJardim(int nLinhas, int nColunas);
     void mostraInterface() const ;
+    void corre();
 
     const Jardim * devolveJardim() const { return jardim; }
 
@@ -39,7 +41,7 @@ class Simulador {
     int nInstantes;
     int nComandos;
 
-    //TODO: Interface interface;
+    Interface* interface;
 
 };
 

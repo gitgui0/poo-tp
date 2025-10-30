@@ -6,14 +6,9 @@
 #include "Interface.h"
 
 int main() {
-
     Simulador sim;
 
-
-    std::string input;
-
-    Interface ui(&sim);
-    ui.inicia();
+    sim.corre();
 
     return 0;
 }

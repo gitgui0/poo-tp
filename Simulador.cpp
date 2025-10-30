@@ -15,7 +15,7 @@ Simulador::Simulador()
   for (int i = 0; i < MAX_CMDS; i++)
     cmds[i] = nullptr;
 
-
+  interface = new Interface(this);
   //isto t apodre, mas por agora é assim
   Comando* ca = new ComandoAvanca();
   Comando* cj = new ComandoJardim();
@@ -74,4 +74,9 @@ bool Simulador::executa(const string &input){
   if(exec == nullptr) return false;
 
   return exec->executa(*this,params); // nao sei ainda se vou deixar em return
+}
+
+
+void Simulador::corre() {
+  interface->inicia();
 }

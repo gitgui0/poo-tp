@@ -1,10 +1,10 @@
 #include "Interface.h"
 
+#include "Simulador.h"
+
 using namespace std;
 
-Interface::Interface(Simulador * sim) : running(true) {
-    this->sim = sim;
-}
+Interface::Interface(Simulador * sim) : sim(sim), ligado(true) {}
 
 Interface::~Interface() {
     //delete jardim????
@@ -15,7 +15,7 @@ void Interface::inicia() {
 
     cout << "===== POO TP 25/26 =====" << endl;
 
-    while (running) {
+    while (ligado) {
         mostraJardim();
         cout << "\n>";
         getline(cin, linha);
@@ -23,7 +23,7 @@ void Interface::inicia() {
         if (linha.empty()) continue;
         if (linha=="fim") {
             // POR AGORA
-            running = false;
+            ligado = false;
             break;
         }
 
