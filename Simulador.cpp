@@ -1,8 +1,8 @@
 
 #include "Simulador.h"
 #include "Comando.h"
-#include "ComandoAvanca.h"
-#include "ComandoJardim.h"
+#include "ComandosTodos.h"
+
 
 #include <iostream>
 #include <sstream>
@@ -16,25 +16,12 @@ Simulador::Simulador()
     cmds[i] = nullptr;
 
   interface = new Interface(this);
-  //isto t apodre, mas por agora é assim
-  Comando* ca = new ComandoAvanca();
-  Comando* cj = new ComandoJardim();
-  adicionaComando(*ca);
-  adicionaComando(*cj);
+  registaComandos();
 
   std::cout << "construtor simulador" << std::endl;
 }
 
-bool Simulador::adicionaComando(Comando & cmd){
-  for(int i = 0; i < MAX_CMDS;i++){
-    if(cmds[i] == nullptr){
-      cmds[i] = &cmd;
-      nComandos++;
-      return true;
-    }
-  }
-  return false;
-}
+
 
 void Simulador::avancaInstante(){
   nInstantes++;
@@ -80,3 +67,11 @@ bool Simulador::executa(const string &input){
 void Simulador::corre() {
   interface->inicia();
 }
+
+void Simulador::registaComandos() {
+
+  cmds[nComandos++] = new ComandoAvanca();
+  cmds[nComandos++] = new ComandoJardim();
+
+}
+

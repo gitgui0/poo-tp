@@ -15,9 +15,6 @@ class Simulador {
 
   public:
     Simulador();
-
-    bool adicionaComando(Comando & cmd);
-
     void avancaInstante();
     int getInstantes() const noexcept { return nInstantes; }
 
@@ -31,6 +28,7 @@ class Simulador {
     bool executa(const std::string &input);
 
   private:
+    void registaComandos();
     static const int MAX_CMDS = 30;
 
     Jardim* jardim;
