@@ -31,6 +31,8 @@ class Simulador {
     Comando* parse(const std::string &input, std::istringstream& parametros);
     void executa(const std::string &input);
 
+  static int charParaInt(char c);
+
   private:
     void registaComandos();
     static const int MAX_CMDS = 30;

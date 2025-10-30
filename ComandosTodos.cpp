@@ -32,6 +32,7 @@ void ComandoJardim::executa(Simulador &sim, std::istringstream &params) const {
         throw std::runtime_error("Falta o primeiro parametro (linhas)");
     if (!(params >> nC))
         throw std::runtime_error("Falta o segundo parametro (colunas)");
+
     if (nL <= 0 || nL >= 27 || nC <= 0 || nC >= 27)
         throw std::runtime_error("Valores fora dos limites (1 a 26)");
 
@@ -45,12 +46,13 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
     if (sim.devolveJardim() == nullptr)
         throw std::runtime_error("Nao existe jardim criado");
 
-    int l, c;
+    char l, c;
+
     if (!(params >> l) || !(params >> c))
         throw std::runtime_error("Nao foi enviada uma posicao");
 
     Jardim *jar = sim.devolveJardim();
-    BocadoSolo *b = jar->getBocado(l, c);
+    BocadoSolo *b = jar->getBocado(Simulador::charParaInt(l), Simulador::charParaInt(c));
     Jardineiro *j = sim.devolveJardineiro();
 
     if (j == nullptr || b == nullptr)
@@ -62,8 +64,6 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
 
     j->mudaLocal(b);
     b->colocaJardineiro();
-
-    std::cout << "[CMD] jardineiro entrou no jardim em (" << l << "," << c << ")" << std::endl;
 }
 
 // isto agora sao so prints basicamente ou "stubs"

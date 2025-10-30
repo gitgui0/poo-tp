@@ -77,3 +77,6 @@ void Simulador::registaComandos() {
   cmds[nComandos++] = new ComandoEntraJardim();
 }
 
+int Simulador::charParaInt(char c) {
+  return toupper(c) - 'A';
+}
