@@ -8,10 +8,11 @@ int Jardim::instantes = 0;
 Jardim::Jardim(int nLinhas, int nColunas)
     : nLinhas(nLinhas), nColunas(nColunas)
 {
-    area = new BocadoSolo*[nLinhas];
-    for(int i = 0; i < nLinhas; ++i)
-        for (int j = 0; j < nColunas; j++)
-            area[i] = new BocadoSolo[nColunas];
+    area = new BocadoSolo*[nLinhas]; // linhas
+
+    for (int i = 0; i < nLinhas; ++i) {
+        area[i] = new BocadoSolo[nColunas];  // colunas
+    }
 
 }
 

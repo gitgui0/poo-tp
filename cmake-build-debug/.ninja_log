@@ -40,3 +40,11 @@
 7	348	7835369321822161	CMakeFiles/TP.dir/Simulador.cpp.obj	b8ca2490fa2931e0
 4	304	7835369725621708	CMakeFiles/TP.dir/main.cpp.obj	a2204d3ead9a6e84
 304	585	7835369728634343	TP.exe	dbfd77bad4bdafce
+25	437	7835372124662278	CMakeFiles/TP.dir/Comando.cpp.obj	e013088836fc54f6
+4	439	7835372124458229	CMakeFiles/TP.dir/main.cpp.obj	a2204d3ead9a6e84
+21	455	7835372124628776	CMakeFiles/TP.dir/ComandoJardim.cpp.obj	1d762c2ba0cd69da
+8	456	7835372124498273	CMakeFiles/TP.dir/Jardim.cpp.obj	2760495663d1cec9
+15	475	7835372124568277	CMakeFiles/TP.dir/Simulador.cpp.obj	b8ca2490fa2931e0
+11	483	7835372124528274	CMakeFiles/TP.dir/Interface.cpp.obj	d1c5c4ec3c698c56
+18	485	7835372124598777	CMakeFiles/TP.dir/ComandoAvanca.cpp.obj	6a85fa59a83fd1dc
+486	620	7835372129267122	TP.exe	dbfd77bad4bdafce
