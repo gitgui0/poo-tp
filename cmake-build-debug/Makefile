@@ -200,6 +200,54 @@ Cacto.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/Cacto.cpp.s
 .PHONY : Cacto.cpp.s
 
+Comando.obj: Comando.cpp.obj
+.PHONY : Comando.obj
+
+# target to build an object file
+Comando.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/Comando.cpp.obj
+.PHONY : Comando.cpp.obj
+
+Comando.i: Comando.cpp.i
+.PHONY : Comando.i
+
+# target to preprocess a source file
+Comando.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/Comando.cpp.i
+.PHONY : Comando.cpp.i
+
+Comando.s: Comando.cpp.s
+.PHONY : Comando.s
+
+# target to generate assembly for a file
+Comando.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/Comando.cpp.s
+.PHONY : Comando.cpp.s
+
+ComandosTodos.obj: ComandosTodos.cpp.obj
+.PHONY : ComandosTodos.obj
+
+# target to build an object file
+ComandosTodos.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/ComandosTodos.cpp.obj
+.PHONY : ComandosTodos.cpp.obj
+
+ComandosTodos.i: ComandosTodos.cpp.i
+.PHONY : ComandosTodos.i
+
+# target to preprocess a source file
+ComandosTodos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/ComandosTodos.cpp.i
+.PHONY : ComandosTodos.cpp.i
+
+ComandosTodos.s: ComandosTodos.cpp.s
+.PHONY : ComandosTodos.s
+
+# target to generate assembly for a file
+ComandosTodos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/ComandosTodos.cpp.s
+.PHONY : ComandosTodos.cpp.s
+
 ErvaDaninha.obj: ErvaDaninha.cpp.obj
 .PHONY : ErvaDaninha.obj
 
@@ -392,6 +440,30 @@ Roseira.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/Roseira.cpp.s
 .PHONY : Roseira.cpp.s
 
+Simulador.obj: Simulador.cpp.obj
+.PHONY : Simulador.obj
+
+# target to build an object file
+Simulador.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/Simulador.cpp.obj
+.PHONY : Simulador.cpp.obj
+
+Simulador.i: Simulador.cpp.i
+.PHONY : Simulador.i
+
+# target to preprocess a source file
+Simulador.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/Simulador.cpp.i
+.PHONY : Simulador.cpp.i
+
+Simulador.s: Simulador.cpp.s
+.PHONY : Simulador.s
+
+# target to generate assembly for a file
+Simulador.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/Simulador.cpp.s
+.PHONY : Simulador.cpp.s
+
 TesouraPoda.obj: TesouraPoda.cpp.obj
 .PHONY : TesouraPoda.obj
 
@@ -458,6 +530,12 @@ help:
 	@echo ... Cacto.obj
 	@echo ... Cacto.i
 	@echo ... Cacto.s
+	@echo ... Comando.obj
+	@echo ... Comando.i
+	@echo ... Comando.s
+	@echo ... ComandosTodos.obj
+	@echo ... ComandosTodos.i
+	@echo ... ComandosTodos.s
 	@echo ... ErvaDaninha.obj
 	@echo ... ErvaDaninha.i
 	@echo ... ErvaDaninha.s
@@ -482,6 +560,9 @@ help:
 	@echo ... Roseira.obj
 	@echo ... Roseira.i
 	@echo ... Roseira.s
+	@echo ... Simulador.obj
+	@echo ... Simulador.i
+	@echo ... Simulador.s
 	@echo ... TesouraPoda.obj
 	@echo ... TesouraPoda.i
 	@echo ... TesouraPoda.s

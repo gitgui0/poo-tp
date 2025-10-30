@@ -36,3 +36,5 @@
 
 &nbsp;  git checkout <nome\_branch>
 
+git fetch origin main
+git reset --hard origin/main
