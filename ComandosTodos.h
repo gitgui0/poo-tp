@@ -8,7 +8,7 @@ class ComandoAvanca : public Comando {
 
 public:
     ComandoAvanca() = default;
-    bool executa(Simulador &sim, std::istringstream & params ) const override;
+    void executa(Simulador &sim, std::istringstream & params ) const override;
     const char* getNome() override { return "avanca"; }
 
 };
@@ -16,14 +16,14 @@ public:
 class ComandoJardim : public Comando {
 public:
     ComandoJardim() = default;
-    bool executa(Simulador &sim, std::istringstream & params ) const override;
+    void executa(Simulador &sim, std::istringstream & params ) const override;
     const char* getNome() override { return "jardim"; }
 };
 
 class ComandoEntraJardim : public Comando {
 public:
     ComandoEntraJardim() = default;
-    bool executa(Simulador & sim, std::istringstream & params) const override;
+    void executa(Simulador & sim, std::istringstream & params) const override;
     const char* getNome() override { return "entra"; }
 };
 

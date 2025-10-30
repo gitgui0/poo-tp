@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -55,13 +56,14 @@ Comando* Simulador::parse(const string &input, istringstream& parametros) {
 }
 
 
-bool Simulador::executa(const string &input){
+void Simulador::executa(const string &input){
   istringstream params;
   Comando* exec = parse(input,params);
 
-  if(exec == nullptr) return false;
+  if(exec == nullptr) throw std::runtime_error("Esse comando nao foi encontrado");
 
-  return exec->executa(*this,params); // nao sei ainda se vou deixar em return
+  exec->executa(*this,params);
+
 }
 
 

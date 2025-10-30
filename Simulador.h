@@ -29,7 +29,7 @@ class Simulador {
     Jardineiro * devolveJardineiro() { return jardineiro; }// ainda ns sobre este overload
 
     Comando* parse(const std::string &input, std::istringstream& parametros);
-    bool executa(const std::string &input);
+    void executa(const std::string &input);
 
   private:
     void registaComandos();

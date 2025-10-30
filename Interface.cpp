@@ -27,8 +27,14 @@ void Interface::inicia() {
             break;
         }
 
-        if (!sim->executa(linha))
+        try {
+            sim->executa(linha);
+        } catch (const exception &e) {
+            cout << "Erro: " << e.what() << endl;
+        } catch (...) {
+            // catch do resto
             cout << "Erro ao executar: " << linha << endl;
+        }
     }
 }
 
