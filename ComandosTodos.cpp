@@ -66,7 +66,6 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
     std::cout << "[CMD] jardineiro entrou no jardim em (" << l << "," << c << ")" << std::endl;
 }
 
-
 // isto agora sao so prints basicamente ou "stubs"
 
 // gestão e gravação
@@ -82,7 +81,6 @@ void ComandoApaga::executa(Simulador &, std::istringstream &) const {
 void ComandoExecuta::executa(Simulador &, std::istringstream &) const {
     std::cout << "[CMD] executa (a implementar)" << std::endl;
 }
-
 
 // listagens
 void ComandoLPlantas::executa(Simulador &, std::istringstream &) const {
@@ -100,7 +98,6 @@ void ComandoLSolo::executa(Simulador &, std::istringstream &) const {
 void ComandoLFerr::executa(Simulador &, std::istringstream &) const {
     std::cout << "[CMD] lferr (a implementar)" << std::endl;
 }
-
 
 // ações diretas
 void ComandoColhe::executa(Simulador &, std::istringstream &) const {

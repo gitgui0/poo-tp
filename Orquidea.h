@@ -2,8 +2,8 @@
 #ifndef TP_ORQUIDEA_H
 #define TP_ORQUIDEA_H
 
-#include "Planta.h"
 #include "Settings.h"
+#include "Planta.h"
 
 class Orquidea : public Planta {
 private:

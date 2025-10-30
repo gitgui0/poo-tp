@@ -72,11 +72,8 @@ void Simulador::corre() {
 }
 
 void Simulador::registaComandos() {
-
   cmds[nComandos++] = new ComandoAvanca();
   cmds[nComandos++] = new ComandoJardim();
   cmds[nComandos++] = new ComandoEntraJardim();
-
-
 }
 
