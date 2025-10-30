@@ -18,7 +18,7 @@ void ComandoJardim::executa(Simulador &sim, std::istringstream & params) const{
     int nL, nC;
     if(!(params >> nL)) throw std::runtime_error("Nao foi enviado o primeiro parametro");;
     if(!(params >> nC)) throw std::runtime_error("Nao foi enviado o segundo parametro");;
-    if(nL <= 0 || nC <= 0) throw std::runtime_error("Valor de parametro invalido");;
+    if(nL <= 0 || nL >= 27 || nC <= 0 || nC >= 27) throw std::runtime_error("Valor de parametro invalido");;
 
     sim.criaJardim(nL,nC);
 }
