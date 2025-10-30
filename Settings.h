@@ -67,6 +67,18 @@ class Settings {
         static const int nova_nutrientes = 5;
         static const int original_nutrientes = 5;
     };
+    class Orquidea {
+    public:
+        static const int inicial_agua = 25;
+        static const int inicial_nutrientes = 25;
+        static const int absorve_agua = 4;
+        static const int absorve_nutrientes = 3;
+        static const int multiplica_agua_maior = 80;
+        static const int multiplica_nutrientes_maior = 60;
+        static const int agua_maior_perde = 100;
+        static const int agua_maior_instantes = 2;
+        static const int perda_nutrientes = 10;
+    };
 };
 
 #endif //SETTINGS_SETTINGS_H
