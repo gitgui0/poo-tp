@@ -3,14 +3,7 @@
 
 #include "Comando.h"
 
-// meti bastantes coisas, umas era codigo repetido tirei do jorge
-//se tiver a interferir avisa me e podes tirar
-
-
-
-// -------------------------
-// Comandos do tempo simulado
-// -------------------------
+// Comando do tempo simulado
 class ComandoAvanca : public Comando {
 public:
     ComandoAvanca() = default;

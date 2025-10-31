@@ -11,7 +11,7 @@
 using namespace std;
 
 class Jardineiro {
-private:
+
     BocadoSolo* localAtual;
     bool dentroDoJardim;
 
@@ -21,8 +21,6 @@ private:
     int movimentosRestantes;
     int colheitasRestantes;
     int plantasRestantes;
-    //bool podeEntrarSair = true; jorge sugeriu isto mas nao sei se meto
-
 
 public:
     Jardineiro();
@@ -42,7 +40,7 @@ public:
 
     //acoes
     void aplicarFerramenta();
-    void resetTurno(); //por agora (turno = instante)
+    void resetTurno();
 
     string getInfo() const;
 };

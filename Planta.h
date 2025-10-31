@@ -23,12 +23,10 @@ class Planta : EstaSolo {
       //TODO: copy constructor, nao sabemos ainda se vai ser necessário
 
 
-      // Se countInstantes for private, funcao getInstante
-
     private:
       int agua;
       int nutrientes;
-      int countInstantes; // private?, herda para todas?
+      int countInstantes;
 
       std::string beleza;
 };

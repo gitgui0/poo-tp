@@ -6,9 +6,7 @@ using namespace std;
 
 Interface::Interface(Simulador * sim) : sim(sim), ligado(true) {}
 
-Interface::~Interface() {
-    //delete jardim????
-}
+Interface::~Interface() = default;
 
 void Interface::inicia() {
     string linha;
@@ -22,7 +20,6 @@ void Interface::inicia() {
 
         if (linha.empty()) continue;
         if (linha=="fim") {
-            // POR AGORA
             ligado = false;
             break;
         }
@@ -32,7 +29,7 @@ void Interface::inicia() {
         } catch (const exception &e) {
             cout << "Erro: " << e.what() << endl;
         } catch (...) {
-            // catch do resto
+            // captura outras excecoes
             cout << "Erro ao executar: " << linha << endl;
         }
     }

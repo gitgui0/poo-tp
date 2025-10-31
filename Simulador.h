@@ -24,10 +24,10 @@ class Simulador {
     void corre();
 
     const Jardim * devolveJardim() const { return jardim; }
-    Jardim * devolveJardim() { return jardim; }// ainda ns sobre este overload
-
+    Jardim * devolveJardim() { return jardim; }
+  
     const Jardineiro * devolveJardineiro() const { return jardineiro; }
-    Jardineiro * devolveJardineiro() { return jardineiro; }// ainda ns sobre este overload
+    Jardineiro * devolveJardineiro() { return jardineiro; }
 
     Comando* parse(const std::string &input, std::istringstream& parametros);
     void executa(const std::string &input);

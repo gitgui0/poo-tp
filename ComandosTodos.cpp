@@ -66,8 +66,6 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
     b->colocaJardineiro();
 }
 
-// isto agora sao so prints basicamente ou "stubs"
-
 // gestão e gravação
 void ComandoGrava::executa(Simulador &, std::istringstream &) const {
     std::cout << "[CMD] grava (a implementar)" << std::endl;

@@ -40,7 +40,7 @@ Comando* Simulador::parse(const string &input, istringstream& parametros) {
     if(c->getNome() == cmd){
       string resto;
       getline(iss,resto);
-      parametros.clear(); // so no caso
+      parametros.clear();
       parametros.str(resto);
       return c;
     }

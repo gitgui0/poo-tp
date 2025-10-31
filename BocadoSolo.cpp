@@ -35,8 +35,6 @@ bool BocadoSolo::estaJardineiro() const noexcept { return ocupado; }
 void BocadoSolo::colocaJardineiro(){ ocupado = true; }
 void BocadoSolo::removeJardineiro(){ ocupado = false; }
 
-
-//POR AGORA
 std::string BocadoSolo::mostra() {
     if (estaJardineiro()) return "*";
     return "a";
