@@ -6,6 +6,7 @@
 #include "Jardineiro.h"
 #include "Interface.h"
 #include <sstream>
+#include <vector>
 
 // ************** IMPORTANTE *********************
 // em vez do include, para nao haver um loop de includes
@@ -35,12 +36,12 @@ class Simulador {
 
   private:
     void registaComandos();
-    static const int MAX_CMDS = 30;
+
 
     Jardim* jardim;
     Jardineiro* jardineiro;
 
-    Comando *cmds[MAX_CMDS];
+    std::vector<Comando*> cmds;
 
     int nInstantes;
     int nComandos;

@@ -13,16 +13,12 @@ using namespace std;
 Simulador::Simulador()
   : jardim(nullptr), nComandos(0), nInstantes(0)
 {
-  for (int i = 0; i < MAX_CMDS; i++)
-    cmds[i] = nullptr;
-
+  //vecotr inicializa a null diretamente
   interface = new Interface(this);
   jardineiro = new Jardineiro();
 
   registaComandos();
 }
-
-
 
 void Simulador::avancaInstante(){
   nInstantes++;
@@ -38,21 +34,18 @@ Comando* Simulador::parse(const string &input, istringstream& parametros) {
   istringstream iss(input);
   string cmd;
   iss >> cmd;
-  if (cmd.empty()) throw 1; // nao pode ser 1
+  if (cmd.empty()) throw std::runtime_error("Esse comando nao foi encontrado");
 
-  for(int i = 0; i < nComandos; i++){
-    if(cmds[i]->getNome() == cmd){
+  for(Comando* c : cmds){
+    if(c->getNome() == cmd){
       string resto;
       getline(iss,resto);
       parametros.clear(); // so no caso
       parametros.str(resto);
-
-      return cmds[i];
+      return c;
     }
   }
-
   return nullptr;
-
 }
 
 
@@ -71,10 +64,37 @@ void Simulador::corre() {
   interface->inicia();
 }
 
+
 void Simulador::registaComandos() {
-  cmds[nComandos++] = new ComandoAvanca();
-  cmds[nComandos++] = new ComandoJardim();
-  cmds[nComandos++] = new ComandoEntraJardim();
+  // Adicionar comandos usando push_back()
+  cmds.push_back(new ComandoAvanca());
+  cmds.push_back(new ComandoJardim());
+  cmds.push_back(new ComandoEntraJardim());
+
+  cmds.push_back(new ComandoGrava());
+  cmds.push_back(new ComandoRecupera());
+  cmds.push_back(new ComandoApaga());
+  cmds.push_back(new ComandoExecuta());
+
+  cmds.push_back(new ComandoLPlantas());
+  cmds.push_back(new ComandoLPlanta());
+  cmds.push_back(new ComandoLArea());
+  cmds.push_back(new ComandoLSolo());
+  cmds.push_back(new ComandoLFerr());
+
+  cmds.push_back(new ComandoColhe());
+  cmds.push_back(new ComandoPlanta());
+  cmds.push_back(new ComandoLarga());
+  cmds.push_back(new ComandoPega());
+  cmds.push_back(new ComandoCompra());
+
+  cmds.push_back(new ComandoMoveEsquerda());
+  cmds.push_back(new ComandoMoveDireita());
+  cmds.push_back(new ComandoMoveCima());
+  cmds.push_back(new ComandoMoveBaixo());
+  cmds.push_back(new ComandoSai());
+
+  cmds.push_back(new ComandoFim());
 }
 
 int Simulador::charParaInt(char c) {

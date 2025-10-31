@@ -5,7 +5,7 @@
 #include "Ferramenta.h"
 
 
-class Regador : Ferramenta{
+class Regador : public Ferramenta{
     public:
       void aplica() override;
 

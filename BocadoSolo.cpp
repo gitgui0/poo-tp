@@ -4,7 +4,6 @@
 #include <random>
 
 BocadoSolo::BocadoSolo() : ocupado(false){
-  //este codigo ta duvidoso
     std::random_device rd;
     std::mt19937 gen(rd());
 
@@ -15,6 +14,17 @@ BocadoSolo::BocadoSolo() : ocupado(false){
     // Gera um valor aleatório
     this->agua = randomAgua(gen);
     this->nutrientes = randomNutri(gen);
+
+    objetos[0] = nullptr;
+    objetos[1] = nullptr;
+
+
+}
+
+BocadoSolo::~BocadoSolo() {
+    // Destroi a planta e a ferramenta se existirem
+    delete objetos[0]; // Planta
+    delete objetos[1]; // Ferramenta
 }
 
 int BocadoSolo::getAgua() const noexcept{ return agua;}

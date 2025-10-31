@@ -15,9 +15,7 @@ private:
     BocadoSolo* localAtual;
     bool dentroDoJardim;
 
-    vector<unique_ptr<Ferramenta>> ferramentas; //inventario
-    //por agora pus assim mas secalhar isso muda-se vi que com o vector ajuda
-    //mas nao o sei usar muito bem
+    vector<Ferramenta*> ferramentas;
     Ferramenta* ferramentaNaMao;//ativa
 
     int movimentosRestantes;
@@ -35,7 +33,7 @@ public:
     void mudaLocal(BocadoSolo * b) { localAtual = b; };
 
     //pa tratar das ferramentas
-    void adicionarFerramenta(unique_ptr<Ferramenta> f); //tenho que ver melhor isto
+    void adicionarFerramenta(Ferramenta* f);
 
     void pegaFerramenta();
     void largaFerramenta();

@@ -9,6 +9,7 @@
 class BocadoSolo {
     public:
       BocadoSolo();
+     ~BocadoSolo();
 
       int getAgua() const noexcept;
       int getNutrientes() const noexcept;

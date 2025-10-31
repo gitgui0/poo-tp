@@ -1,15 +1,16 @@
 
 #include "Jardineiro.h"
 #include <iostream>
-
+#include "Settings.h"
 using namespace std;
 
 Jardineiro::Jardineiro() : ferramentaNaMao(nullptr),
-                           movimentosRestantes(10),
-                           colheitasRestantes(5),
-                           plantasRestantes(2),
+                           movimentosRestantes(Settings::Jardineiro::max_movimentos), // 10
+                           colheitasRestantes(Settings::Jardineiro::max_colheitas),   // 5
+                           plantasRestantes(Settings::Jardineiro::max_plantacoes),     // 2
 						   localAtual(nullptr),
                            dentroDoJardim(false){
+    // O std::vector<Ferramenta*> ferramentas e inicializado automaticamente vazio
 
 }
 Jardineiro::~Jardineiro() = default;
@@ -21,7 +22,7 @@ Jardineiro::~Jardineiro() = default;
 //}
 
 // --- Ferramentas ---
-void Jardineiro::adicionarFerramenta(unique_ptr<Ferramenta> f) {
+void Jardineiro::adicionarFerramenta(Ferramenta* f) {
     // TODO: Adicionar ao inventário
 }
 
@@ -42,6 +43,7 @@ Ferramenta* Jardineiro::getFerramentaNaMao() const {
 // --- Ações ---
 void Jardineiro::aplicarFerramenta() {
     // TODO: Aplicar efeito da ferramenta atual na posição atual
+    std::cout << "Usa a ferramenta nesta posicao" << std::endl;
 }
 
 void Jardineiro::resetTurno() {

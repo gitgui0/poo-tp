@@ -1,8 +1,12 @@
 #include "ErvaDaninha.h"
+#include "Settings.h"
+
 #include <iostream>
 
+
 ErvaDaninha::ErvaDaninha() :
-    Planta(5,5,'e',"Feia")
+    Planta(Settings::ErvaDaninha::inicial_agua,Settings::ErvaDaninha::inicial_nutrientes,
+        'e',"Feia")
 {};
 
 ErvaDaninha::~ErvaDaninha(){ std::cout << "Destructor Erva Daninha" << std::endl;}
