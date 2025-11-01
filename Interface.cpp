@@ -1,6 +1,6 @@
 #include "Interface.h"
-
 #include "Simulador.h"
+#include <iostream>
 
 using namespace std;
 

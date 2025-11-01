@@ -2,12 +2,11 @@
 #ifndef TP_ORQUIDEA_H
 #define TP_ORQUIDEA_H
 
-#include "Settings.h"
 #include "Planta.h"
 
 class Orquidea : public Planta {
 private:
-    int instantesAguaAlta; //pa contar quanto passou com a agua maior que 100
+    int instantesAguaAlta; //para contar quanto passou com a agua maior que 100
 
 public:
     Orquidea();

@@ -1,4 +1,5 @@
 #include "Orquidea.h"
+#include "Settings.h"
 #include "Planta.h"
 #include <iostream>
 

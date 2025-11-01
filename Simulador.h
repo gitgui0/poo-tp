@@ -25,7 +25,7 @@ class Simulador {
 
     const Jardim * devolveJardim() const { return jardim; }
     Jardim * devolveJardim() { return jardim; }
-  
+
     const Jardineiro * devolveJardineiro() const { return jardineiro; }
     Jardineiro * devolveJardineiro() { return jardineiro; }
 

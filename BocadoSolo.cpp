@@ -1,6 +1,5 @@
 #include "BocadoSolo.h"
 #include "Settings.h"
-#include <iostream>
 #include <random>
 
 BocadoSolo::BocadoSolo() : ocupado(false){

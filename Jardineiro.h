@@ -4,7 +4,6 @@
 
 #include <string>
 #include <vector>
-#include <memory>
 #include "Ferramenta.h"
 #include "BocadoSolo.h"
 

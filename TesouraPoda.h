@@ -13,4 +13,4 @@ class TesouraPoda : public Ferramenta {
 
 
 
-#endif //TESOURAPODA_H
+#endif

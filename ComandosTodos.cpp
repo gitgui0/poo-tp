@@ -1,6 +1,5 @@
 #include "ComandosTodos.h"
 #include <iostream>
-#include <string>
 
 // ===========================================================
 // Comandos já funcionais

@@ -3,7 +3,35 @@ project(TP)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(TP main.cpp Adubo.cpp BocadoSolo.cpp Cacto.cpp ErvaDaninha.cpp EstaSolo.cpp Ferramenta.cpp Jardim.cpp Planta.cpp Regador.cpp Roseira.cpp TesouraPoda.cpp
-        Interface.cpp Simulador.cpp Comando.cpp ComandosTodos.cpp Jardineiro.cpp
-        Orquidea.h
-        Orquidea.cpp)
+add_executable(TP
+        # Núcleo e Interface
+        main.cpp
+        Simulador.cpp
+        Interface.cpp
+
+        # Domínio (Jardim, Solo e Jardineiro)
+        Jardim.cpp
+        BocadoSolo.cpp
+        Jardineiro.cpp
+
+        # Classes Base
+        EstaSolo.cpp
+        Planta.cpp
+        Ferramenta.cpp
+
+        # Classes de Plantas
+        Cacto.cpp
+        ErvaDaninha.cpp
+        Roseira.cpp
+        Orquidea.cpp
+
+        # Classes de Ferramentas
+        Adubo.cpp
+        Regador.cpp
+        TesouraPoda.cpp
+        AceleradorCrescimento.cpp
+
+        # Comandos
+        Comando.cpp
+        ComandosTodos.cpp
+)

@@ -3,7 +3,6 @@
 #define TP_INTERFACE_H
 
 #include <string>
-#include <iostream>
 
 using namespace std;
 class Simulador;
