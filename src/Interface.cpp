@@ -38,6 +38,7 @@ void Interface::inicia() {
 void Interface::mostraJardim() const {
     if (sim->devolveJardim() != nullptr) {
         cout << "\n";
-        cout << sim->devolveJardim()->mostraJardim();
+        const Jardim* j= sim->devolveJardim();
+        cout << j->mostraJardim();
     }
 }

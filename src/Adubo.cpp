@@ -1,5 +1,5 @@
-#include "Adubo.h"
-#include "Settings.h"
+#include "./Adubo.h"
+#include "./Settings.h"
 #include <iostream>
 
 Adubo::Adubo() : Ferramenta('a'), capacidade(Settings::Adubo::capacidade){};

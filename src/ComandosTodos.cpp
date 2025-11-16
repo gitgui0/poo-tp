@@ -16,8 +16,6 @@ void ComandoAvanca::executa(Simulador &sim, std::istringstream &params) const {
         throw std::runtime_error("Valor invalido para o parametro [n]");
 
     std::cout << "[CMD] avanca " << n << " instante(s)" << std::endl;
-
-    // TODO: chamar o método do simulador quando existir
 }
 
 
@@ -35,7 +33,6 @@ void ComandoJardim::executa(Simulador &sim, std::istringstream &params) const {
     if (nL <= 0 || nL >= 27 || nC <= 0 || nC >= 27)
         throw std::runtime_error("Valores fora dos limites (1 a 26)");
 
-    std::cout << "[CMD] jardim " << nL << "x" << nC << " criado" << std::endl;
     sim.criaJardim(nL, nC);
 }
 

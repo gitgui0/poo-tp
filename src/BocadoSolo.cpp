@@ -14,16 +14,14 @@ BocadoSolo::BocadoSolo() : ocupado(false){
     this->agua = randomAgua(gen);
     this->nutrientes = randomNutri(gen);
 
-    objetos[0] = nullptr;
-    objetos[1] = nullptr;
-
-
+    planta = nullptr;
+    ferramenta = nullptr;
 }
 
 BocadoSolo::~BocadoSolo() {
     // Destroi a planta e a ferramenta se existirem
-    delete objetos[0]; // Planta
-    delete objetos[1]; // Ferramenta
+    delete planta;
+    delete ferramenta;
 }
 
 int BocadoSolo::getAgua() const noexcept{ return agua;}
@@ -36,5 +34,5 @@ void BocadoSolo::removeJardineiro(){ ocupado = false; }
 
 std::string BocadoSolo::mostra() {
     if (estaJardineiro()) return "*";
-    return "a";
+    return " ";
 }

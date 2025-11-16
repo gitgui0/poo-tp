@@ -1,4 +1,6 @@
 #include "AceleradorCrescimento.h"
+#include <iostream>
+
 using namespace std;
 
 AceleradorCrescimento::AceleradorCrescimento() :

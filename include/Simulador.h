@@ -42,7 +42,6 @@ class Simulador {
     Jardineiro* jardineiro;
 
     std::vector<Comando*> cmds;
-
     int nInstantes;
     int nComandos;
 

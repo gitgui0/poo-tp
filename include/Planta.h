@@ -4,7 +4,7 @@
 #include <string>
 #include "EstaSolo.h"
 
-class Planta : EstaSolo {
+class Planta : public EstaSolo {
     public:
       void obterAgua(int agua);
       void obterNutrientes(int nutrientes);

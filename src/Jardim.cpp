@@ -36,8 +36,7 @@ string Jardim::mostraJardim() const noexcept {
         l++; // ascii
         i++;
     }
-    oss << "\n"; // acabou a linha com ABCD...
-
+    oss << "\n"; // acabou a linha com ABCD..
     l = 'A';
 
     for(int i = 0; i < nLinhas; ++i) {

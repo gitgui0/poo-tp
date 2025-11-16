@@ -6,32 +6,34 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(TP
         # Núcleo e Interface
         main.cpp
-        Simulador.cpp
-        Interface.cpp
+        src/Simulador.cpp
+        src/Interface.cpp
 
         # Domínio (Jardim, Solo e Jardineiro)
-        Jardim.cpp
-        BocadoSolo.cpp
-        Jardineiro.cpp
+        src/Jardim.cpp
+        src/BocadoSolo.cpp
+        src/Jardineiro.cpp
 
         # Classes Base
-        EstaSolo.cpp
-        Planta.cpp
-        Ferramenta.cpp
+        src/EstaSolo.cpp
+        src/Planta.cpp
+        src/Ferramenta.cpp
 
         # Classes de Plantas
-        Cacto.cpp
-        ErvaDaninha.cpp
-        Roseira.cpp
-        Orquidea.cpp
+        src/Cacto.cpp
+        src/ErvaDaninha.cpp
+        src/Roseira.cpp
+        src/Orquidea.cpp
 
         # Classes de Ferramentas
-        Adubo.cpp
-        Regador.cpp
-        TesouraPoda.cpp
-        AceleradorCrescimento.cpp
+        src/Adubo.cpp
+        src/Regador.cpp
+        src/TesouraPoda.cpp
+        src/AceleradorCrescimento.cpp
 
         # Comandos
-        Comando.cpp
-        ComandosTodos.cpp
+        src/Comando.cpp
+        src/ComandosTodos.cpp
 )
+
+target_include_directories(TP PUBLIC ${CMAKE_SOURCE_DIR}/include)

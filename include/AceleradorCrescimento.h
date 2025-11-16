@@ -2,7 +2,7 @@
 #define TP_ACELERADORCRESCIMENTO_H
 
 #include "Ferramenta.h"
-#include <iostream>
+
 
 class AceleradorCrescimento : public Ferramenta {
 public:

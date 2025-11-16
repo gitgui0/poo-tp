@@ -2,7 +2,8 @@
 #ifndef BOCADOSOLO_H
 #define BOCADOSOLO_H
 
-#include "EstaSolo.h"
+#include "Planta.h"
+#include "Ferramenta.h"
 
 #include <string>
 
@@ -33,7 +34,8 @@ class BocadoSolo {
 
       bool ocupado;
 
-      EstaSolo *objetos[2];  // [2] para planta e ferramenta
+      Planta* planta;
+      Ferramenta* ferramenta;
 
 
 };

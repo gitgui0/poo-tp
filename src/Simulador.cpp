@@ -66,7 +66,7 @@ void Simulador::corre() {
 
 
 void Simulador::registaComandos() {
-  // Adicionar comandos usando push_back()
+
   cmds.push_back(new ComandoAvanca());
   cmds.push_back(new ComandoJardim());
   cmds.push_back(new ComandoEntraJardim());
