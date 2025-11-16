@@ -20,13 +20,20 @@ class Jardim {
 
     BocadoSolo * getBocado(int l, int c);
 
+
+
   private:
+
+    static Ferramenta* geraFerramentaAleatoria();
+    void colocaFerramentasIniciais();
+
     int nLinhas;
     int nColunas;
 
     BocadoSolo **area;
 
     static int instantes;
+
 
 };
 

@@ -18,15 +18,21 @@ class BocadoSolo {
       bool setAgua(int agua);
       bool setNutrientes(int nutrientes);
 
-      bool insere(EstaSolo* item);
-      bool remove(EstaSolo* item);
+      bool insere(Planta* item);
+      bool remove(Planta* item);
+
+      bool insere(Ferramenta* item);
+      bool remove(Ferramenta* item);
 
       bool estaJardineiro() const noexcept;
+
+      Planta* getPlanta() const noexcept { return planta; }
+      Ferramenta* getFerramenta() const noexcept{ return ferramenta; }
 
       void colocaJardineiro();
       void removeJardineiro();
 
-        std::string mostra();
+      char mostra();
 
     private:
       int agua;
@@ -34,7 +40,7 @@ class BocadoSolo {
 
       bool ocupado;
 
-      Planta* planta;
+      Planta *planta;
       Ferramenta* ferramenta;
 
 

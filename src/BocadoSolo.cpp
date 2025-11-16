@@ -32,7 +32,15 @@ bool BocadoSolo::estaJardineiro() const noexcept { return ocupado; }
 void BocadoSolo::colocaJardineiro(){ ocupado = true; }
 void BocadoSolo::removeJardineiro(){ ocupado = false; }
 
-std::string BocadoSolo::mostra() {
-    if (estaJardineiro()) return "*";
-    return " ";
+char BocadoSolo::mostra() {
+    if (estaJardineiro()) return '*';
+    if (planta) return planta->getLetra();
+    if (ferramenta) return ferramenta->getLetra();
+    return ' ';
+}
+
+bool BocadoSolo::insere(Ferramenta* item) {
+    if (item==nullptr || ferramenta != nullptr) return false;
+    ferramenta = item;
+    return true;
 }

@@ -8,6 +8,8 @@
 // avanca [n]
 void ComandoAvanca::executa(Simulador &sim, std::istringstream &params) const {
     int n;
+    if (sim.devolveJardim() == nullptr)
+        throw std::runtime_error("Nao existe jardim. ");
     if (!(params >> n)) {
         n = 1; // se o user não meter nada, avança 1 por default
     }
@@ -15,7 +17,8 @@ void ComandoAvanca::executa(Simulador &sim, std::istringstream &params) const {
     if (n < 1)
         throw std::runtime_error("Valor invalido para o parametro [n]");
 
-    std::cout << "[CMD] avanca " << n << " instante(s)" << std::endl;
+    for (int i= 0; i < n; i++) sim.avancaInstante();
+    std::cout << sim.getInstantes() << endl;
 }
 
 

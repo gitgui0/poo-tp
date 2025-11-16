@@ -1,5 +1,10 @@
 #include "Jardim.h"
 #include <sstream>
+#include <random>
+#include "Regador.h"
+#include "Adubo.h"
+#include "TesouraPoda.h"
+#include "AceleradorCrescimento.h"
 
 using namespace std;
 
@@ -14,6 +19,8 @@ Jardim::Jardim(int nLinhas, int nColunas)
         area[i] = new BocadoSolo[nColunas];  // colunas
     }
 
+    colocaFerramentasIniciais();
+
 }
 
 Jardim::~Jardim() {
@@ -21,6 +28,47 @@ Jardim::~Jardim() {
         delete[] area[i];
     }
     delete[] area;
+}
+
+Ferramenta* Jardim::geraFerramentaAleatoria() {
+    random_device rd;
+    mt19937 gen(rd());
+    // 0: Regador, 1: Adubo, 2: TesouraPoda, 3: AceleradorCrescimento
+    uniform_int_distribution<int> distrib(0, 3);
+    int tipo = distrib(gen);
+
+    switch (tipo) {
+        case 0: return new Regador();
+        case 1: return new Adubo();
+        case 2: return new TesouraPoda();
+        case 3: return new AceleradorCrescimento();
+        default: return nullptr; // Nunca deve acontecer
+    }
+}
+
+void Jardim::colocaFerramentasIniciais() {
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<int> randL(0, nLinhas - 1); // Linhas aleatorias
+    uniform_int_distribution<int> randC(0, nColunas - 1); // Colunas aleatorias
+
+    int ferramentasColocadas = 0;
+    int maximo = (nColunas * nLinhas < 3 ? nColunas * nLinhas : 3 );
+    while (ferramentasColocadas < maximo) {
+        int l = randL(gen);
+        int c = randC(gen);
+
+        BocadoSolo* bocado = getBocado(l, c);
+
+        Ferramenta* f = geraFerramentaAleatoria();
+        if (f == nullptr) continue;
+
+        if (bocado->insere(f)) {
+            ferramentasColocadas++;
+        } else {
+            delete f;
+        }
+    }
 }
 
 int Jardim::getLinhas() const noexcept { return nLinhas; };

@@ -22,6 +22,21 @@ Simulador::Simulador()
 
 void Simulador::avancaInstante(){
   nInstantes++;
+  jardineiro->resetTurno();
+  int n = jardim->getLinhas();
+  int l = jardim->getColunas();
+
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < l; j++) {
+
+      BocadoSolo* b = jardim->getBocado(i,j);
+      Planta* p = b->getPlanta();
+
+      if (p) {
+        p->cadaInstante();
+      }
+    }
+  }
 }
 
 void Simulador::criaJardim(int nLinhas, int nColunas) {
