@@ -20,13 +20,14 @@ void Jardineiro::adicionarFerramenta(Ferramenta* f) {
     if (f!=nullptr) ferramentas.push_back(f);
 }
 
-void Jardineiro::pegaFerramenta() {
-    std::cout << "Jardineiro pegou na ferramenta" << std::endl;
+void Jardineiro::pegaFerramenta(Ferramenta* f) {
+    if (f==nullptr) return; //TODO: MENSAGEM DE JEITO PARA METER NO THROW
+    largaFerramenta();
+    ferramentaNaMao = f;
 }
 
 void Jardineiro::largaFerramenta() {
     if (ferramentaNaMao == nullptr) {
-        std:cout << "O jaridneiro nao tem nenhuma ferramenta nao mao" << std::endl;
         return;
     }
     ferramentas.push_back(ferramentaNaMao);

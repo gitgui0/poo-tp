@@ -29,6 +29,9 @@ class BocadoSolo {
       Planta* getPlanta() const noexcept { return planta; }
       Ferramenta* getFerramenta() const noexcept{ return ferramenta; }
 
+      void setPlanta(Planta* p) { planta = p;}
+      void setFerramenta(Ferramenta* f) { ferramenta = f;}
+
       void colocaJardineiro();
       void removeJardineiro();
 

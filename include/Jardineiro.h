@@ -32,7 +32,7 @@ public:
     //pa tratar das ferramentas
     void adicionarFerramenta(Ferramenta* f);
 
-    void pegaFerramenta();
+    void pegaFerramenta(Ferramenta* f);
     void largaFerramenta();
 
     vector< Ferramenta* > devolveFerramentas() const noexcept{ return ferramentas;}

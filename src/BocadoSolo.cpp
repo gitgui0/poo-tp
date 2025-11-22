@@ -44,3 +44,4 @@ bool BocadoSolo::insere(Ferramenta* item) {
     ferramenta = item;
     return true;
 }
+

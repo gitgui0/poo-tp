@@ -69,6 +69,13 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
 
     j->mudaLocal(b);
     b->colocaJardineiro();
+
+    // Pega na ferramenta que esta no chao automaticamente, se existir
+    Ferramenta *f = b->getFerramenta();
+    if (f!=nullptr) {
+        j->adicionarFerramenta(f); // adicionar ao inventario do jardineiro
+        b->setFerramenta(nullptr); // tira a do bocado de solo
+    }
 }
 
 // gestão e gravação
@@ -124,8 +131,18 @@ void ComandoLarga::executa(Simulador &sim, std::istringstream &) const {
         throw std::runtime_error("Nao existe jardim criado");
     sim.devolveJardineiro()->largaFerramenta();
 }
-void ComandoPega::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] pega (a implementar)" << std::endl;
+void ComandoPega::executa(Simulador & sim, std::istringstream & params) const {
+    Jardineiro *j = sim.devolveJardineiro();
+    int num;
+    if (!(params >> num))
+        throw std::runtime_error("Falta especificar o numero de serie da ferramenta");
+    for (Ferramenta *f : j->devolveFerramentas())
+        if (f->getNumSerie() == num) {
+            j->pegaFerramenta(f);
+            return;
+        }
+
+    throw std::runtime_error("Essa ferramenta nao esta no inventario");
 }
 void ComandoCompra::executa(Simulador & sim, std::istringstream & params) const {
     char tipo;
