@@ -1,4 +1,10 @@
 #include "ComandosTodos.h"
+#include "Ferramenta.h"
+#include "Adubo.h"
+#include "Regador.h"
+#include "TesouraPoda.h"
+#include "AceleradorCrescimento.h"
+
 #include <iostream>
 
 // ===========================================================
@@ -92,8 +98,18 @@ void ComandoLArea::executa(Simulador &, std::istringstream &) const {
 void ComandoLSolo::executa(Simulador &, std::istringstream &) const {
     std::cout << "[CMD] lsolo (a implementar)" << std::endl;
 }
-void ComandoLFerr::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] lferr (a implementar)" << std::endl;
+void ComandoLFerr::executa(Simulador & sim, std::istringstream &) const {
+    int i=1;
+    Jardineiro* jardineiro = sim.devolveJardineiro();
+    if ( jardineiro->devolveFerramentas().empty()) {
+        std::cout << "Nao ha ferramentas no inventario.\n";
+        return;
+    }
+    for (Ferramenta* f : jardineiro->devolveFerramentas()) {
+        if (i>1) std::cout << "\n";
+        std::cout << i << ". " << f->mostra();
+        i++;
+    }
 }
 
 // ações diretas
@@ -103,14 +119,40 @@ void ComandoColhe::executa(Simulador &, std::istringstream &) const {
 void ComandoPlanta::executa(Simulador &, std::istringstream &) const {
     std::cout << "[CMD] planta (a implementar)" << std::endl;
 }
-void ComandoLarga::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] larga (a implementar)" << std::endl;
+void ComandoLarga::executa(Simulador &sim, std::istringstream &) const {
+    if (sim.devolveJardim() == nullptr)
+        throw std::runtime_error("Nao existe jardim criado");
+    sim.devolveJardineiro()->largaFerramenta();
 }
 void ComandoPega::executa(Simulador &, std::istringstream &) const {
     std::cout << "[CMD] pega (a implementar)" << std::endl;
 }
-void ComandoCompra::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] compra (a implementar)" << std::endl;
+void ComandoCompra::executa(Simulador & sim, std::istringstream & params) const {
+    char tipo;
+    if (!(params >> tipo))
+        throw std::runtime_error("Falta especificar o tipo de ferramenta a comprar (g, a, t, z)");
+
+    Ferramenta* novaFerramenta = nullptr;
+
+    switch (tolower(tipo)) {
+        case 'g':
+            novaFerramenta = new Regador();
+        break;
+        case 'a':
+            novaFerramenta = new Adubo();
+        break;
+        case 't':
+            novaFerramenta = new TesouraPoda();
+        break;
+        case 'z':
+            novaFerramenta = new AceleradorCrescimento();
+        break;
+        default:
+            throw std::runtime_error("Tipo de ferramenta invalida. Use g, a, t, ou z.");
+    }
+
+    // A ferramenta comprada é adicionada ao inventário
+    sim.devolveJardineiro()->adicionarFerramenta(novaFerramenta);
 }
 
 

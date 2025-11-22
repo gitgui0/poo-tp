@@ -17,7 +17,7 @@ Jardineiro::~Jardineiro() = default;
 
 // --- Ferramentas ---
 void Jardineiro::adicionarFerramenta(Ferramenta* f) {
-    std::cout << "Jardineiro adicionou a ferramenta" << std::endl;
+    if (f!=nullptr) ferramentas.push_back(f);
 }
 
 void Jardineiro::pegaFerramenta() {
@@ -25,7 +25,12 @@ void Jardineiro::pegaFerramenta() {
 }
 
 void Jardineiro::largaFerramenta() {
-    std::cout << "Jardineiro largou a ferramenta na mao" << std::endl;
+    if (ferramentaNaMao == nullptr) {
+        std:cout << "O jaridneiro nao tem nenhuma ferramenta nao mao" << std::endl;
+        return;
+    }
+    ferramentas.push_back(ferramentaNaMao);
+    ferramentaNaMao = nullptr;
 }
 
 Ferramenta* Jardineiro::getFerramentaNaMao() const {

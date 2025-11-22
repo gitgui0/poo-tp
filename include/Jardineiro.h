@@ -25,15 +25,17 @@ public:
     Jardineiro();
     ~Jardineiro();
 
-    bool estaDentro() const { return dentroDoJardim; }
+    bool estaDentro() const { return dentroDoJardim;}
     BocadoSolo* getLocalAtual() const { return localAtual;}
-    void mudaLocal(BocadoSolo * b) { localAtual = b; };
+    void mudaLocal(BocadoSolo * b) { localAtual = b;}
 
     //pa tratar das ferramentas
     void adicionarFerramenta(Ferramenta* f);
 
     void pegaFerramenta();
     void largaFerramenta();
+
+    vector< Ferramenta* > devolveFerramentas() const noexcept{ return ferramentas;}
 
     Ferramenta* getFerramentaNaMao() const;
 

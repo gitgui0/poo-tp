@@ -9,6 +9,7 @@ public:
     AceleradorCrescimento();
 
     void aplica() override;
+    std::string mostra() override;
 
     ~AceleradorCrescimento() override;
 

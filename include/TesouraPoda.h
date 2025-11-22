@@ -7,6 +7,7 @@
 class TesouraPoda : public Ferramenta {
     public:
       void aplica() override;
+      std::string mostra() override;
       TesouraPoda();
       ~TesouraPoda() override ;
 };
