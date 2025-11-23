@@ -62,11 +62,21 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
     if (!(params >> l) || !(params >> c))
         throw std::runtime_error("Nao foi enviada uma posicao");
 
-    sim.devolveJardineiro()->entrar(
-        sim.devolveJardim(),
-        Simulador::charParaInt(l),
-        Simulador::charParaInt(c)
-    );
+    Jardim *jar = sim.devolveJardim();
+    BocadoSolo *b = jar->getBocado(Simulador::charParaInt(l), Simulador::charParaInt(c));
+    Jardineiro *j = sim.devolveJardineiro();
+
+    if (j == nullptr || b == nullptr)
+        throw std::runtime_error("Posicao invalida");
+
+    // se o jardineiro já estiver noutro bocado, tira-o de lá primeiro
+    if (j->getLocalAtual() != nullptr)
+        j->getLocalAtual()->removeJardineiro();
+
+    j->mudaLocal(b);
+    b->colocaJardineiro();
+
+    j->setEstaDentro(true);
 }
 
 // gestão e gravação
@@ -165,17 +175,115 @@ void ComandoCompra::executa(Simulador & sim, std::istringstream & params) const 
 
 
 // movimento do jardineiro
-void ComandoMoveEsquerda::executa(Simulador &sim, std::istringstream &) const {
-    sim.devolveJardineiro()->esquerda(sim.devolveJardim());
+void ComandoMoveEsquerda::executa(Simulador & sim, std::istringstream & params) const {
+    Jardim* jardim = sim.devolveJardim();
+    Jardineiro* j = sim.devolveJardineiro();
+    BocadoSolo* b = j->getLocalAtual(), *novo;
+
+
+    if (jardim == nullptr )
+        throw std::runtime_error("Nao existe jardim. ");
+
+    if (b == nullptr)
+        throw std::runtime_error("O jardineiro nao esta no jardim.");
+
+
+    std::pair<int,int> posicao = jardim->getPosicaoBocado(b);
+    int l = posicao.first;
+    int c = posicao.second;
+
+    if (c==0)
+        throw std::runtime_error("O movimento nao e possivel.");
+
+    novo = jardim->getBocado(l,c - 1); // -1 porque e para a andar para a esquerda
+    b->removeJardineiro(); // remover o jardineiro do bocado atual
+
+    // colocar o jardinieor no bocado novo
+    novo->colocaJardineiro();
+    j->mudaLocal(novo);
+
+
 }
-void ComandoMoveDireita::executa(Simulador &sim, std::istringstream &) const {
-    sim.devolveJardineiro()->direita(sim.devolveJardim());
+void ComandoMoveDireita::executa(Simulador &sim, std::istringstream & params) const {
+    Jardim* jardim = sim.devolveJardim();
+    Jardineiro* j = sim.devolveJardineiro();
+    BocadoSolo* b = j->getLocalAtual(), *novo;
+
+
+    if (jardim == nullptr )
+        throw std::runtime_error("Nao existe jardim. ");
+
+    if (b == nullptr)
+        throw std::runtime_error("O jardineiro nao esta no jardim.");
+
+
+    std::pair<int,int> posicao = jardim->getPosicaoBocado(b);
+    int l = posicao.first;
+    int c = posicao.second;
+
+    if (c==jardim->getColunas() - 1)
+        throw std::runtime_error("O movimento nao e possivel.");
+
+    novo = jardim->getBocado(l,c + 1); // +1 porque e para a andar para a direita
+    b->removeJardineiro(); // remover o jardineiro do bocado atual
+
+    // colocar o jardinieor no bocado novo
+    novo->colocaJardineiro();
+    j->mudaLocal(novo);
 }
-void ComandoMoveCima::executa(Simulador &sim, std::istringstream &) const {
-    sim.devolveJardineiro()->cima(sim.devolveJardim());
+void ComandoMoveCima::executa(Simulador & sim, std::istringstream & params) const {
+    Jardim* jardim = sim.devolveJardim();
+    Jardineiro* j = sim.devolveJardineiro();
+    BocadoSolo* b = j->getLocalAtual(), *novo;
+
+
+    if (jardim == nullptr )
+        throw std::runtime_error("Nao existe jardim. ");
+
+    if (b == nullptr)
+        throw std::runtime_error("O jardineiro nao esta no jardim.");
+
+
+    std::pair<int,int> posicao = jardim->getPosicaoBocado(b);
+    int l = posicao.first;
+    int c = posicao.second;
+
+    if (l==0)
+        throw std::runtime_error("O movimento nao e possivel.");
+
+    novo = jardim->getBocado(l-1 , c); // -1 porque e para a andar para cima
+    b->removeJardineiro(); // remover o jardineiro do bocado atual
+
+    // colocar o jardinieor no bocado novo
+    novo->colocaJardineiro();
+    j->mudaLocal(novo);
 }
-void ComandoMoveBaixo::executa(Simulador &sim, std::istringstream &) const {
-    sim.devolveJardineiro()->baixo(sim.devolveJardim());
+void ComandoMoveBaixo::executa(Simulador &sim, std::istringstream & params) const {
+    Jardim* jardim = sim.devolveJardim();
+    Jardineiro* j = sim.devolveJardineiro();
+    BocadoSolo* b = j->getLocalAtual(), *novo;
+
+
+    if (jardim == nullptr )
+        throw std::runtime_error("Nao existe jardim. ");
+
+    if (b == nullptr)
+        throw std::runtime_error("O jardineiro nao esta no jardim.");
+
+
+    std::pair<int,int> posicao = jardim->getPosicaoBocado(b);
+    int l = posicao.first;
+    int c = posicao.second;
+
+    if (l==jardim->getLinhas() - 1)
+        throw std::runtime_error("O movimento nao e possivel.");
+
+    novo = jardim->getBocado(l + 1,c); // +1 porque e para a andar para baixo
+    b->removeJardineiro(); // remover o jardineiro do bocado atual
+
+    // colocar o jardineiro no bocado novo
+    novo->colocaJardineiro();
+    j->mudaLocal(novo);
 }
 
 void ComandoSai::executa(Simulador &, std::istringstream &) const {

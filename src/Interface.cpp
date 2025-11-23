@@ -26,6 +26,16 @@ void Interface::inicia() {
 
         try {
             sim->executa(linha);
+            if (sim->devolveJardineiro()->estaDentro()) {
+                Jardim* jar = sim->devolveJardim();
+                Jardineiro* j = sim->devolveJardineiro();
+                BocadoSolo* b = j->getLocalAtual();
+
+                Ferramenta*f = jar->apanharFerramenta(b);
+                if (f!=nullptr) {
+                    j->adicionarFerramenta(f); // adicionar ao inventario do jardineiro
+                }
+            }
         } catch (const exception &e) {
             cout << "Erro: " << e.what() << endl;
         } catch (...) {

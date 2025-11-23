@@ -23,11 +23,13 @@ Ferramenta* BocadoSolo::retiraFerramenta() {
     if (this->ferramenta == nullptr) {
         return nullptr;
     }
+
     // Guarda ponteiro temporário
     Ferramenta* temp = this->ferramenta;
+
     // Esvazia o solo
     this->ferramenta = nullptr;
-    // Devolve a ferramenta
+
     return temp;
 }
 

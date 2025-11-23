@@ -30,21 +30,17 @@ Jardim::~Jardim() {
     delete[] area;
 }
 
-Ferramenta* Jardim::apanharFerramenta(int l, int c) {
-    // 1. Obter o ponteiro para o solo usando a função segura getBocado
-    BocadoSolo* solo = getBocado(l, c);
-
+Ferramenta* Jardim::apanharFerramenta(BocadoSolo* solo) {
     if (solo == nullptr) {
         return nullptr;
     }
 
-    // 2. Tentar retirar do solo
+    // Tentar retirar do solo
     Ferramenta* f = solo->retiraFerramenta();
 
-    // 3. Se apanhámos algo, gerar uma nova noutro local "por magia"
+    //Se apanhamos algo, gerar uma nova noutro local "por magia"
     if (f != nullptr) {
         int novaL, novaC;
-        bool conseguiu = false;
 
         // Tenta encontrar uma posição vazia (100 tentativas)
         for(int i = 0; i < 100; i++) {
@@ -58,7 +54,6 @@ Ferramenta* Jardim::apanharFerramenta(int l, int c) {
             // Em vez de !soloDestino->temFerramenta(), verificamos se o get é nulo
             if (soloDestino != nullptr && soloDestino->getFerramenta() == nullptr) {
                 soloDestino->setFerramenta(geraFerramentaAleatoria());
-                conseguiu = true;
                 break;
             }
         }
@@ -85,8 +80,8 @@ Ferramenta* Jardim::geraFerramentaAleatoria() {
 void Jardim::colocaFerramentasIniciais() {
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<int> randL(0, nLinhas - 1);
-    uniform_int_distribution<int> randC(0, nColunas - 1);
+    uniform_int_distribution<int> randL(0, nLinhas - 1); // Linhas aleatorias
+    uniform_int_distribution<int> randC(0, nColunas - 1); // Colunas aleatorias
 
     int ferramentasColocadas = 0;
     int maximo = (nColunas * nLinhas < 3 ? nColunas * nLinhas : 3 );
@@ -97,8 +92,7 @@ void Jardim::colocaFerramentasIniciais() {
 
         BocadoSolo* bocado = getBocado(l, c);
 
-        // CORREÇÃO AQUI:
-        // Usamos getFerramenta() != nullptr para ver se está ocupado
+        // verificar se existe ferramentauma ferramenta no bocado aleatorio
         if (bocado->getFerramenta() != nullptr) continue;
 
         Ferramenta* f = geraFerramentaAleatoria();
@@ -119,13 +113,13 @@ string Jardim::mostraJardim() const noexcept {
     ostringstream oss;
     char l = 'A';
     int i = 0;
-    oss << " ";
+    oss << " "; // espaco inicial
     while (i < nColunas) {
         oss << l;
-        l++;
+        l++; // ascii
         i++;
     }
-    oss << "\n";
+    oss << "\n"; // acabou a linha com ABCD...
     l = 'A';
 
     for(int i = 0; i < nLinhas; ++i) {
@@ -133,7 +127,7 @@ string Jardim::mostraJardim() const noexcept {
         for (int j = 0; j < nColunas; j++)
             oss << area[i][j].mostra();
         oss << "\n";
-        l++;
+        l++; // ascii
     }
     return oss.str();
 }
@@ -141,4 +135,15 @@ string Jardim::mostraJardim() const noexcept {
 BocadoSolo* Jardim::getBocado(int l, int c) {
     if (l > nLinhas-1 || l < 0  || c > nColunas-1 || c < 0) return nullptr;
     return &area[l][c];
+}
+
+std::pair<int,int> Jardim::getPosicaoBocado(BocadoSolo* b) const noexcept {
+    for (int i = 0; i < nLinhas; i++) {
+        for (int j = 0; j < nColunas; j++) {
+            if (&area[i][j] == b) {
+                return std::pair<int,int>(i,j);
+            }
+        }
+    }
+    throw std::runtime_error("[ERRO INTERNO] Esse bocado e invalido.");
 }

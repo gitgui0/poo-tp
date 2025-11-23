@@ -11,9 +11,7 @@ Jardineiro::Jardineiro() : ferramentaNaMao(nullptr),
                            colheitasRestantes(Settings::Jardineiro::max_colheitas),
                            plantasRestantes(Settings::Jardineiro::max_plantacoes),
                            localAtual(nullptr),
-                           dentroDoJardim(false),
-                           linha(-1), // Inicializar fora do jardim
-                           coluna(-1)
+                           dentroDoJardim(false)
 {
 }
 
@@ -25,7 +23,7 @@ void Jardineiro::adicionarFerramenta(Ferramenta* f) {
 }
 
 void Jardineiro::pegaFerramenta(Ferramenta* f) {
-    if (f==nullptr) return;
+    if (f==nullptr) return; //TODO: MENSAGEM DE JEITO PARA METER NO THROW
     largaFerramenta();
     ferramentaNaMao = f;
 }
@@ -51,83 +49,6 @@ void Jardineiro::resetTurno() {
     movimentosRestantes = 10;
     colheitasRestantes = 5;
     plantasRestantes = 2;
-}
-
-// Agora esta função pertence à classe Jardineiro (tem Jardineiro:: antes)
-void Jardineiro::processarMovimento(Jardim* jardim) {
-    if (jardim == nullptr) return;
-
-    // --- 1. ATUALIZAÇÃO VISUAL (* no mapa) ---
-
-    // Se já estavamos noutro sitio, removemos o boneco de lá
-    if (this->localAtual != nullptr) {
-        this->localAtual->removeJardineiro();
-    }
-
-    // Atualizamos o ponteiro 'localAtual' para a nova posição (linha, coluna)
-    this->localAtual = jardim->getBocado(this->linha, this->coluna);
-
-    // Colocamos o boneco no novo sitio
-    if (this->localAtual != nullptr) {
-        this->localAtual->colocaJardineiro();
-    }
-
-    // --- 2. APANHAR FERRAMENTAS ---
-
-    // Tentar apanhar ferramenta do chão na posição atual
-    Ferramenta* f = jardim->apanharFerramenta(this->linha, this->coluna);
-
-    if (f != nullptr) {
-        this->adicionarFerramenta(f);
-        cout << ">> O Jardineiro encontrou um(a) " << f->mostra() << "!" << endl;
-    }
-}
-
-void Jardineiro::entrar(Jardim* jardim, int l, int c) {
-    if (jardim == nullptr) return;
-
-    this->linha = l;
-    this->coluna = c;
-    this->dentroDoJardim = true;
-    cout << "Jardineiro entrou na posicao " << l << " " << c << endl;
-
-    processarMovimento(jardim);
-}
-
-void Jardineiro::cima(Jardim* jardim) {
-    if (!dentroDoJardim || movimentosRestantes <= 0) return;
-
-    if (this->linha > 0) {
-        this->linha--;
-        this->movimentosRestantes--;
-        processarMovimento(jardim);
-    }
-}
-
-void Jardineiro::baixo(Jardim* jardim) {
-    if (!dentroDoJardim || movimentosRestantes <= 0) return;
-
-    this->linha++;
-    this->movimentosRestantes--;
-    processarMovimento(jardim);
-}
-
-void Jardineiro::esquerda(Jardim* jardim) {
-    if (!dentroDoJardim || movimentosRestantes <= 0) return;
-
-    if (this->coluna > 0) {
-        this->coluna--;
-        this->movimentosRestantes--;
-        processarMovimento(jardim);
-    }
-}
-
-void Jardineiro::direita(Jardim* jardim) {
-    if (!dentroDoJardim || movimentosRestantes <= 0) return;
-
-    this->coluna++;
-    this->movimentosRestantes--;
-    processarMovimento(jardim);
 }
 
 // --- Informação ---
