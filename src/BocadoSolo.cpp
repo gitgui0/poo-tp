@@ -1,6 +1,7 @@
 #include "BocadoSolo.h"
 #include "Settings.h"
 #include <random>
+#include "Planta.h"
 
 BocadoSolo::BocadoSolo() : ocupado(false){
     std::random_device rd;
@@ -16,6 +17,18 @@ BocadoSolo::BocadoSolo() : ocupado(false){
 
     planta = nullptr;
     ferramenta = nullptr;
+}
+//isto é pa devolver o ponteiro e limpar a variavel
+Ferramenta* BocadoSolo::retiraFerramenta() {
+    if (this->ferramenta == nullptr) {
+        return nullptr;
+    }
+    // Guarda ponteiro temporário
+    Ferramenta* temp = this->ferramenta;
+    // Esvazia o solo
+    this->ferramenta = nullptr;
+    // Devolve a ferramenta
+    return temp;
 }
 
 BocadoSolo::~BocadoSolo() {

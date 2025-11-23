@@ -3,175 +3,147 @@
 
 #include "Comando.h"
 
-// Comando do tempo simulado
+// Comandos de Tempo
 class ComandoAvanca : public Comando {
 public:
-    ComandoAvanca() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
+    // Removi o 'const' depois de getNome()
     const char* getNome() override { return "avanca"; }
 };
 
-
-// gestao do jardim
+// Comandos de Gestão do Jardim
 class ComandoJardim : public Comando {
 public:
-    ComandoJardim() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "jardim"; }
+};
+
+class ComandoEntraJardim : public Comando {
+public:
+    void executa(Simulador &sim, std::istringstream &params) const override;
+    const char* getNome() override { return "entra"; }
 };
 
 class ComandoGrava : public Comando {
 public:
-    ComandoGrava() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "grava"; }
 };
 
 class ComandoRecupera : public Comando {
 public:
-    ComandoRecupera() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "recupera"; }
 };
 
 class ComandoApaga : public Comando {
 public:
-    ComandoApaga() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "apaga"; }
 };
 
 class ComandoExecuta : public Comando {
 public:
-    ComandoExecuta() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "executa"; }
 };
 
-
-// listar
+// Comandos de Informação (Listagens)
 class ComandoLPlantas : public Comando {
 public:
-    ComandoLPlantas() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "lplantas"; }
 };
 
 class ComandoLPlanta : public Comando {
 public:
-    ComandoLPlanta() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "lplanta"; }
 };
 
 class ComandoLArea : public Comando {
 public:
-    ComandoLArea() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "larea"; }
 };
 
 class ComandoLSolo : public Comando {
 public:
-    ComandoLSolo() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "lsolo"; }
 };
 
 class ComandoLFerr : public Comando {
 public:
-    ComandoLFerr() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "lferr"; }
 };
 
-
-// as acoes diretas tipo colher plantar etc...
+// Comandos de Ação
 class ComandoColhe : public Comando {
 public:
-    ComandoColhe() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "colhe"; }
 };
 
 class ComandoPlanta : public Comando {
 public:
-    ComandoPlanta() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "planta"; }
 };
 
 class ComandoLarga : public Comando {
 public:
-    ComandoLarga() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "larga"; }
 };
 
 class ComandoPega : public Comando {
 public:
-    ComandoPega() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "pega"; }
 };
 
 class ComandoCompra : public Comando {
 public:
-    ComandoCompra() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "compra"; }
 };
 
-
-// para os movimentos do jardineiro
+// Comandos de Movimento
 class ComandoMoveEsquerda : public Comando {
 public:
-    ComandoMoveEsquerda() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "e"; }
 };
 
 class ComandoMoveDireita : public Comando {
 public:
-    ComandoMoveDireita() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "d"; }
 };
 
 class ComandoMoveCima : public Comando {
 public:
-    ComandoMoveCima() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "c"; }
 };
 
 class ComandoMoveBaixo : public Comando {
 public:
-    ComandoMoveBaixo() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "b"; }
-};
-
-class ComandoEntraJardim : public Comando {
-public:
-    ComandoEntraJardim() = default;
-    void executa(Simulador & sim, std::istringstream & params) const override;
-    const char* getNome() override { return "entra"; }
 };
 
 class ComandoSai : public Comando {
 public:
-    ComandoSai() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "sai"; }
 };
 
-
-// e termina o simulador
 class ComandoFim : public Comando {
 public:
-    ComandoFim() = default;
-    void executa(Simulador &sim, std::istringstream & params) const override;
+    void executa(Simulador &sim, std::istringstream &params) const override;
     const char* getNome() override { return "fim"; }
 };
 

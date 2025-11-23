@@ -3,6 +3,7 @@
 #include "Comando.h"
 #include "ComandosTodos.h"
 #include "Jardineiro.h"
+#include "Planta.h"
 
 #include <iostream>
 #include <sstream>

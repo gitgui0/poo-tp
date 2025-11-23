@@ -5,10 +5,16 @@
 #include "TesouraPoda.h"
 #include "AceleradorCrescimento.h"
 
+// Includes necessários
+#include "Jardineiro.h"
+#include "Jardim.h"
+#include "BocadoSolo.h"
 #include <iostream>
 
+using namespace std;
+
 // ===========================================================
-// Comandos já funcionais
+// Implementação dos Comandos
 // ===========================================================
 
 // avanca [n]
@@ -56,26 +62,11 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
     if (!(params >> l) || !(params >> c))
         throw std::runtime_error("Nao foi enviada uma posicao");
 
-    Jardim *jar = sim.devolveJardim();
-    BocadoSolo *b = jar->getBocado(Simulador::charParaInt(l), Simulador::charParaInt(c));
-    Jardineiro *j = sim.devolveJardineiro();
-
-    if (j == nullptr || b == nullptr)
-        throw std::runtime_error("Posicao invalida");
-
-    // se o jardineiro já estiver noutro bocado, tira-o de lá primeiro
-    if (j->getLocalAtual() != nullptr)
-        j->getLocalAtual()->removeJardineiro();
-
-    j->mudaLocal(b);
-    b->colocaJardineiro();
-
-    // Pega na ferramenta que esta no chao automaticamente, se existir
-    Ferramenta *f = b->getFerramenta();
-    if (f!=nullptr) {
-        j->adicionarFerramenta(f); // adicionar ao inventario do jardineiro
-        b->setFerramenta(nullptr); // tira a do bocado de solo
-    }
+    sim.devolveJardineiro()->entrar(
+        sim.devolveJardim(),
+        Simulador::charParaInt(l),
+        Simulador::charParaInt(c)
+    );
 }
 
 // gestão e gravação
@@ -174,18 +165,19 @@ void ComandoCompra::executa(Simulador & sim, std::istringstream & params) const 
 
 
 // movimento do jardineiro
-void ComandoMoveEsquerda::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] e (mover para a esquerda - a implementar)" << std::endl;
+void ComandoMoveEsquerda::executa(Simulador &sim, std::istringstream &) const {
+    sim.devolveJardineiro()->esquerda(sim.devolveJardim());
 }
-void ComandoMoveDireita::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] d (mover para a direita - a implementar)" << std::endl;
+void ComandoMoveDireita::executa(Simulador &sim, std::istringstream &) const {
+    sim.devolveJardineiro()->direita(sim.devolveJardim());
 }
-void ComandoMoveCima::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] c (mover para cima - a implementar)" << std::endl;
+void ComandoMoveCima::executa(Simulador &sim, std::istringstream &) const {
+    sim.devolveJardineiro()->cima(sim.devolveJardim());
 }
-void ComandoMoveBaixo::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] b (mover para baixo - a implementar)" << std::endl;
+void ComandoMoveBaixo::executa(Simulador &sim, std::istringstream &) const {
+    sim.devolveJardineiro()->baixo(sim.devolveJardim());
 }
+
 void ComandoSai::executa(Simulador &, std::istringstream &) const {
     std::cout << "[CMD] sai (a implementar)" << std::endl;
 }

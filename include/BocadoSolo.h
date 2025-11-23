@@ -2,15 +2,19 @@
 #ifndef BOCADOSOLO_H
 #define BOCADOSOLO_H
 
-#include "Planta.h"
+//#include "Planta.h"
 #include "Ferramenta.h"
 
 #include <string>
+class Planta;
 
 class BocadoSolo {
     public:
       BocadoSolo();
-     ~BocadoSolo();
+      ~BocadoSolo();
+    //para o "chao" saber entregar a ferramente
+    //ou ficar vazio
+      Ferramenta* retiraFerramenta();
 
       int getAgua() const noexcept;
       int getNutrientes() const noexcept;
