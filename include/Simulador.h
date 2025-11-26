@@ -20,8 +20,8 @@ class Simulador {
     int getInstantes() const noexcept { return nInstantes; }
 
     void criaJardim(int nLinhas, int nColunas);
-    void mostraInterface() const ;
-    void corre();
+    string mostraJardim() const;
+
 
     const Jardim * devolveJardim() const { return jardim; }
     Jardim * devolveJardim() { return jardim; }
@@ -32,7 +32,7 @@ class Simulador {
     Comando* parse(const std::string &input, std::istringstream& parametros);
     void executa(const std::string &input);
 
-  static int charParaInt(char c);
+    static int charParaInt(char c);
 
   private:
     void registaComandos();

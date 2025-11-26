@@ -14,7 +14,6 @@ void Interface::inicia() {
     cout << "===== POO TP 25/26 | SIMULADOR JARDIM =====" << endl;
 
     while (ligado) {
-        mostraJardim();
         cout << "\n>";
         getline(cin, linha);
 
@@ -42,13 +41,5 @@ void Interface::inicia() {
             // captura outras excecoes
             cout << "Erro ao executar: " << linha << endl;
         }
-    }
-}
-
-void Interface::mostraJardim() const {
-    if (sim->devolveJardim() != nullptr) {
-        cout << "\n";
-        const Jardim* j= sim->devolveJardim();
-        cout << j->mostraJardim();
     }
 }

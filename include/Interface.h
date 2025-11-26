@@ -15,7 +15,6 @@ class Interface {
         explicit Interface(Simulador * sim);
         ~Interface();
         void inicia(); // loop principal
-        void mostraJardim() const;
 
 };
 

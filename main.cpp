@@ -4,8 +4,9 @@
 
 int main() {
     Simulador sim;
+    Interface ui(&sim);
 
-    sim.corre();
+    ui.inicia();
 
     return 0;
 }

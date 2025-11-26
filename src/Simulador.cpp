@@ -76,11 +76,6 @@ void Simulador::executa(const string &input){
 }
 
 
-void Simulador::corre() {
-  interface->inicia();
-}
-
-
 void Simulador::registaComandos() {
 
   cmds.push_back(new ComandoAvanca());
