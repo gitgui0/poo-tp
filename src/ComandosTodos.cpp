@@ -115,7 +115,7 @@ void ComandoLFerr::executa(Simulador & sim, std::istringstream &) const {
     }
     for (Ferramenta* f : jardineiro->devolveFerramentas()) {
         if (i>1) std::cout << "\n";
-        std::cout << i << ". " << f->mostra();
+        std::cout << f;
         i++;
     }
 }

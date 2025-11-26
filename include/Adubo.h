@@ -6,7 +6,7 @@
 class Adubo : public Ferramenta{
     public:
       void aplica() override;
-      std::string mostra() override;
+      std::string mostra() const override;
 
       Adubo();
 

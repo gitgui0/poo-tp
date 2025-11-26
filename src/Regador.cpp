@@ -8,8 +8,8 @@ Regador::Regador() : Ferramenta('g'), capacidade(Settings::Regador::capacidade){
 Regador::~Regador() = default;
 void Regador::aplica(){ std::cout << "Aplica regador" << std::endl; }
 
-std::string Regador::mostra() {
+std::string Regador::mostra() const {
     ostringstream oss;
-    oss << "Acelerador de Crescimento - " << getNumSerie() <<  "\nCapacidade: " << capacidade << endl;
+    oss << "Regador - " << getNumSerie() <<  "\nCapacidade: " << capacidade << endl;
     return oss.str();
 }

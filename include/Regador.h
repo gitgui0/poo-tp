@@ -8,7 +8,7 @@
 class Regador : public Ferramenta{
     public:
       void aplica() override;
-      std::string mostra() override;
+      std::string mostra() const override;
 
       Regador();
       ~Regador() override;

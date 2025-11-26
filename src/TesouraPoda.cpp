@@ -9,7 +9,7 @@ TesouraPoda::~TesouraPoda() = default;
 
 void TesouraPoda::aplica() { std::cout << "Aplica tesoura poda" << std::endl; }
 
-std::string TesouraPoda::mostra() {
+std::string TesouraPoda::mostra() const {
     ostringstream oss;
     oss << "Tesoura de Poda - " << getNumSerie() << endl;
     return oss.str();

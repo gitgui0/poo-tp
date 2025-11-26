@@ -9,7 +9,7 @@ Adubo::~Adubo() = default;
 
 void Adubo::aplica() { cout << "Aplica pacote adubo" << endl; }
 
-string Adubo::mostra() {
+string Adubo::mostra() const {
     ostringstream oss;
     oss << "Adubo - " << getNumSerie() <<  "\nCapacidade: " << capacidade << endl;
     return oss.str();

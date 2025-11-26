@@ -5,7 +5,7 @@ class EstaSolo {
     public:
       explicit EstaSolo(char letra);
       char getLetra() const noexcept;
-      virtual ~EstaSolo(); // virtual, porque por exemplo, as platnas sao destruidas de maneira diferente das ferramentas
+      virtual ~EstaSolo() = 0; // virtual, porque por exemplo, as platnas sao destruidas de maneira diferente das ferramentas
 
     private:
       char letra;
