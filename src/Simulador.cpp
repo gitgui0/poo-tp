@@ -111,3 +111,14 @@ void Simulador::registaComandos() {
 int Simulador::charParaInt(char c) {
   return toupper(c) - 'A';
 }
+
+
+string Simulador::mostraJardim() const {
+  if (jardim==nullptr)
+      return "";
+
+  ostringstream oss;
+  oss << jardim->mostraJardim();
+  return oss.str();
+
+}

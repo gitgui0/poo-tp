@@ -49,6 +49,7 @@ void ComandoJardim::executa(Simulador &sim, std::istringstream &params) const {
         throw std::runtime_error("Valores fora dos limites (1 a 26)");
 
     sim.criaJardim(nL, nC);
+    cout << sim.mostraJardim() << endl;
 }
 
 
@@ -77,6 +78,8 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
     b->colocaJardineiro();
 
     j->setEstaDentro(true);
+
+    cout << sim.mostraJardim();
 }
 
 // gestão e gravação
@@ -202,6 +205,7 @@ void ComandoMoveEsquerda::executa(Simulador & sim, std::istringstream & params) 
     novo->colocaJardineiro();
     j->mudaLocal(novo);
 
+    cout << sim.mostraJardim();
 
 }
 void ComandoMoveDireita::executa(Simulador &sim, std::istringstream & params) const {
@@ -230,6 +234,8 @@ void ComandoMoveDireita::executa(Simulador &sim, std::istringstream & params) co
     // colocar o jardinieor no bocado novo
     novo->colocaJardineiro();
     j->mudaLocal(novo);
+
+    cout << sim.mostraJardim();
 }
 void ComandoMoveCima::executa(Simulador & sim, std::istringstream & params) const {
     Jardim* jardim = sim.devolveJardim();
@@ -257,6 +263,8 @@ void ComandoMoveCima::executa(Simulador & sim, std::istringstream & params) cons
     // colocar o jardinieor no bocado novo
     novo->colocaJardineiro();
     j->mudaLocal(novo);
+
+    cout << sim.mostraJardim();
 }
 void ComandoMoveBaixo::executa(Simulador &sim, std::istringstream & params) const {
     Jardim* jardim = sim.devolveJardim();
@@ -284,6 +292,8 @@ void ComandoMoveBaixo::executa(Simulador &sim, std::istringstream & params) cons
     // colocar o jardineiro no bocado novo
     novo->colocaJardineiro();
     j->mudaLocal(novo);
+
+    cout << sim.mostraJardim();
 }
 
 void ComandoSai::executa(Simulador &, std::istringstream &) const {
