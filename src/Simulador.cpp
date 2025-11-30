@@ -34,7 +34,7 @@ void Simulador::avancaInstante(){
       Planta* p = b->getPlanta();
 
       if (p) {
-        p->cadaInstante();
+        p->cadaInstante(b);
       }
     }
   }
@@ -112,6 +112,9 @@ int Simulador::charParaInt(char c) {
   return toupper(c) - 'A';
 }
 
+char Simulador::intParaChar(int n) {
+  return n + 'A';
+}
 
 string Simulador::mostraJardim() const {
   if (jardim==nullptr)

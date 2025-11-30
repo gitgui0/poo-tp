@@ -33,6 +33,7 @@ class Simulador {
     void executa(const std::string &input);
 
     static int charParaInt(char c);
+    static char intParaChar(int n);
 
   private:
     void registaComandos();

@@ -18,6 +18,7 @@ class Jardim {
     std::pair<int,int> getPosicaoBocado(BocadoSolo* b) const noexcept;
     int getLinhas() const noexcept;
     int getColunas() const noexcept;
+    void multiplica();
 
     std::string mostraJardim() const noexcept;
 

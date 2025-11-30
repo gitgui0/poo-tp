@@ -3,18 +3,22 @@
 
 #include <string>
 #include "EstaSolo.h"
+#include "BocadoSolo.h"
+#include "Jardim.h"
 
 class Planta : public EstaSolo {
     public:
-      void obterAgua(int agua);
-      void obterNutrientes(int nutrientes);
+      int obterAgua() const noexcept{ return agua; }
+      int obterNutrientes() const noexcept{ return nutrientes; }
 
       void colocarAgua(int agua);
       void colocarNutrientes(int nutrientes);
 
-      virtual void cadaInstante() = 0;
+      virtual void cadaInstante(BocadoSolo* b) = 0;
 
-      //TODO: funcao para multiplicar, provavelmente virtual também
+      virtual void multiplica(BocadoSolo* b, Jardim* j) = 0;
+
+      virtual BocadoSolo* geraVizinho(BocadoSolo* b, Jardim* j) const = 0;
 
       ~Planta() override = 0; // override do destrutor do estasolo
 

@@ -25,7 +25,8 @@ using namespace std;
 // avanca [n]
 void ComandoAvanca::executa(Simulador &sim, std::istringstream &params) const {
     int n;
-    if (sim.devolveJardim() == nullptr)
+    Jardim* j = sim.devolveJardim();
+    if (j == nullptr)
         throw std::runtime_error("Nao existe jardim. ");
     if (!(params >> n)) {
         n = 1; // se o user não meter nada, avança 1 por default
@@ -34,8 +35,13 @@ void ComandoAvanca::executa(Simulador &sim, std::istringstream &params) const {
     if (n < 1)
         throw std::runtime_error("Valor invalido para o parametro [n]");
 
-    for (int i= 0; i < n; i++) sim.avancaInstante();
-    std::cout << sim.getInstantes() << endl;
+    for (int i= 0; i < n; i++) {
+        sim.avancaInstante();
+        j->multiplica();
+    }
+
+    std::cout << "Instantes: " << sim.getInstantes() << endl;
+    std::cout << sim.mostraJardim();
 }
 
 
@@ -102,8 +108,33 @@ void ComandoExecuta::executa(Simulador &, std::istringstream &) const {
 }
 
 // listagens
-void ComandoLPlantas::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] lplantas (a implementar)" << std::endl;
+void ComandoLPlantas::executa(Simulador &sim, std::istringstream &) const {
+
+    Jardim* jardim = sim.devolveJardim();
+    if (jardim == nullptr)
+        throw std::runtime_error("O jardim nao existe");
+
+    for (int i = 0; i < jardim->getLinhas(); i++) {
+        for (int j = 0; j < jardim->getColunas(); j++) {
+            BocadoSolo* b= jardim->getBocado(i,j);
+            Planta* p = b->getPlanta();
+            if (p == nullptr)
+                continue;
+            char l = p->getLetra();
+            string planta;
+            if (l=='c') planta = "Cacto";
+            else if (l=='e') planta = "Erva Daninha";
+            else if (l=='x') planta = "Orquidea";
+            else if (l=='r') planta = "Roseira";
+
+            std::cout << "(" << Simulador::intParaChar(i) << "," << Simulador::intParaChar(j) << ") : " << planta << endl;
+            std::cout << "Planta - Agua: " << p->obterAgua() << " - Nutrientes: " << p->obterNutrientes() << endl;
+            std::cout << "Solo - Agua: " << b->getAgua() << " - Nutrientes: " << b->getNutrientes() << endl;
+            std::cout << "\n";
+        }
+    }
+
+    std::cout << sim.mostraJardim() << endl;
 }
 void ComandoLPlanta::executa(Simulador &, std::istringstream &) const {
     std::cout << "[CMD] lplanta (a implementar)" << std::endl;

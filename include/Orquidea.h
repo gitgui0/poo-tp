@@ -3,6 +3,7 @@
 #define TP_ORQUIDEA_H
 
 #include "Planta.h"
+#include <iostream>
 
 class Orquidea : public Planta {
 private:
@@ -10,7 +11,9 @@ private:
 
 public:
     Orquidea();
-    void cadaInstante() override; //o que faz a cada instante
+    void cadaInstante(BocadoSolo* b) override;
+    void multiplica(BocadoSolo *b, Jardim* j) override;
+    BocadoSolo* geraVizinho(BocadoSolo *b, Jardim* j) const override;
 };
 
 

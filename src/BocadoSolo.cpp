@@ -12,12 +12,13 @@ BocadoSolo::BocadoSolo() : ocupado(false){
     std::uniform_int_distribution<int> randomNutri(Settings::Jardim::nutrientes_min,Settings::Jardim::nutrientes_max);
 
     // Gera um valor aleatório
-    this->agua = randomAgua(gen);
+    this->agua =  randomAgua(gen);
     this->nutrientes = randomNutri(gen);
 
     planta = nullptr;
     ferramenta = nullptr;
 }
+
 //isto é pa devolver o ponteiro e limpar a variavel
 Ferramenta* BocadoSolo::retiraFerramenta() {
     if (this->ferramenta == nullptr) {
@@ -54,5 +55,22 @@ char BocadoSolo::mostra() {
     return ' ';
 }
 
+void BocadoSolo::setPlanta(Planta* p) {
+    delete planta;
+    planta = p;
+}
+void BocadoSolo::setFerramenta(Ferramenta* f) {
+    delete ferramenta;
+    ferramenta = f;
+}
 
-
+bool BocadoSolo::setAgua(int agua) {
+    if (agua<0) return false;
+    this->agua = agua;
+    return true;
+}
+bool BocadoSolo::setNutrientes(int nutrientes) {
+    if (nutrientes<0) return false;
+    this->nutrientes = nutrientes;
+    return true;
+}

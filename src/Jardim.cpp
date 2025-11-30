@@ -1,4 +1,6 @@
 #include "Jardim.h"
+
+#include <Planta.h>
 #include <sstream>
 #include <random>
 #include "Regador.h"
@@ -144,3 +146,17 @@ std::pair<int,int> Jardim::getPosicaoBocado(BocadoSolo* b) const noexcept {
     }
     throw std::runtime_error("[ERRO INTERNO] Esse bocado e invalido.");
 }
+
+void Jardim::multiplica() {
+    for (int i = 0; i < nLinhas; i++) {
+        for (int j = 0; j < nColunas; j++) {
+            BocadoSolo* b = &area[i][j];
+            Planta * p = b->getPlanta();
+            if (p!=nullptr)
+                p->multiplica(b,this);
+        }
+    }
+}
+
+
+
