@@ -5,7 +5,12 @@
 #include "TesouraPoda.h"
 #include "AceleradorCrescimento.h"
 
-// Includes necessários
+#include "Planta.h"
+#include "Cacto.h"
+#include "ErvaDaninha.h"
+#include "Orquidea.h"
+#include "Roseira.h"
+
 #include "Jardineiro.h"
 #include "Jardim.h"
 #include "BocadoSolo.h"
@@ -124,11 +129,88 @@ void ComandoLFerr::executa(Simulador & sim, std::istringstream &) const {
 }
 
 // ações diretas
-void ComandoColhe::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] colhe (a implementar)" << std::endl;
+void ComandoColhe::executa(Simulador &sim, std::istringstream &params) const {
+    if (sim.devolveJardim() == nullptr)
+        throw std::runtime_error("O jardim nao existe.");
+
+    char l,c;
+    Jardim* jardim = sim.devolveJardim();
+    Jardineiro* jardineiro = sim.devolveJardineiro();
+
+    if (jardineiro->getColheitasRestantes() <= 0)
+        throw std::runtime_error("Nao pode colher mais plantas neste turno");
+
+    if (!(params >> l))
+        throw std::runtime_error("Falta especificar a linha da posicao");
+
+    if (!(params >> c))
+        throw std::runtime_error("Falta especificar a coluna da posicao");
+
+
+    int linha = Simulador::charParaInt(l), coluna = Simulador::charParaInt(c);
+
+    BocadoSolo* b = jardim->getBocado(linha,coluna);
+
+    if (b->getPlanta()==nullptr)
+        throw std::runtime_error("Nao existe planta nessa posicao");
+
+    b->setPlanta(nullptr);
+    jardineiro->menosColheitasRestantes();
+
+    std:: cout << sim.mostraJardim();
 }
-void ComandoPlanta::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] planta (a implementar)" << std::endl;
+void ComandoPlanta::executa(Simulador &sim, std::istringstream & params) const {
+    if (sim.devolveJardim() == nullptr)
+         throw std::runtime_error("O jardim nao existe.");
+
+    char tipo,l,c;
+    Jardim* jardim = sim.devolveJardim();
+    Jardineiro* jardineiro = sim.devolveJardineiro();
+
+    if (jardineiro->getPlantasRestantes() <= 0)
+        throw std::runtime_error("Nao pode plantar mais plantas neste turno");
+
+    if (!(params >> l))
+        throw std::runtime_error("Falta especificar a linha da posicao");
+
+    if (!(params >> c))
+        throw std::runtime_error("Falta especificar a coluna da posicao");
+
+    if (!(params >> tipo))
+        throw std::runtime_error("Falta especificar o tipo de planta");
+
+    int linha = Simulador::charParaInt(l), coluna = Simulador::charParaInt(c);
+
+    BocadoSolo* b = jardim->getBocado(linha,coluna);
+
+    // Ja existe uma planta no sitio
+    if (b->getPlanta() != nullptr)
+        throw std::runtime_error("Nao e possivel colocar uma planta nessa posicao.");
+
+    Planta* novaPlanta = nullptr;
+
+    switch (tolower(tipo)) {
+        case 'c':
+            novaPlanta = new Cacto();
+        break;
+        case 'e':
+            novaPlanta = new ErvaDaninha();
+        break;
+        case 'x':
+            novaPlanta = new Orquidea();
+        break;
+        case 'r':
+            novaPlanta = new Roseira();
+        break;
+        default:
+            throw std::runtime_error("Tipo de planta invalida. Cacto - c, Erva Daninha - e, Orquidea - x, Roseira - r ");
+    }
+
+    b->setPlanta(novaPlanta);
+    jardineiro->menosPlantasRestantes();
+
+
+    std:: cout << sim.mostraJardim();
 }
 void ComandoLarga::executa(Simulador &sim, std::istringstream &) const {
     if (sim.devolveJardim() == nullptr)
@@ -183,6 +265,8 @@ void ComandoMoveEsquerda::executa(Simulador & sim, std::istringstream & params) 
     Jardineiro* j = sim.devolveJardineiro();
     BocadoSolo* b = j->getLocalAtual(), *novo;
 
+    if (j->getMovimentosRestantes()<=0)
+        throw std::runtime_error("Nao ha movimentos restantes para este turno");
 
     if (jardim == nullptr )
         throw std::runtime_error("Nao existe jardim. ");
@@ -204,6 +288,7 @@ void ComandoMoveEsquerda::executa(Simulador & sim, std::istringstream & params) 
     // colocar o jardinieor no bocado novo
     novo->colocaJardineiro();
     j->mudaLocal(novo);
+    j->menosMovimentosRestantes();
 
     cout << sim.mostraJardim();
 
@@ -213,6 +298,8 @@ void ComandoMoveDireita::executa(Simulador &sim, std::istringstream & params) co
     Jardineiro* j = sim.devolveJardineiro();
     BocadoSolo* b = j->getLocalAtual(), *novo;
 
+    if (j->getMovimentosRestantes()<=0)
+        throw std::runtime_error("Nao ha movimentos restantes para este turno");
 
     if (jardim == nullptr )
         throw std::runtime_error("Nao existe jardim. ");
@@ -234,6 +321,7 @@ void ComandoMoveDireita::executa(Simulador &sim, std::istringstream & params) co
     // colocar o jardinieor no bocado novo
     novo->colocaJardineiro();
     j->mudaLocal(novo);
+    j->menosMovimentosRestantes();
 
     cout << sim.mostraJardim();
 }
@@ -242,6 +330,8 @@ void ComandoMoveCima::executa(Simulador & sim, std::istringstream & params) cons
     Jardineiro* j = sim.devolveJardineiro();
     BocadoSolo* b = j->getLocalAtual(), *novo;
 
+    if (j->getMovimentosRestantes()<=0)
+        throw std::runtime_error("Nao ha movimentos restantes para este turno");
 
     if (jardim == nullptr )
         throw std::runtime_error("Nao existe jardim. ");
@@ -263,6 +353,7 @@ void ComandoMoveCima::executa(Simulador & sim, std::istringstream & params) cons
     // colocar o jardinieor no bocado novo
     novo->colocaJardineiro();
     j->mudaLocal(novo);
+    j->menosMovimentosRestantes();
 
     cout << sim.mostraJardim();
 }
@@ -271,6 +362,8 @@ void ComandoMoveBaixo::executa(Simulador &sim, std::istringstream & params) cons
     Jardineiro* j = sim.devolveJardineiro();
     BocadoSolo* b = j->getLocalAtual(), *novo;
 
+    if (j->getMovimentosRestantes()<=0)
+        throw std::runtime_error("Nao ha movimentos restantes para este turno");
 
     if (jardim == nullptr )
         throw std::runtime_error("Nao existe jardim. ");
@@ -292,6 +385,7 @@ void ComandoMoveBaixo::executa(Simulador &sim, std::istringstream & params) cons
     // colocar o jardineiro no bocado novo
     novo->colocaJardineiro();
     j->mudaLocal(novo);
+    j->menosMovimentosRestantes();
 
     cout << sim.mostraJardim();
 }

@@ -38,6 +38,14 @@ public:
     void pegaFerramenta(Ferramenta* f);
     void largaFerramenta();
 
+    int getPlantasRestantes() const noexcept { return plantasRestantes;}
+    int getColheitasRestantes() const noexcept { return colheitasRestantes;}
+    int getMovimentosRestantes() const noexcept { return movimentosRestantes;}
+
+    void menosPlantasRestantes()  { plantasRestantes--;}
+    void menosColheitasRestantes()  { colheitasRestantes--;}
+    void menosMovimentosRestantes()  { movimentosRestantes--;}
+
     vector< Ferramenta* > devolveFerramentas() const noexcept{ return ferramentas;}
 
     Ferramenta* getFerramentaNaMao() const;

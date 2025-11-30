@@ -54,9 +54,5 @@ char BocadoSolo::mostra() {
     return ' ';
 }
 
-bool BocadoSolo::insere(Ferramenta* item) {
-    if (item==nullptr || ferramenta != nullptr) return false;
-    ferramenta = item;
-    return true;
-}
+
 

@@ -98,11 +98,8 @@ void Jardim::colocaFerramentasIniciais() {
         Ferramenta* f = geraFerramentaAleatoria();
         if (f == nullptr) continue;
 
-        if (bocado->insere(f)) {
-            ferramentasColocadas++;
-        } else {
-            delete f;
-        }
+       bocado->setFerramenta(f);
+       ferramentasColocadas++;
     }
 }
 

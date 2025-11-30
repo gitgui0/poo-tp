@@ -22,10 +22,8 @@ class BocadoSolo {
       bool setAgua(int agua);
       bool setNutrientes(int nutrientes);
 
-      bool insere(Planta* item);
       bool remove(Planta* item);
 
-      bool insere(Ferramenta* item);
       bool remove(Ferramenta* item);
 
       bool estaJardineiro() const noexcept;
