@@ -11,7 +11,38 @@ Orquidea::Orquidea()
         "Bonita"), instantesAguaAlta(0){}
 
 void Orquidea::multiplica(BocadoSolo *b, Jardim* j) {
+    // [Mantido] Log do teu colega
     std::cout << "multiplica orquidea" << std::endl;
+
+    if (b == nullptr) return;
+
+    // Usa os valores definidos no Settings.h para a Orquidea
+    // Exige: Nutrientes > 60 E Agua > 80 (valores do teu Settings)
+    if (obterNutrientes() > Settings::Orquidea::multiplica_nutrientes_maior &&
+        obterAgua() > Settings::Orquidea::multiplica_agua_maior) {
+
+        // A Orquidea usa o geraVizinho padrão (que só devolve vazios, verifiquei no código anterior)
+        BocadoSolo* vizinho = geraVizinho(b, j);
+
+        if (vizinho != nullptr) {
+            // Estratégia de Divisão Justa
+            int aguaPassada = obterAgua() / 2;
+            int nutriPassado = obterNutrientes() / 2;
+
+            // Criar a nova Orquidea.
+            // Como o construtor da Orquidea não recebe argumentos (usa defaults),
+            // criamos e depois ajustamos os valores.
+            Orquidea* p = new Orquidea();
+            p->colocarAgua(aguaPassada);
+            p->colocarNutrientes(nutriPassado);
+
+            vizinho->setPlanta(p);
+
+            // Atualiza a MÃE
+            colocarAgua(aguaPassada);
+            colocarNutrientes(nutriPassado);
+        }
+        }
 }
 
 BocadoSolo* Orquidea::geraVizinho(BocadoSolo *b, Jardim* j) const {

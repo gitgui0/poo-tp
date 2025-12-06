@@ -17,7 +17,31 @@ ErvaDaninha::ErvaDaninha(int agua, int nutrientes) :
 ErvaDaninha::~ErvaDaninha(){ std::cout << "Destructor Erva Daninha" << std::endl;}
 
 void ErvaDaninha::multiplica(BocadoSolo *b, Jardim* j) {
+    // [Mantido] Log do teu colega
     std::cout << "multiplica erva daninha" << std::endl;
+
+    if (b == nullptr) return;
+
+    // Regra: Nutrientes > 30 (Settings::ErvaDaninha::multiplica_nutrientes_maior)
+    if (obterNutrientes() > Settings::ErvaDaninha::multiplica_nutrientes_maior) {
+
+        // O geraVizinho da ErvaDaninha (já implementado) devolve QUALQUER vizinho.
+        BocadoSolo* vizinho = geraVizinho(b, j);
+
+        if (vizinho != nullptr) {
+            // Criar a FILHA (invasora)
+            // "Fica com 5 de água, e 5 de nutrientes"
+            int aguaFilha = Settings::ErvaDaninha::inicial_agua;      // 5
+            int nutriFilha = Settings::ErvaDaninha::nova_nutrientes;  // 5
+
+            // Ao fazer setPlanta, se já lá estiver uma planta, o BocadoSolo
+            // encarrega-se de fazer 'delete' da anterior (matando-a).
+            Planta* p = new ErvaDaninha(aguaFilha, nutriFilha);
+            vizinho->setPlanta(p);
+
+            // A MÃE mantém-se igual (não perde recursos, segundo o enunciado)
+        }
+    }
 }
 
 

@@ -20,6 +20,8 @@ class Planta : public EstaSolo {
 
       virtual BocadoSolo* geraVizinho(BocadoSolo* b, Jardim* j) const = 0;
 
+      std::string getBeleza() const { return beleza; }
+
       ~Planta() override = 0; // override do destrutor do estasolo
 
       Planta(int agua, int nutrientes, char letra, const std::string& beleza);
