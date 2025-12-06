@@ -74,12 +74,18 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
     if (!(params >> l) || !(params >> c))
         throw std::runtime_error("Nao foi enviada uma posicao");
 
+
     Jardim *jar = sim.devolveJardim();
     BocadoSolo *b = jar->getBocado(Simulador::charParaInt(l), Simulador::charParaInt(c));
     Jardineiro *j = sim.devolveJardineiro();
 
+
+
     if (j == nullptr || b == nullptr)
         throw std::runtime_error("Posicao invalida");
+
+    if (j->getEntradasRestantes() == 0)
+        throw std::runtime_error("O jardineiro ja nao pode entrar outra vez. Tem que avancar o turno.");
 
     // se o jardineiro já estiver noutro bocado, tira-o de lá primeiro
     if (j->getLocalAtual() != nullptr)
@@ -89,6 +95,8 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
     b->colocaJardineiro();
 
     j->setEstaDentro(true);
+    j->menosEntradasRestantes();
+
 
     cout << sim.mostraJardim();
 }
@@ -403,6 +411,8 @@ void ComandoMoveBaixo::executa(Simulador &sim, std::istringstream & params) cons
         throw std::runtime_error("O jardineiro nao esta no jardim.");
 
 
+
+
     std::pair<int,int> posicao = jardim->getPosicaoBocado(b);
     int l = posicao.first;
     int c = posicao.second;
@@ -421,8 +431,23 @@ void ComandoMoveBaixo::executa(Simulador &sim, std::istringstream & params) cons
     cout << sim.mostraJardim();
 }
 
-void ComandoSai::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] sai (a implementar)" << std::endl;
+void ComandoSai::executa(Simulador &sim, std::istringstream &params) const {
+    if (sim.devolveJardim() == nullptr)
+        throw std::runtime_error("Nao existe jardim criado");
+
+    Jardineiro *j = sim.devolveJardineiro();
+
+    if (j == nullptr)
+        throw std::runtime_error("Erro inesperado.");
+
+    if (j->getEntradasRestantes() == 0)
+        throw std::runtime_error("O jardineiro ja nao pode sair. Tem que avancar o turno");
+
+    j->getLocalAtual()->removeJardineiro();
+    j->mudaLocal(nullptr);
+    j->setEstaDentro(false);
+
+    cout << sim.mostraJardim();
 }
 
 

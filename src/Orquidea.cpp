@@ -52,7 +52,7 @@ BocadoSolo* Orquidea::geraVizinho(BocadoSolo *b, Jardim* j) const {
 }
 
 
-void Orquidea::cadaInstante(BocadoSolo* b) {
+bool Orquidea::cadaInstante(BocadoSolo* b) {
     int absorveNutri = ( b->getNutrientes() >= 4 ? 4 : 0);
     int absorveAgua = (b->getAgua() >= 3 ? 3 : 0);
 
@@ -61,5 +61,7 @@ void Orquidea::cadaInstante(BocadoSolo* b) {
 
     b->setNutrientes(b->getNutrientes() - absorveNutri);
     b->setAgua(b->getAgua() - absorveAgua);
+
+    return false;
 }
 

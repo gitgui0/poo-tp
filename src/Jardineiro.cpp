@@ -49,6 +49,7 @@ void Jardineiro::resetTurno() {
     movimentosRestantes = 10;
     colheitasRestantes = 5;
     plantasRestantes = 2;
+    entradasRestantes = 2;
 }
 
 // --- Informação ---

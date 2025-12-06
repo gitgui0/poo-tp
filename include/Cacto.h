@@ -6,13 +6,17 @@
 
 class Cacto : public Planta {
     public:
-      void cadaInstante(BocadoSolo* b) override;
+      bool cadaInstante(BocadoSolo* b) override;
       void multiplica(BocadoSolo *b, Jardim* j) override;
       BocadoSolo* geraVizinho(BocadoSolo *b, Jardim* j) const override;
 
       Cacto();
       Cacto(int agua, int nutri );
       ~Cacto() override;
+
+    private:
+        int turnosAguaExcessiva;
+        int turnosNutrientesExcessivos;
 
 };
 

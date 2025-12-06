@@ -2,11 +2,22 @@
 #include <iostream>
 #include <vector>
 
-Cacto::Cacto() : Planta(0,0,'c',"Neutra") {};
+Cacto::Cacto() : Planta(0,0,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrientesExcessivos(0) {};
 Cacto::Cacto(int agua, int nutrientes) : Planta(agua,nutrientes,'c',"Neutra") {};
 Cacto::~Cacto(){ std::cout << "Desconstrutor cacto " << std::endl;}
 
-void Cacto::cadaInstante(BocadoSolo* b) {
+bool Cacto::cadaInstante(BocadoSolo* b) {
+
+    if (b->getAgua() > 100)
+        turnosAguaExcessiva++;
+    else
+        turnosAguaExcessiva=0;
+
+    if (b->getNutrientes() > 100)
+        turnosNutrientesExcessivos++;
+    else
+        turnosNutrientesExcessivos=0;
+
     // Se nutrientes do bocado de solo > 5, entao 5, se nao os nutrientes que tem.
     int absorveNutri = ( b->getNutrientes() > 5 ? 5 : b->getNutrientes());
 
@@ -23,6 +34,8 @@ void Cacto::cadaInstante(BocadoSolo* b) {
     //Colocar a agua e nutrientes no bocado de solo (b). atuais - absorvidos
     b->setNutrientes(b->getNutrientes() - absorveNutri);
     b->setAgua(b->getAgua() - absorveAgua);
+
+    return turnosAguaExcessiva >= 3 || turnosNutrientesExcessivos >= 3;
 }
 
 void Cacto::multiplica(BocadoSolo *b, Jardim* j) {

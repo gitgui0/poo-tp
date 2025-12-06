@@ -23,6 +23,8 @@ class Jardineiro {
     int colheitasRestantes;
     int plantasRestantes;
 
+    int entradasRestantes;
+
 public:
     Jardineiro();
     ~Jardineiro();
@@ -41,10 +43,13 @@ public:
     int getPlantasRestantes() const noexcept { return plantasRestantes;}
     int getColheitasRestantes() const noexcept { return colheitasRestantes;}
     int getMovimentosRestantes() const noexcept { return movimentosRestantes;}
+    int getEntradasRestantes() const noexcept { return entradasRestantes;}
+
 
     void menosPlantasRestantes()  { plantasRestantes--;}
     void menosColheitasRestantes()  { colheitasRestantes--;}
     void menosMovimentosRestantes()  { movimentosRestantes--;}
+    void menosEntradasRestantes()  { entradasRestantes--;}
 
     vector< Ferramenta* > devolveFerramentas() const noexcept{ return ferramentas;}
 

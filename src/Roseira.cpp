@@ -12,8 +12,6 @@ void Roseira::multiplica(BocadoSolo *b, Jardim* j) {
     std::cout << "multiplica roseira" << std::endl;
 }
 
-
-
 BocadoSolo* Roseira::geraVizinho(BocadoSolo *b, Jardim* j) const {
     if (b == nullptr) return nullptr;
 
@@ -52,7 +50,7 @@ BocadoSolo* Roseira::geraVizinho(BocadoSolo *b, Jardim* j) const {
 }
 
 
-void Roseira::cadaInstante(BocadoSolo* b) {
+bool Roseira::cadaInstante(BocadoSolo* b) {
     colocarNutrientes(obterNutrientes() - 4);
     colocarAgua(obterAgua() - 4);
 
@@ -64,4 +62,23 @@ void Roseira::cadaInstante(BocadoSolo* b) {
 
     b->setNutrientes(b->getNutrientes() - absorveNutri);
     b->setAgua(b->getAgua() - absorveAgua);
+
+    // se a quantidade de água acumulada chegar a 0
+    if (obterAgua() < Settings::Roseira::morre_agua_menor) {
+        return true;
+    }
+
+    // se a quantidade de nutrientes acumulada chegar a 0
+    if (obterNutrientes() < Settings::Roseira::morre_nutrientes_menor) {
+        return true;
+    }
+
+    //  se a quantidade de nutrientes acumulada atingir 200
+    if (obterNutrientes() > Settings::Roseira::morre_nutrientes_maior) {
+        return true;
+    }
+
+    return false;
 }
+
+

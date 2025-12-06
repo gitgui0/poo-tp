@@ -6,7 +6,7 @@
 
 ErvaDaninha::ErvaDaninha() :
     Planta(Settings::ErvaDaninha::inicial_agua,Settings::ErvaDaninha::inicial_nutrientes,
-        'e',"Feia")
+        'e',"Feia"), instantesAtuais(0)
 {};
 
 ErvaDaninha::ErvaDaninha(int agua, int nutrientes) :
@@ -61,7 +61,9 @@ BocadoSolo* ErvaDaninha::geraVizinho(BocadoSolo *b, Jardim* j) const {
 }
 
 
-void ErvaDaninha::cadaInstante(BocadoSolo* b) {
+bool ErvaDaninha::cadaInstante(BocadoSolo* b) {
+    instantesAtuais++;
+
     int absorveNutri = ( b->getNutrientes() > 0 ? 1 : 0);
     int absorveAgua = (b->getAgua() > 0 ? 1 : 0);
 
@@ -70,4 +72,6 @@ void ErvaDaninha::cadaInstante(BocadoSolo* b) {
 
     b->setNutrientes(b->getNutrientes() - absorveNutri);
     b->setAgua(b->getAgua() - absorveAgua);
+
+    return instantesAtuais >= 60;
 }

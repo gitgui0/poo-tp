@@ -30,11 +30,29 @@ void Simulador::avancaInstante(){
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < l; j++) {
 
+      bool plantaMorreu = false;
+
       BocadoSolo* b = jardim->getBocado(i,j);
       Planta* p = b->getPlanta();
 
-      if (p) {
-        p->cadaInstante(b);
+
+      if (p)
+        plantaMorreu = p->cadaInstante(b);
+
+      if (plantaMorreu)
+        b->setPlanta(nullptr);
+      else {
+        //logica extra para roseira
+        if (p!=nullptr) {
+          if (p->getLetra() == 'r') {
+            BocadoSolo* b = p->geraVizinho(b,jardim);
+
+            // Ou seja, nao ha nenhum vizinho sem planta
+            if (b==nullptr)
+              b->setPlanta(nullptr);
+          }
+        }
+
       }
     }
   }
