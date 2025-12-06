@@ -1,6 +1,8 @@
 #ifndef TP_ACELERADORCRESCIMENTO_H
 #define TP_ACELERADORCRESCIMENTO_H
 
+#include <BocadoSolo.h>
+
 #include "Ferramenta.h"
 
 
@@ -8,7 +10,7 @@ class AceleradorCrescimento : public Ferramenta {
 public:
     AceleradorCrescimento();
 
-    void aplica() override;
+    bool aplica(BocadoSolo* b, Jardim* j) override;
     std::string mostra() const override;
 
     ~AceleradorCrescimento() override;

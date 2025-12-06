@@ -7,7 +7,12 @@ using namespace std;
 Adubo::Adubo() : Ferramenta('a'), capacidade(Settings::Adubo::capacidade){};
 Adubo::~Adubo() = default;
 
-void Adubo::aplica() { cout << "Aplica pacote adubo" << endl; }
+bool Adubo::aplica(BocadoSolo* b, Jardim* j) {
+    b->setNutrientes(b->getNutrientes() + 10);
+
+    capacidade = capacidade - 10;
+    return capacidade <= 0;
+}
 
 string Adubo::mostra() const {
     ostringstream oss;

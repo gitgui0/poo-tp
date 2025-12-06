@@ -10,6 +10,7 @@ Jardineiro::Jardineiro() : ferramentaNaMao(nullptr),
                            movimentosRestantes(Settings::Jardineiro::max_movimentos),
                            colheitasRestantes(Settings::Jardineiro::max_colheitas),
                            plantasRestantes(Settings::Jardineiro::max_plantacoes),
+                           entradasRestantes(Settings::Jardineiro::max_entradas_saidas),
                            localAtual(nullptr),
                            dentroDoJardim(false)
 {
@@ -25,6 +26,13 @@ void Jardineiro::adicionarFerramenta(Ferramenta* f) {
 void Jardineiro::pegaFerramenta(Ferramenta* f) {
     if (f==nullptr) return; //TODO: MENSAGEM DE JEITO PARA METER NO THROW
     largaFerramenta();
+
+    for (auto it = ferramentas.begin(); it != ferramentas.end(); ++it) {
+        if (*it == f) {
+            ferramentas.erase(it); // Remove do vetor, mas NÃO apaga o objeto da memória
+            break;
+        }
+    }
     ferramentaNaMao = f;
 }
 
@@ -41,15 +49,23 @@ Ferramenta* Jardineiro::getFerramentaNaMao() const {
 }
 
 // --- Ações ---
-void Jardineiro::aplicarFerramenta() {
-    std::cout << "Usa a ferramenta nesta posicao" << std::endl;
+void Jardineiro::aplicarFerramenta(Jardim* j) {
+    bool acabou = false;
+    if (ferramentaNaMao == nullptr)
+        return;
+    acabou = ferramentaNaMao->aplica(localAtual,j);
+    std::cout << ferramentaNaMao << "foi aplicada" << endl;
+    if (acabou) {
+        delete ferramentaNaMao;
+        ferramentaNaMao = nullptr;
+    }
 }
 
 void Jardineiro::resetTurno() {
-    movimentosRestantes = 10;
-    colheitasRestantes = 5;
-    plantasRestantes = 2;
-    entradasRestantes = 2;
+    movimentosRestantes = Settings::Jardineiro::max_movimentos;
+    colheitasRestantes = Settings::Jardineiro::max_colheitas;
+    plantasRestantes = Settings::Jardineiro::max_plantacoes;
+    entradasRestantes = Settings::Jardineiro::max_entradas_saidas;
 }
 
 // --- Informação ---

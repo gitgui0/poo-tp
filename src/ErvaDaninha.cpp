@@ -6,12 +6,12 @@
 
 ErvaDaninha::ErvaDaninha() :
     Planta(Settings::ErvaDaninha::inicial_agua,Settings::ErvaDaninha::inicial_nutrientes,
-        'e',"Feia"), instantesAtuais(0)
+        'e',"Feia"), instantesAtuais(0), instanteMulti(0)
 {};
 
 ErvaDaninha::ErvaDaninha(int agua, int nutrientes) :
     Planta(agua,nutrientes,
-        'e',"Feia")
+        'e',"Feia"), instantesAtuais(0), instanteMulti(0)
 {};
 
 ErvaDaninha::~ErvaDaninha(){ std::cout << "Destructor Erva Daninha" << std::endl;}
@@ -22,8 +22,9 @@ void ErvaDaninha::multiplica(BocadoSolo *b, Jardim* j) {
 
     if (b == nullptr) return;
 
-    // Regra: Nutrientes > 30 (Settings::ErvaDaninha::multiplica_nutrientes_maior)
-    if (obterNutrientes() > Settings::ErvaDaninha::multiplica_nutrientes_maior) {
+    // Regra: Nutrientes > 30 (Settings::ErvaDaninha::multiplica_nutrientes_maior) e se os inatntes desde a ultia multiplicaco > 5
+    if (obterNutrientes() > Settings::ErvaDaninha::multiplica_nutrientes_maior && instantesAtuais - instanteMulti >= Settings::ErvaDaninha::multiplica_instantes) {
+        instanteMulti = instantesAtuais;
 
         // O geraVizinho da ErvaDaninha (já implementado) devolve QUALQUER vizinho.
         BocadoSolo* vizinho = geraVizinho(b, j);
@@ -88,8 +89,8 @@ BocadoSolo* ErvaDaninha::geraVizinho(BocadoSolo *b, Jardim* j) const {
 bool ErvaDaninha::cadaInstante(BocadoSolo* b) {
     instantesAtuais++;
 
-    int absorveNutri = ( b->getNutrientes() > 0 ? 1 : 0);
-    int absorveAgua = (b->getAgua() > 0 ? 1 : 0);
+    int absorveNutri = ( b->getNutrientes() > 0 ? Settings::ErvaDaninha::absorcao_nutrientes : 0);
+    int absorveAgua = (b->getAgua() > 0 ? Settings::ErvaDaninha::absorcao_agua : 0);
 
     colocarNutrientes(obterNutrientes() + absorveNutri);
     colocarAgua(obterAgua() + absorveAgua);
@@ -97,5 +98,5 @@ bool ErvaDaninha::cadaInstante(BocadoSolo* b) {
     b->setNutrientes(b->getNutrientes() - absorveNutri);
     b->setAgua(b->getAgua() - absorveAgua);
 
-    return instantesAtuais >= 60;
+    return instantesAtuais >= Settings::ErvaDaninha::morre_instantes;
 }

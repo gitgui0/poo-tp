@@ -17,8 +17,12 @@ Planta::~Planta() = default;
 void Planta::colocarAgua(int agua) {
     if (agua>0)
         this->agua = agua;
+    else
+        this->agua = 0;
 }
 void Planta::colocarNutrientes(int nutrientes) {
     if (nutrientes > 0)
         this->nutrientes = nutrientes;
+    else
+        this->nutrientes = 0;
 }

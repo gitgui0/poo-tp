@@ -16,6 +16,7 @@
 #include "BocadoSolo.h"
 #include <iostream>
 #include <fstream>
+#include <Settings.h>
 
 using namespace std;
 
@@ -27,8 +28,13 @@ using namespace std;
 void ComandoAvanca::executa(Simulador &sim, std::istringstream &params) const {
     int n;
     Jardim* j = sim.devolveJardim();
+    Jardineiro* jardineiro = sim.devolveJardineiro();
     if (j == nullptr)
         throw std::runtime_error("Nao existe jardim. ");
+
+    if (jardineiro == nullptr)
+        throw std::runtime_error("Nao existe jardineiro. ");
+
     if (!(params >> n)) {
         n = 1; // se o user não meter nada, avança 1 por default
     }
@@ -39,6 +45,7 @@ void ComandoAvanca::executa(Simulador &sim, std::istringstream &params) const {
     for (int i= 0; i < n; i++) {
         sim.avancaInstante();
         j->multiplica();
+        jardineiro->aplicarFerramenta(j);
     }
 
     std::cout << "Instantes: " << sim.getInstantes() << endl;
@@ -95,9 +102,16 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
     j->mudaLocal(b);
     b->colocaJardineiro();
 
-    j->setEstaDentro(true);
-    j->menosEntradasRestantes();
+    if (j->estaDentro()) {
+        if (j->getMovimentosRestantes() <= 0)
+            throw std::runtime_error("O jardineiro nao se pode mover mais este turno.");
 
+        j->menosMovimentosRestantes(); // conta como movimento
+    }
+
+
+
+    j->setEstaDentro(true);
 
     cout << sim.mostraJardim();
 }
@@ -332,14 +346,18 @@ void ComandoLSolo::executa(Simulador &sim, std::istringstream & params) const {
 void ComandoLFerr::executa(Simulador & sim, std::istringstream &) const {
     int i=1;
     Jardineiro* jardineiro = sim.devolveJardineiro();
-    if ( jardineiro->devolveFerramentas().empty()) {
+    if ( jardineiro->devolveFerramentas().empty() && jardineiro->getFerramentaNaMao() == nullptr) {
         std::cout << "Nao ha ferramentas no inventario.\n";
         return;
     }
+    if (jardineiro->getFerramentaNaMao() != nullptr)
+        std::cout << "FERRAMENTA NA MAO - " << jardineiro->getFerramentaNaMao() << endl;
     for (Ferramenta* f : jardineiro->devolveFerramentas()) {
         if (i>1) std::cout << "\n";
-        std::cout << f;
-        i++;
+        if (f!=nullptr) {
+            std::cout << f;
+            i++;
+        }
     }
 }
 
@@ -622,6 +640,8 @@ void ComandoSai::executa(Simulador &sim, std::istringstream &params) const {
     j->getLocalAtual()->removeJardineiro();
     j->mudaLocal(nullptr);
     j->setEstaDentro(false);
+
+    j->menosEntradasRestantes();
 
     cout << sim.mostraJardim();
 }

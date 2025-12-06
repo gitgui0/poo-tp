@@ -16,6 +16,7 @@ class ErvaDaninha : public Planta{
 
     private:
        int instantesAtuais;
+       int instanteMulti;
 
 };
 

@@ -13,7 +13,7 @@ bool Cacto::cadaInstante(BocadoSolo* b) {
     else
         turnosAguaExcessiva=0;
 
-    if (b->getNutrientes() > 100)
+    if (b->getNutrientes() <= 0)
         turnosNutrientesExcessivos++;
     else
         turnosNutrientesExcessivos=0;

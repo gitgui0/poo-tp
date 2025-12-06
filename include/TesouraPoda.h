@@ -6,7 +6,7 @@
 
 class TesouraPoda : public Ferramenta {
     public:
-      void aplica() override;
+      bool aplica(BocadoSolo* b, Jardim* j) override;
       std::string mostra() const override;
       TesouraPoda();
       ~TesouraPoda() override ;

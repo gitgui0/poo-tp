@@ -2,10 +2,12 @@
 #define ADUBO_H
 
 #include "Ferramenta.h"
+#include <BocadoSolo.h>
+
 
 class Adubo : public Ferramenta{
     public:
-      void aplica() override;
+      bool aplica(BocadoSolo* b, Jardim* j) override;
       std::string mostra() const override;
 
       Adubo();

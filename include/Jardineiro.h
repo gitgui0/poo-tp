@@ -56,7 +56,7 @@ public:
     Ferramenta* getFerramentaNaMao() const;
 
     //acoes
-    void aplicarFerramenta();
+    void aplicarFerramenta(Jardim* j);
     void resetTurno();
 
     string getInfo() const;

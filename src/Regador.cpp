@@ -6,7 +6,12 @@ using namespace std;
 
 Regador::Regador() : Ferramenta('g'), capacidade(Settings::Regador::capacidade){};
 Regador::~Regador() = default;
-void Regador::aplica(){ std::cout << "Aplica regador" << std::endl; }
+bool Regador::aplica(BocadoSolo* b, Jardim* j) {
+    b->setAgua(b->getAgua() + 10);
+
+    capacidade = capacidade - 10;
+    return capacidade <= 0;
+}
 
 std::string Regador::mostra() const {
     ostringstream oss;

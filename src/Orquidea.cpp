@@ -1,98 +1,83 @@
 #include "Orquidea.h"
 #include "Settings.h"
-#include "Planta.h"
 #include <iostream>
 #include <vector>
 
 Orquidea::Orquidea()
-    :Planta(Settings::Orquidea::inicial_agua,
-        Settings::Orquidea::inicial_nutrientes,
-        'x',
-        "Bonita"), instantesAguaAlta(0){}
-
-void Orquidea::multiplica(BocadoSolo *b, Jardim* j) {
-    // [Mantido] Log do teu colega
-    std::cout << "multiplica orquidea" << std::endl;
-
-    if (b == nullptr) return;
-
-    // Usa os valores definidos no Settings.h para a Orquidea
-    // Exige: Nutrientes > 60 E Agua > 80 (valores do teu Settings)
-    if (obterNutrientes() > Settings::Orquidea::multiplica_nutrientes_maior &&
-        obterAgua() > Settings::Orquidea::multiplica_agua_maior) {
-
-        // A Orquidea usa o geraVizinho padrão (que só devolve vazios, verifiquei no código anterior)
-        BocadoSolo* vizinho = geraVizinho(b, j);
-
-        if (vizinho != nullptr) {
-            // Estratégia de Divisão Justa
-            int aguaPassada = obterAgua() / 2;
-            int nutriPassado = obterNutrientes() / 2;
-
-            // Criar a nova Orquidea.
-            // Como o construtor da Orquidea não recebe argumentos (usa defaults),
-            // criamos e depois ajustamos os valores.
-            Orquidea* p = new Orquidea();
-            p->colocarAgua(aguaPassada);
-            p->colocarNutrientes(nutriPassado);
-
-            vizinho->setPlanta(p);
-
-            // Atualiza a MÃE
-            colocarAgua(aguaPassada);
-            colocarNutrientes(nutriPassado);
-        }
-        }
-}
-
-BocadoSolo* Orquidea::geraVizinho(BocadoSolo *b, Jardim* j) const {
-    if (b == nullptr) return nullptr;
-
-    std::vector<BocadoSolo*> escolhas;
-    std::pair<int, int> posicao = j->getPosicaoBocado(b);
-    int l = posicao.first;
-    int c = posicao.second;
-
-    // Arrays auxiliares para as 4 direções (Cima, Baixo, Esquerda, Direita)
-    int dr[] = {-1, 1, 0, 0}; // Variacao na linha
-    int dc[] = {0, 0, -1, 1}; // Variacao na coluna
-
-    // Percorre as 4 direções possíveis
-    for (int i = 0; i < 4; i++) {
-        int nl = l + dr[i]; // Nova linha
-        int nc = c + dc[i]; // Nova coluna
-
-        if (nl >= 0 && nl < j->getLinhas() && nc >= 0 && nc < j->getColunas()) {
-
-            BocadoSolo* vizinho = j->getBocado(nl, nc);
-
-            if (vizinho->getPlanta() == nullptr)
-                escolhas.push_back(vizinho);
-        }
-    }
-
-    // 3. Escolha Aleatória
-    if (escolhas.empty()) {
-        return nullptr; // Não há vizinhos válidos (ou vazios)
-    }
-
-    // Gera um índice aleatório entre 0 e o tamanho do vetor - 1
-    int indiceSorteado = rand() % escolhas.size();
-
-    return escolhas[indiceSorteado];
-}
-
+    : Planta(Settings::Orquidea::inicial_agua, Settings::Orquidea::inicial_nutrientes, 'x', "Bonita"),
+      nInstantesAguaExcessiva(0)
+{}
 
 bool Orquidea::cadaInstante(BocadoSolo* b) {
-    int absorveNutri = ( b->getNutrientes() >= 4 ? 4 : 0);
-    int absorveAgua = (b->getAgua() >= 3 ? 3 : 0);
 
-    colocarNutrientes(obterNutrientes() + absorveNutri);
-    colocarAgua(obterAgua() + absorveAgua);
+    //perde agua e nutrientes
 
-    b->setNutrientes(b->getNutrientes() - absorveNutri);
-    b->setAgua(b->getAgua() - absorveAgua);
+    colocarAgua(obterAgua() - 2);
+    colocarNutrientes(obterNutrientes() - 1);
+
+    bool estaFraca = false;
+
+    if (b->getAgua() > 80 && b->getAgua() < 30) {
+        nInstantesAguaExcessiva++;
+    } else {
+        nInstantesAguaExcessiva = 0;
+    }
+
+    // se tiver fraca, ou seja, com muita agua durante mt tempo, tira nutrientes
+    if (nInstantesAguaExcessiva >= 2) {
+        estaFraca = true;
+        colocarNutrientes(obterNutrientes() - 10);
+    }
+
+    // bebe 10
+    if (b->getAgua() >= 10) {
+        b->setAgua(b->getAgua() - 10);
+        colocarAgua(obterAgua() + 10);
+
+        // se nao estiver fraca, retribui com 5 nutrientes e absorve nutrientes tambem
+        if (!estaFraca) {
+            b->setNutrientes(b->getNutrientes() + 5);
+            colocarNutrientes(obterNutrientes() + 2);
+        }
+    } else {
+        // se nao havia 10 aguas no solo, perde mais agua e tira nutrientes do solo
+        b->setAgua(b->getAgua() - 5);
+        colocarAgua(obterAgua() - 5);
+        b->setNutrientes(b->getNutrientes() - 5);
+        colocarNutrientes(obterNutrientes() - 5);
+    }
+
+    if (obterAgua() <= 0 || obterNutrientes() <= 0) {
+        return true;
+    }
 
     return false;
 }
 
+void Orquidea::multiplica(BocadoSolo *b, Jardim* j) {
+    if (obterNutrientes() < 50) return;
+
+    BocadoSolo* vizinho = geraVizinho(b, j);
+
+    if (vizinho != nullptr && vizinho->getAgua() > 40 && vizinho->getAgua() < 70) {
+        Planta* p = new Orquidea();
+        vizinho->setPlanta(p);
+        colocarNutrientes(obterNutrientes() - 25);
+    }
+}
+
+BocadoSolo* Orquidea::geraVizinho(BocadoSolo *b, Jardim* j) const {
+    if (b == nullptr) return nullptr;
+    std::vector<BocadoSolo*> escolhas;
+    std::pair<int, int> pos = j->getPosicaoBocado(b);
+    int dr[] = {-1, 1, 0, 0};
+    int dc[] = {0, 0, -1, 1};
+
+    for (int i = 0; i < 4; i++) {
+        BocadoSolo* viz = j->getBocado(pos.first + dr[i], pos.second + dc[i]);
+        if (viz && viz->getPlanta() == nullptr) escolhas.push_back(viz);
+    }
+
+    if (escolhas.empty()) return nullptr;
+    return escolhas[rand() % escolhas.size()];
+}

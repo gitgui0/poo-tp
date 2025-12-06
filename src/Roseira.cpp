@@ -5,6 +5,9 @@
 
 Roseira::Roseira() : Planta(Settings::Roseira::inicial_agua,
                             Settings::Roseira::inicial_nutrientes,'r',"Bonita") {};
+
+Roseira::Roseira(int agua, int nutrientes) : Planta(agua,nutrientes,'r',"Bonita") {};
+
 Roseira::~Roseira(){ std::cout << "Desconstrutor roseira " << std::endl;}
 
 

@@ -45,10 +45,10 @@ void Simulador::avancaInstante(){
         //logica extra para roseira
         if (p!=nullptr) {
           if (p->getLetra() == 'r') {
-            BocadoSolo* b = p->geraVizinho(b,jardim);
+            BocadoSolo* boc = p->geraVizinho(b,jardim);
 
             // Ou seja, nao ha nenhum vizinho sem planta
-            if (b==nullptr)
+            if (boc==nullptr)
               b->setPlanta(nullptr);
           }
         }

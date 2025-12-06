@@ -5,9 +5,12 @@
 #include <string>
 #include <sstream>
 
+class BocadoSolo;
+class Jardim;
+
 class Ferramenta : public EstaSolo {
   public:
-    virtual void aplica() = 0;
+    virtual bool aplica(BocadoSolo* b, Jardim* j) = 0;
     virtual std::string mostra() const = 0;
     int getNumSerie() const noexcept { return numSerie; }
 

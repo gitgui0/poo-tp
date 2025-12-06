@@ -2,12 +2,14 @@
 #ifndef REGADOR_H
 #define REGADOR_H
 
+#include <BocadoSolo.h>
+
 #include "Ferramenta.h"
 
 
 class Regador : public Ferramenta{
     public:
-      void aplica() override;
+      bool aplica(BocadoSolo* b, Jardim* j) override;
       std::string mostra() const override;
 
       Regador();
