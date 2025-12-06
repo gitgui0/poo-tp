@@ -20,17 +20,18 @@ bool AceleradorCrescimento::aplica(BocadoSolo* b, Jardim* j) {
         for (int i = 0 ; i < 3; i++) {
             bool plantaMorreu = p->cadaInstante(b);
 
-            if (plantaMorreu)
+            if (plantaMorreu) {
                 b->setPlanta(nullptr);
-            else {
-                if (p->getLetra() == 'r') {
-                    BocadoSolo* b = p->geraVizinho(b,j);
-
-                    // Ou seja, nao ha nenhum vizinho sem planta
-                    if (b==nullptr)
-                        b->setPlanta(nullptr);
-                }
+                break;
             }
+
+            if (p->getLetra() == 'r') {
+                BocadoSolo* b = p->geraVizinho(b,j);
+                // Ou seja, nao ha nenhum vizinho sem planta
+                if (b==nullptr)
+                    b->setPlanta(nullptr);
+            }
+
         }
         capacidade--;
     }

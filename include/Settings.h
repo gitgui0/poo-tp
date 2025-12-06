@@ -24,7 +24,7 @@ class Settings {
     public:
         static const int max_movimentos = 10;
         static const int max_entradas_saidas = 1;
-        static const int max_plantacoes = 10;
+        static const int max_plantacoes = 2;
         static const int max_colheitas = 5;
     };
     class Cacto {

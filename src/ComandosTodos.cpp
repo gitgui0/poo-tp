@@ -92,7 +92,7 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
     if (j == nullptr || b == nullptr)
         throw std::runtime_error("Posicao invalida");
 
-    if (j->getEntradasRestantes() == 0)
+    if (j->getEntradasSaidasRestantes() == 0)
         throw std::runtime_error("O jardineiro ja nao pode entrar outra vez. Tem que avancar o turno.");
 
     // se o jardineiro já estiver noutro bocado, tira-o de lá primeiro
@@ -634,14 +634,14 @@ void ComandoSai::executa(Simulador &sim, std::istringstream &params) const {
     if (j == nullptr)
         throw std::runtime_error("Erro inesperado.");
 
-    if (j->getEntradasRestantes() == 0)
+    if (j->getEntradasSaidasRestantes() == 0)
         throw std::runtime_error("O jardineiro ja nao pode sair. Tem que avancar o turno");
 
     j->getLocalAtual()->removeJardineiro();
     j->mudaLocal(nullptr);
     j->setEstaDentro(false);
 
-    j->menosEntradasRestantes();
+    j->menosEntradasSaidasRestantes();
 
     cout << sim.mostraJardim();
 }

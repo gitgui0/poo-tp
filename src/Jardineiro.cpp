@@ -10,7 +10,7 @@ Jardineiro::Jardineiro() : ferramentaNaMao(nullptr),
                            movimentosRestantes(Settings::Jardineiro::max_movimentos),
                            colheitasRestantes(Settings::Jardineiro::max_colheitas),
                            plantasRestantes(Settings::Jardineiro::max_plantacoes),
-                           entradasRestantes(Settings::Jardineiro::max_entradas_saidas),
+                           entradasSaidasRestantes(Settings::Jardineiro::max_entradas_saidas),
                            localAtual(nullptr),
                            dentroDoJardim(false)
 {

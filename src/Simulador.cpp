@@ -42,7 +42,8 @@ void Simulador::avancaInstante(){
       if (plantaMorreu)
         b->setPlanta(nullptr);
       else {
-        //logica extra para roseira
+        //logica extra para roseira, isto mais para nao ter que mandar o jardim a funcao
+        // cadaInstante das plantas, ate porque nem todas existem
         if (p!=nullptr) {
           if (p->getLetra() == 'r') {
             BocadoSolo* boc = p->geraVizinho(b,jardim);
