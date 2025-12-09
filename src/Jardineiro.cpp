@@ -16,7 +16,15 @@ Jardineiro::Jardineiro() : ferramentaNaMao(nullptr),
 {
 }
 
-Jardineiro::~Jardineiro() = default;
+Jardineiro::~Jardineiro() {
+    delete ferramentaNaMao;
+
+    for (Ferramenta* f : ferramentas) {
+        delete f;
+    }
+    ferramentas.clear();
+
+};
 
 // --- Ferramentas ---
 void Jardineiro::adicionarFerramenta(Ferramenta* f) {
@@ -65,7 +73,7 @@ void Jardineiro::resetTurno() {
     movimentosRestantes = Settings::Jardineiro::max_movimentos;
     colheitasRestantes = Settings::Jardineiro::max_colheitas;
     plantasRestantes = Settings::Jardineiro::max_plantacoes;
-    entradasRestantes = Settings::Jardineiro::max_entradas_saidas;
+    entradasSaidasRestantes = Settings::Jardineiro::max_entradas_saidas;
 }
 
 // --- Informação ---

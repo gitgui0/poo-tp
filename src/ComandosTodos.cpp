@@ -648,6 +648,8 @@ void ComandoSai::executa(Simulador &sim, std::istringstream &params) const {
 
 
 // fim do simulador
-void ComandoFim::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] fim (a implementar)" << std::endl;
+void ComandoFim::executa(Simulador &sim, std::istringstream &params) const {
+
+    Interface *i = sim.devolveInterface();
+    i->setLigado(false);
 }

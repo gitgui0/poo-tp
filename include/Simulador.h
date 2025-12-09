@@ -16,8 +16,11 @@ class Simulador {
 
   public:
     Simulador();
+    ~Simulador();
     void avancaInstante();
     int getInstantes() const noexcept { return nInstantes; }
+
+    Interface* devolveInterface(){return interface;}
 
     void criaJardim(int nLinhas, int nColunas);
     string mostraJardim() const;

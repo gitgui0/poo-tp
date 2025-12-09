@@ -21,6 +21,18 @@ Simulador::Simulador()
   registaComandos();
 }
 
+Simulador::~Simulador() {
+  delete jardim;
+  delete jardineiro;
+  delete interface;
+
+  for (Comando* c : cmds) {
+    delete c;
+  }
+
+  cmds.clear();
+}
+
 void Simulador::avancaInstante(){
   nInstantes++;
   jardineiro->resetTurno();
