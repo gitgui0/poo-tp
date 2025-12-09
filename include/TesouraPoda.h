@@ -8,6 +8,9 @@ class TesouraPoda : public Ferramenta {
     public:
       bool aplica(BocadoSolo* b, Jardim* j) override;
       std::string mostra() const override;
+
+      Ferramenta* clone() const{return new TesouraPoda(*this);}
+
       TesouraPoda();
       ~TesouraPoda() override ;
 };

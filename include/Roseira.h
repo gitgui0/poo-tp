@@ -10,6 +10,8 @@ class Roseira : public Planta{
         void multiplica(BocadoSolo *b, Jardim* j) override;
         BocadoSolo* geraVizinho(BocadoSolo *b, Jardim* j) const override;
 
+         Planta* clone() const override {return new Roseira(*this);}
+
         Roseira();
         Roseira(int agua, int nutrientes);
         ~Roseira();

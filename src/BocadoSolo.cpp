@@ -19,6 +19,49 @@ BocadoSolo::BocadoSolo() : ocupado(false){
     ferramenta = nullptr;
 }
 
+BocadoSolo& BocadoSolo::operator=(const BocadoSolo& outro) {
+    if (this == &outro) {
+        return *this;
+    }
+
+    // Dados simples
+    this->agua = outro.agua;
+    this->nutrientes = outro.nutrientes;
+    this->ocupado = outro.ocupado;
+
+    delete this->planta;
+    delete this->ferramenta;
+
+    // Deep copy da planta
+    if (outro.planta != nullptr) {
+        // O clone() garante que se for Cacto, cria um novo Cacto
+        this->planta = outro.planta->clone();
+    } else {
+        this->planta = nullptr;
+    }
+
+    // Deep copy da ferramenta
+    if (outro.ferramenta != nullptr) {
+        this->ferramenta = outro.ferramenta->clone();
+    } else {
+        this->ferramenta = nullptr;
+    }
+
+    return *this;
+}
+
+// Nao é usado, foi criado mais para "no caso"
+BocadoSolo::BocadoSolo(const BocadoSolo& other)
+    : agua(other.agua), nutrientes(other.nutrientes), ocupado(other.ocupado), planta(nullptr), ferramenta(nullptr)
+{
+    if (other.planta != nullptr) {
+        this->planta = other.planta->clone();
+    }
+    if (other.ferramenta != nullptr) {
+        this->ferramenta = other.ferramenta->clone();
+    }
+}
+
 //isto é pa devolver o ponteiro e limpar a variavel
 Ferramenta* BocadoSolo::retiraFerramenta() {
     if (this->ferramenta == nullptr) {

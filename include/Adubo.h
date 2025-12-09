@@ -10,6 +10,8 @@ class Adubo : public Ferramenta{
       bool aplica(BocadoSolo* b, Jardim* j) override;
       std::string mostra() const override;
 
+      Ferramenta* clone() const{return new Adubo(*this);}
+
       Adubo();
 
       ~Adubo() override;

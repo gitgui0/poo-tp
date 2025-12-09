@@ -11,7 +11,11 @@ class Planta;
 class BocadoSolo {
     public:
       BocadoSolo();
+      BocadoSolo(const BocadoSolo& outro);
       ~BocadoSolo();
+
+     BocadoSolo& operator=(const BocadoSolo& outro);
+
     //para o "chao" saber entregar a ferramente
     //ou ficar vazio
       Ferramenta* retiraFerramenta();

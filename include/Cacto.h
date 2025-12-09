@@ -10,6 +10,8 @@ class Cacto : public Planta {
       void multiplica(BocadoSolo *b, Jardim* j) override;
       BocadoSolo* geraVizinho(BocadoSolo *b, Jardim* j) const override;
 
+      Planta* clone() const override {return new Cacto(*this);}
+
       Cacto();
       Cacto(int agua, int nutri );
       ~Cacto() override;

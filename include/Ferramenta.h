@@ -14,6 +14,8 @@ class Ferramenta : public EstaSolo {
     virtual std::string mostra() const = 0;
     int getNumSerie() const noexcept { return numSerie; }
 
+    virtual Ferramenta* clone() const = 0;
+
     explicit Ferramenta(char letra);
 
   // O 'explicit' evita conversão de char para um objeto Ferramenta, por exemplo, func('a');

@@ -117,14 +117,55 @@ void ComandoEntraJardim::executa(Simulador &sim, std::istringstream &params) con
 }
 
 // gestão e gravação
-void ComandoGrava::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] grava (a implementar)" << std::endl;
+void ComandoGrava::executa(Simulador &sim, std::istringstream &params) const {
+    std::string nome;
+    if (!(params >> nome)) {
+        throw std::runtime_error("Falta o nome para gravar (ex: grava save1)");
+    }
+    sim.gravarJardim(nome);
+    cout << sim.mostraJardim();
 }
-void ComandoRecupera::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] recupera (a implementar)" << std::endl;
+
+void ComandoRecupera::executa(Simulador &sim, std::istringstream &params) const {
+    std::string nome;
+    if (!(params >> nome)) {
+        throw std::runtime_error("Falta o nome do save a recuperar.");
+    }
+    sim.recuperarJardim(nome);
+
+    Jardim *jar = sim.devolveJardim();
+    Jardineiro* j = sim.devolveJardineiro();
+
+    j->mudaLocal(nullptr);
+    j->setEstaDentro(false);
+
+    /*
+     Para casos em que o jardineiro estava dentro do jardim.
+     Se o jardineiro estava num certo bocadosolo B, a cópia do jardim, tem esse bocadoSolo
+    igual, ou seja, se depois usamos o recupera, esse B vai ter la o jardineiro. Mesmo
+    que o jardineiro atual nao esteja la.
+
+     É o que esta parte da função faz, se houver um bocadoSolo que foi guardado com o jardineiro la,
+     "sincroniza" o jardineiro atual
+    */
+    for (int i = 0; i < jar->getLinhas(); i++ ) {
+        for (int k = 0; k < jar->getColunas(); k++) {
+            BocadoSolo* b = jar->getBocado(i,k);
+            if (b->estaJardineiro()) {
+                j->mudaLocal(b);
+                j->setEstaDentro(true);
+            }
+        }
+    }
+
+    std::cout << sim.mostraJardim();
 }
-void ComandoApaga::executa(Simulador &, std::istringstream &) const {
-    std::cout << "[CMD] apaga (a implementar)" << std::endl;
+void ComandoApaga::executa(Simulador &sim, std::istringstream &params) const {
+    std::string nome;
+    if (!(params >> nome)) {
+        throw std::runtime_error("Falta o nome do save a apagar.");
+    }
+    sim.apagarJardim(nome);
 }
 void ComandoExecuta::executa(Simulador &sim, std::istringstream & params) const {
     std::string nomeFicheiro;

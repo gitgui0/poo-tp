@@ -22,7 +22,7 @@ Simulador::Simulador()
 }
 
 Simulador::~Simulador() {
-  delete jardim;
+  // delete jardim; é unique_ptr
   delete jardineiro;
   delete interface;
 
@@ -31,6 +31,10 @@ Simulador::~Simulador() {
   }
 
   cmds.clear();
+
+  salvos.clear();
+
+
 }
 
 void Simulador::avancaInstante(){
@@ -58,7 +62,7 @@ void Simulador::avancaInstante(){
         // cadaInstante das plantas, ate porque nem todas existem
         if (p!=nullptr) {
           if (p->getLetra() == 'r') {
-            BocadoSolo* boc = p->geraVizinho(b,jardim);
+            BocadoSolo* boc = p->geraVizinho(b,jardim.get());
 
             // Ou seja, nao ha nenhum vizinho sem planta
             if (boc==nullptr)
@@ -73,8 +77,7 @@ void Simulador::avancaInstante(){
 
 void Simulador::criaJardim(int nLinhas, int nColunas) {
   // Validacoes ja estao no comando
-  delete jardim;
-  jardim = new Jardim(nLinhas, nColunas);
+  jardim = std::make_unique<Jardim>(nLinhas, nColunas);
 }
 
 Comando* Simulador::parse(const string &input, istringstream& parametros) {
@@ -155,4 +158,33 @@ string Simulador::mostraJardim() const {
   oss << jardim->mostraJardim();
   return oss.str();
 
+}
+
+
+void Simulador::gravarJardim(const std::string& nome) {
+  if (jardim == nullptr) {
+    throw std::runtime_error("Nao existe nenhum jardim ativo para gravar.");
+  }
+  // deep copy para salvar
+  salvos[nome] = jardim->clone();
+}
+
+void Simulador::recuperarJardim(const std::string& nome) {
+  auto it = salvos.find(nome);
+  if (it == salvos.end()) {
+    throw std::runtime_error("Nao existe nenhum jardim salvo com esse nome.");
+  }
+
+  // Se ja existisse um jardim ativo, o unique_ptr destroi-o antes de receber o recuperado
+  jardim = std::move(it->second);
+
+  // Remove a copia no map. A copia ja nao tem o jardim mas mais pela memoria
+  salvos.erase(it);
+
+}
+
+void Simulador::apagarJardim(const std::string& nome) {
+  if (salvos.erase(nome) < 0) {
+    throw std::runtime_error("Save nao encontrado para apagar.");
+  }
 }

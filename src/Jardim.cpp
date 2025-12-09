@@ -25,6 +25,23 @@ Jardim::Jardim(int nLinhas, int nColunas)
     colocaFerramentasIniciais();
 }
 
+Jardim::Jardim(const Jardim& outro) {
+    nLinhas = outro.nLinhas;
+    nColunas = outro.nColunas;
+    instantes = outro.instantes;
+
+    // Deep copy
+    area = new BocadoSolo*[nLinhas];
+    for (int i = 0; i < nLinhas; ++i) {
+        area[i] = new BocadoSolo[nColunas];
+        for (int j = 0; j < nColunas; ++j) {
+            // Deep copy a usar o operator = overload do bocadoSolo
+            area[i][j] = outro.area[i][j];
+        }
+    }
+
+}
+
 Jardim::~Jardim() {
     for(int i = 0; i < nLinhas; ++i) {
         delete[] area[i];

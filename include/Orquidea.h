@@ -14,6 +14,8 @@ public:
     void multiplica(BocadoSolo *b, Jardim* j) override;
     BocadoSolo* geraVizinho(BocadoSolo *b, Jardim* j) const override;
 
+    Planta* clone() const override {return new Orquidea(*this);}
+
 private:
     int nInstantesAguaExcessiva;
 };

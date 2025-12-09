@@ -2,11 +2,14 @@
 #ifndef SIMULADOR_H
 #define SIMULADOR_H
 
+
 #include "Jardim.h"
 #include "Jardineiro.h"
 #include "Interface.h"
 #include <sstream>
 #include <vector>
+#include <map>
+#include <memory>
 
 // ************** IMPORTANTE *********************
 // em vez do include, para nao haver um loop de includes
@@ -26,8 +29,8 @@ class Simulador {
     string mostraJardim() const;
 
 
-    const Jardim * devolveJardim() const { return jardim; }
-    Jardim * devolveJardim() { return jardim; }
+    const Jardim * devolveJardim() const { return jardim.get(); }
+    Jardim * devolveJardim() { return jardim.get(); }
 
     const Jardineiro * devolveJardineiro() const { return jardineiro; }
     Jardineiro * devolveJardineiro() { return jardineiro; }
@@ -38,11 +41,14 @@ class Simulador {
     static int charParaInt(char c);
     static char intParaChar(int n);
 
+    void gravarJardim(const std::string& nome);
+    void recuperarJardim(const std::string& nome);
+    void apagarJardim(const std::string& nome);
+
   private:
     void registaComandos();
 
-
-    Jardim* jardim;
+    std::unique_ptr<Jardim> jardim;
     Jardineiro* jardineiro;
 
     std::vector<Comando*> cmds;
@@ -50,7 +56,7 @@ class Simulador {
     int nComandos;
 
     Interface* interface;
-
+    std::map<string, unique_ptr<Jardim>> salvos;
 };
 
 

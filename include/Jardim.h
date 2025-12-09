@@ -4,6 +4,7 @@
 
 #include "BocadoSolo.h"
 #include <string>
+#include <memory>
 
 class Jardim {
 
@@ -11,8 +12,8 @@ class Jardim {
 
     Jardim() = default;
     Jardim(int nLinhas, int nColunas);
+    explicit Jardim(const Jardim& j);
     ~Jardim();
-    //Quando o jardineiro pede para apanhar numa posição, o jardim entrega a ferramenta e cria imediatamente uma nova noutro sítio aleatório
 
     Ferramenta* apanharFerramenta(BocadoSolo* solo);
     std::pair<int,int> getPosicaoBocado(BocadoSolo* b) const noexcept;
@@ -24,7 +25,9 @@ class Jardim {
 
     BocadoSolo * getBocado(int l, int c);
 
-
+    std::unique_ptr<Jardim> clone() const {
+      return std::make_unique<Jardim>(*this);
+    }
 
   private:
 

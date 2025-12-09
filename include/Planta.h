@@ -26,7 +26,7 @@ class Planta : public EstaSolo {
 
       Planta(int agua, int nutrientes, char letra, const std::string& beleza);
 
-      //TODO: copy constructor, nao sabemos ainda se vai ser necessário
+      virtual Planta* clone() const = 0;
 
 
     private:
