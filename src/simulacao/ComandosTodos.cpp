@@ -123,6 +123,7 @@ void ComandoGrava::executa(Simulador &sim, std::istringstream &params) const {
         throw std::runtime_error("Falta o nome para gravar (ex: grava save1)");
     }
     sim.gravarJardim(nome);
+    std::cout << "O jardim foi gravado com sucesso." << endl;
     cout << sim.mostraJardim();
 }
 
@@ -158,6 +159,7 @@ void ComandoRecupera::executa(Simulador &sim, std::istringstream &params) const 
         }
     }
 
+    std::cout << "O jardim foi recuperado com sucesso." << endl;
     std::cout << sim.mostraJardim();
 }
 void ComandoApaga::executa(Simulador &sim, std::istringstream &params) const {

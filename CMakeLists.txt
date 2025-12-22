@@ -6,34 +6,41 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(TP
         # Núcleo e Interface
         main.cpp
-        src/Simulador.cpp
-        src/Interface.cpp
+        src/simulacao/Simulador.cpp
+        src/simulacao/Interface.cpp
 
         # Domínio (Jardim, Solo e Jardineiro)
-        src/Jardim.cpp
-        src/BocadoSolo.cpp
-        src/Jardineiro.cpp
+        src/jardim/Jardim.cpp
+        src/jardim/BocadoSolo.cpp
+        src/jardim/Jardineiro.cpp
 
         # Classes Base
-        src/EstaSolo.cpp
-        src/Planta.cpp
-        src/Ferramenta.cpp
+        src/jardim/EstaSolo.cpp
+        src/plantas/Planta.cpp
+        src/ferramentas/Ferramenta.cpp
 
         # Classes de Plantas
-        src/Cacto.cpp
-        src/ErvaDaninha.cpp
-        src/Roseira.cpp
-        src/Orquidea.cpp
+        src/plantas/Cacto.cpp
+        src/plantas/ErvaDaninha.cpp
+        src/plantas/Roseira.cpp
+        src/plantas/Orquidea.cpp
 
         # Classes de Ferramentas
-        src/Adubo.cpp
-        src/Regador.cpp
-        src/TesouraPoda.cpp
-        src/AceleradorCrescimento.cpp
+        src/ferramentas/Adubo.cpp
+        src/ferramentas/Regador.cpp
+        src/ferramentas/TesouraPoda.cpp
+        src/ferramentas/AceleradorCrescimento.cpp
 
         # Comandos
-        src/Comando.cpp
-        src/ComandosTodos.cpp
+        src/simulacao/Comando.cpp
+        src/simulacao/ComandosTodos.cpp
 )
 
-target_include_directories(TP PUBLIC ${CMAKE_SOURCE_DIR}/include)
+# Atualizado para incluir as subpastas da pasta 'include'
+target_include_directories(TP PUBLIC
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/include/jardim
+        ${CMAKE_SOURCE_DIR}/include/plantas
+        ${CMAKE_SOURCE_DIR}/include/ferramentas
+        ${CMAKE_SOURCE_DIR}/include/simulacao
+)
