@@ -51,7 +51,7 @@ class Simulador {
     std::unique_ptr<Jardim> jardim;
     Jardineiro* jardineiro;
 
-    std::vector<Comando*> cmds;
+    std::vector<unique_ptr<Comando>> cmds;
     int nInstantes;
     int nComandos;
 

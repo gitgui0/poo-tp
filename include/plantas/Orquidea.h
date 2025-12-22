@@ -10,7 +10,7 @@ class Orquidea : public Planta {
 
 public:
     Orquidea();
-    bool cadaInstante(BocadoSolo* b) override;
+    bool cadaInstante(BocadoSolo* b, Jardim* j) override;
     void multiplica(BocadoSolo *b, Jardim* j) override;
     BocadoSolo* geraVizinho(BocadoSolo *b, Jardim* j) const override;
 

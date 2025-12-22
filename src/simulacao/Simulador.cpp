@@ -26,14 +26,11 @@ Simulador::~Simulador() {
   delete jardineiro;
   delete interface;
 
-  for (Comando* c : cmds) {
-    delete c;
-  }
+  // comandos sao unique pointers
 
   cmds.clear();
 
   salvos.clear();
-
 
 }
 
@@ -53,24 +50,11 @@ void Simulador::avancaInstante(){
 
 
       if (p)
-        plantaMorreu = p->cadaInstante(b);
+        plantaMorreu = p->cadaInstante(b,jardim.get());
 
       if (plantaMorreu)
         b->setPlanta(nullptr);
-      else {
-        //logica extra para roseira, isto mais para nao ter que mandar o jardim a funcao
-        // cadaInstante das plantas, ate porque nem todas existem
-        if (p!=nullptr) {
-          if (p->getLetra() == 'r') {
-            BocadoSolo* boc = p->geraVizinho(b,jardim.get());
 
-            // Ou seja, nao ha nenhum vizinho sem planta
-            if (boc==nullptr)
-              b->setPlanta(nullptr);
-          }
-        }
-
-      }
     }
   }
 }
@@ -86,13 +70,14 @@ Comando* Simulador::parse(const string &input, istringstream& parametros) {
   iss >> cmd;
   if (cmd.empty()) throw std::runtime_error("Esse comando nao foi encontrado");
 
-  for(Comando* c : cmds){
+
+  for(const unique_ptr<Comando> &c : cmds){
     if(c->getNome() == cmd){
       string resto;
       getline(iss,resto);
       parametros.clear();
       parametros.str(resto);
-      return c;
+      return c.get();
     }
   }
   return nullptr;
@@ -112,34 +97,34 @@ void Simulador::executa(const string &input){
 
 void Simulador::registaComandos() {
 
-  cmds.push_back(new ComandoAvanca());
-  cmds.push_back(new ComandoJardim());
-  cmds.push_back(new ComandoEntraJardim());
+  cmds.push_back(make_unique<ComandoAvanca>());
+  cmds.push_back(make_unique<ComandoJardim>());
+  cmds.push_back(make_unique<ComandoEntraJardim>());
 
-  cmds.push_back(new ComandoGrava());
-  cmds.push_back(new ComandoRecupera());
-  cmds.push_back(new ComandoApaga());
-  cmds.push_back(new ComandoExecuta());
+  cmds.push_back(make_unique<ComandoGrava>());
+  cmds.push_back(make_unique<ComandoRecupera>());
+  cmds.push_back(make_unique<ComandoApaga>());
+  cmds.push_back(make_unique<ComandoExecuta>());
 
-  cmds.push_back(new ComandoLPlantas());
-  cmds.push_back(new ComandoLPlanta());
-  cmds.push_back(new ComandoLArea());
-  cmds.push_back(new ComandoLSolo());
-  cmds.push_back(new ComandoLFerr());
+  cmds.push_back(make_unique<ComandoLPlantas>());
+  cmds.push_back(make_unique<ComandoLPlanta>());
+  cmds.push_back(make_unique<ComandoLArea>());
+  cmds.push_back(make_unique<ComandoLSolo>());
+  cmds.push_back(make_unique<ComandoLFerr>());
 
-  cmds.push_back(new ComandoColhe());
-  cmds.push_back(new ComandoPlanta());
-  cmds.push_back(new ComandoLarga());
-  cmds.push_back(new ComandoPega());
-  cmds.push_back(new ComandoCompra());
+  cmds.push_back(make_unique<ComandoColhe>());
+  cmds.push_back(make_unique<ComandoPlanta>());
+  cmds.push_back(make_unique<ComandoLarga>());
+  cmds.push_back(make_unique<ComandoPega>());
+  cmds.push_back(make_unique<ComandoCompra>());
 
-  cmds.push_back(new ComandoMoveEsquerda());
-  cmds.push_back(new ComandoMoveDireita());
-  cmds.push_back(new ComandoMoveCima());
-  cmds.push_back(new ComandoMoveBaixo());
-  cmds.push_back(new ComandoSai());
+  cmds.push_back(make_unique<ComandoMoveEsquerda>());
+  cmds.push_back(make_unique<ComandoMoveDireita>());
+  cmds.push_back(make_unique<ComandoMoveCima>());
+  cmds.push_back(make_unique<ComandoMoveBaixo>());
+  cmds.push_back(make_unique<ComandoSai>());
 
-  cmds.push_back(new ComandoFim());
+  cmds.push_back(make_unique<ComandoFim>());
 }
 
 int Simulador::charParaInt(char c) {

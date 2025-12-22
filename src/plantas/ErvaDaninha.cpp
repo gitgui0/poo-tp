@@ -86,7 +86,7 @@ BocadoSolo* ErvaDaninha::geraVizinho(BocadoSolo *b, Jardim* j) const {
 }
 
 
-bool ErvaDaninha::cadaInstante(BocadoSolo* b) {
+bool ErvaDaninha::cadaInstante(BocadoSolo* b, Jardim* j) {
     instantesAtuais++;
 
     int absorveNutri = ( b->getNutrientes() > 0 ? Settings::ErvaDaninha::absorcao_nutrientes : 0);

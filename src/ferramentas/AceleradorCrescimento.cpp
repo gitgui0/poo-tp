@@ -18,7 +18,7 @@ bool AceleradorCrescimento::aplica(BocadoSolo* b, Jardim* j) {
     Planta* p = b->getPlanta();
     if (p!=nullptr) {
         for (int i = 0 ; i < 3; i++) {
-            bool plantaMorreu = p->cadaInstante(b);
+            bool plantaMorreu = p->cadaInstante(b,j);
 
             if (plantaMorreu) {
                 b->setPlanta(nullptr);

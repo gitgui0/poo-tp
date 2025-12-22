@@ -6,7 +6,7 @@
 
 class Roseira : public Planta{
     public:
-        bool cadaInstante(BocadoSolo* b) override;
+        bool cadaInstante(BocadoSolo* b, Jardim* j) override;
         void multiplica(BocadoSolo *b, Jardim* j) override;
         BocadoSolo* geraVizinho(BocadoSolo *b, Jardim* j) const override;
 

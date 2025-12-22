@@ -79,7 +79,7 @@ BocadoSolo* Roseira::geraVizinho(BocadoSolo *b, Jardim* j) const {
 }
 
 
-bool Roseira::cadaInstante(BocadoSolo* b) {
+bool Roseira::cadaInstante(BocadoSolo* b, Jardim* j) {
     colocarNutrientes(obterNutrientes() - 4);
     colocarAgua(obterAgua() - 4);
 
@@ -107,7 +107,7 @@ bool Roseira::cadaInstante(BocadoSolo* b) {
         return true;
     }
 
-    return false;
+    return geraVizinho(b,j) == nullptr; // se nao devolver nada, significa que nao ha posicoes livres, entao vai morrer
 }
 
 

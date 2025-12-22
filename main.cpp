@@ -4,9 +4,9 @@
 
 int main() {
     Simulador sim;
-    Interface ui(&sim);
+    Interface* ui = sim.devolveInterface();
 
-    ui.inicia();
+    ui->inicia();
 
     return 0;
 }

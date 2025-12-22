@@ -6,7 +6,7 @@ Cacto::Cacto() : Planta(0,0,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrien
 Cacto::Cacto(int agua, int nutrientes) : Planta(agua,nutrientes,'c',"Neutra") {};
 Cacto::~Cacto(){ std::cout << "Desconstrutor cacto " << std::endl;}
 
-bool Cacto::cadaInstante(BocadoSolo* b) {
+bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
 
     if (b->getAgua() > 100)
         turnosAguaExcessiva++;

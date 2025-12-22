@@ -14,7 +14,7 @@ class Planta : public EstaSolo {
       void colocarAgua(int agua);
       void colocarNutrientes(int nutrientes);
 
-      virtual bool cadaInstante(BocadoSolo* b) = 0;
+      virtual bool cadaInstante(BocadoSolo* b, Jardim* j) = 0;
 
       virtual void multiplica(BocadoSolo* b, Jardim* j) = 0;
 
