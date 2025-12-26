@@ -22,6 +22,8 @@ class Ferramenta : public EstaSolo {
 
   friend std::ostream& operator<<(std::ostream& os, const Ferramenta* f);
 
+  static Ferramenta* criar(char ferr);
+
   ~Ferramenta() override = 0;
 
   private:

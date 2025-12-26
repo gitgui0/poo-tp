@@ -20,14 +20,14 @@ class Simulador {
   public:
     Simulador();
     ~Simulador();
-    void avancaInstante();
-    int getInstantes() const noexcept { return nInstantes; }
 
-    Interface* devolveInterface(){return interface;}
+    void avancaInstante();
+
+    void corre() const;
+    void para() const;
 
     void criaJardim(int nLinhas, int nColunas);
     string mostraJardim() const;
-
 
     const Jardim * devolveJardim() const { return jardim.get(); }
     Jardim * devolveJardim() { return jardim.get(); }
@@ -35,8 +35,12 @@ class Simulador {
     const Jardineiro * devolveJardineiro() const { return jardineiro; }
     Jardineiro * devolveJardineiro() { return jardineiro; }
 
-    Comando* parse(const std::string &input, std::istringstream& parametros);
-    void executa(const std::string &input);
+    void colherPlanta(char l, char c);
+    void planta(char l, char c, char planta);
+
+    void entraNoJardim(char l, char c) const;
+    void moveJardineiro(int dirX, int dirY) const;
+    void saiDoJardim() const;
 
     static int charParaInt(char c);
     static char intParaChar(int n);
@@ -45,6 +49,12 @@ class Simulador {
     void recuperarJardim(const std::string& nome);
     void apagarJardim(const std::string& nome);
 
+    void compraEAdiciona(char ferr);
+    void pegaFerramenta(int num);
+
+    Comando* parse(const std::string &input, std::istringstream& parametros);
+    void executa(const std::string &input);
+
   private:
     void registaComandos();
 
@@ -52,7 +62,6 @@ class Simulador {
     Jardineiro* jardineiro;
 
     std::vector<unique_ptr<Comando>> cmds;
-    int nInstantes;
     int nComandos;
 
     Interface* interface;

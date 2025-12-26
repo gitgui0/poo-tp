@@ -9,7 +9,7 @@
 class Comando {
     public:
       virtual void executa(Simulador &sim, std::istringstream & params) const = 0;
-      virtual const char* getNome() = 0;
+      virtual const string getNome() = 0;
       Comando() = default;
       ~Comando() = default;
 };

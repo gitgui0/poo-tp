@@ -80,6 +80,7 @@ BocadoSolo* Roseira::geraVizinho(BocadoSolo *b, Jardim* j) const {
 
 
 bool Roseira::cadaInstante(BocadoSolo* b, Jardim* j) {
+    aumentaInstantes();
     colocarNutrientes(obterNutrientes() - 4);
     colocarAgua(obterAgua() - 4);
 

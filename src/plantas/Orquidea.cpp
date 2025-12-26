@@ -9,6 +9,7 @@ Orquidea::Orquidea()
 {}
 
 bool Orquidea::cadaInstante(BocadoSolo* b, Jardim* j) {
+    aumentaInstantes();
 
     //perde agua e nutrientes
 

@@ -17,7 +17,6 @@ class ErvaDaninha : public Planta{
       ~ErvaDaninha();
 
     private:
-       int instantesAtuais;
        int instanteMulti;
 
 };

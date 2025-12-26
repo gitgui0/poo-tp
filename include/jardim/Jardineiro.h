@@ -34,10 +34,16 @@ public:
     BocadoSolo* getLocalAtual() const { return localAtual;}
     void mudaLocal(BocadoSolo * b) { localAtual = b;}
 
+    void move(BocadoSolo* b);
+    void sai();
+
     //pa tratar das ferramentas
     void adicionarFerramenta(Ferramenta* f);
 
+
     void pegaFerramenta(Ferramenta* f);
+    void pegaFerramenta();
+    void pegaFerramenta(int num);
     void largaFerramenta();
 
     int getPlantasRestantes() const noexcept { return plantasRestantes;}

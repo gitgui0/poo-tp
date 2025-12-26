@@ -1,19 +1,25 @@
 #include "Jardim.h"
 
-#include <Planta.h>
 #include <sstream>
 #include <random>
+
 #include "Regador.h"
 #include "Adubo.h"
 #include "TesouraPoda.h"
 #include "AceleradorCrescimento.h"
 
+#include "Planta.h"
+#include "Cacto.h"
+#include "ErvaDaninha.h"
+#include "Orquidea.h"
+#include "Roseira.h"
+
 using namespace std;
 
-int Jardim::instantes = 0;
+
 
 Jardim::Jardim(int nLinhas, int nColunas)
-    : nLinhas(nLinhas), nColunas(nColunas)
+    : nLinhas(nLinhas), nColunas(nColunas), instantes(0)
 {
     // Criação da matriz de objetos
     area = new BocadoSolo*[nLinhas];
@@ -57,7 +63,7 @@ Ferramenta* Jardim::apanharFerramenta(BocadoSolo* solo) {
     // Tentar retirar do solo
     Ferramenta* f = solo->retiraFerramenta();
 
-    //Se apanhamos algo, gerar uma nova noutro local "por magia"
+    //Se apanhamos algo, gerar uma nova noutro local
     if (f != nullptr) {
         int novaL, novaC;
 
@@ -153,6 +159,18 @@ BocadoSolo* Jardim::getBocado(int l, int c) {
     return &area[l][c];
 }
 
+BocadoSolo *Jardim::getBocadoDoJardineiro() {
+    for (int i = 0; i < nLinhas; i++ ) {
+        for (int j = 0; j < nColunas; j++) {
+            if (area[i][j].estaJardineiro()) {
+                return &area[i][j];
+            }
+        }
+    }
+    return nullptr;
+}
+
+
 std::pair<int,int> Jardim::getPosicaoBocado(BocadoSolo* b) const noexcept {
     for (int i = 0; i < nLinhas; i++) {
         for (int j = 0; j < nColunas; j++) {
@@ -164,16 +182,47 @@ std::pair<int,int> Jardim::getPosicaoBocado(BocadoSolo* b) const noexcept {
     throw std::runtime_error("[ERRO INTERNO] Esse bocado e invalido.");
 }
 
-void Jardim::multiplica() {
+void Jardim::processaTurno() {
+
     for (int i = 0; i < nLinhas; i++) {
         for (int j = 0; j < nColunas; j++) {
             BocadoSolo* b = &area[i][j];
             Planta * p = b->getPlanta();
+
+            bool plantaMorreu = false;
+
+            if (p)
+                plantaMorreu = p->cadaInstante(b,this);
+
+            if (plantaMorreu)
+                b->setPlanta(nullptr);
+
             if (p!=nullptr)
                 p->multiplica(b,this);
         }
     }
 }
 
+
+bool Jardim::colhe(int l, int c) {
+    BocadoSolo& b = area[l][c];
+    if (b.getPlanta()==nullptr)
+        return false;
+
+    b.setPlanta(nullptr);
+    return true;
+}
+
+void Jardim::planta(int l, int c, char planta) {
+    BocadoSolo& b = area[l][c];
+
+    // Ja existe uma planta no sitio
+    if (b.getPlanta() != nullptr)
+        throw std::runtime_error("Nao e possivel colocar uma planta nessa posicao.");
+
+    Planta* novaPlanta = Planta::criar(planta);
+
+    b.setPlanta(novaPlanta);
+}
 
 

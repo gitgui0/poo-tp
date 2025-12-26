@@ -12,7 +12,7 @@
 using namespace std;
 
 Simulador::Simulador()
-  : jardim(nullptr), nComandos(0), nInstantes(0)
+  : jardim(nullptr), nComandos(0)
 {
   //vecotr inicializa a null diretamente
   interface = new Interface(this);
@@ -35,28 +35,13 @@ Simulador::~Simulador() {
 }
 
 void Simulador::avancaInstante(){
-  nInstantes++;
   jardineiro->resetTurno();
-  int n = jardim->getLinhas();
-  int l = jardim->getColunas();
 
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < l; j++) {
+  jardineiro->aplicarFerramenta(jardim.get());
+  jardineiro->pegaFerramenta();
 
-      bool plantaMorreu = false;
-
-      BocadoSolo* b = jardim->getBocado(i,j);
-      Planta* p = b->getPlanta();
-
-
-      if (p)
-        plantaMorreu = p->cadaInstante(b,jardim.get());
-
-      if (plantaMorreu)
-        b->setPlanta(nullptr);
-
-    }
-  }
+  jardim->setInstantes();
+  jardim->processaTurno();
 }
 
 void Simulador::criaJardim(int nLinhas, int nColunas) {
@@ -88,7 +73,12 @@ void Simulador::executa(const string &input){
   istringstream params;
   Comando* exec = parse(input,params);
 
-  if(exec == nullptr) throw std::runtime_error("Esse comando nao foi encontrado");
+  if(exec == nullptr)
+      throw std::runtime_error("Esse comando nao foi encontrado");
+  string n = exec->getNome();
+
+  if (jardim == nullptr && exec->getNome() != "jardim")
+      throw std::runtime_error("Nao existe jardim.");
 
   exec->executa(*this,params);
 
@@ -125,6 +115,7 @@ void Simulador::registaComandos() {
   cmds.push_back(make_unique<ComandoSai>());
 
   cmds.push_back(make_unique<ComandoFim>());
+
 }
 
 int Simulador::charParaInt(char c) {
@@ -163,6 +154,19 @@ void Simulador::recuperarJardim(const std::string& nome) {
   // Se ja existisse um jardim ativo, o unique_ptr destroi-o antes de receber o recuperado
   jardim = std::move(it->second);
 
+
+  /*
+     Para casos em que o jardineiro estava dentro do jardim.
+     Se o jardineiro estava num certo bocadosolo B, a cópia do jardim, tem esse bocadoSolo
+    igual, ou seja, se depois usamos o recupera, esse B vai ter la o jardineiro. Mesmo
+    que o jardineiro atual nao esteja la.
+
+     É o que esta parte da função faz, se houver um bocadoSolo que foi guardado com o jardineiro la,
+     "sincroniza" o jardineiro atual
+  */
+  jardineiro->mudaLocal(jardim->getBocadoDoJardineiro());
+  jardineiro->setEstaDentro(jardineiro->getLocalAtual() == nullptr);
+
   // Remove a copia no map. A copia ja nao tem o jardim mas mais pela memoria
   salvos.erase(it);
 
@@ -173,3 +177,73 @@ void Simulador::apagarJardim(const std::string& nome) {
     throw std::runtime_error("Save nao encontrado para apagar.");
   }
 }
+
+
+void Simulador::entraNoJardim(char l, char c) const {
+  BocadoSolo *b = jardim->getBocado(charParaInt(l), charParaInt(c));
+
+  jardineiro->move(b);
+}
+
+
+void Simulador::colherPlanta(char l, char c) {
+  if (jardineiro->getColheitasRestantes() <= 0)
+    throw std::runtime_error("Nao pode colher mais plantas neste turno");
+
+  int linha = charParaInt(l), coluna = charParaInt(c);
+
+  if (!jardim->colhe(linha,coluna)) {
+    throw std::runtime_error("Nao existe planta nessa posicao");
+  }
+
+  jardineiro->menosColheitasRestantes();
+
+}
+
+void Simulador::planta(char l, char c, char planta) {
+  if (jardineiro->getPlantasRestantes() <= 0)
+    throw std::runtime_error("Nao pode plantar mais plantas neste turno");
+
+  int linha = charParaInt(l), coluna = charParaInt(c);
+
+  jardim->planta(linha,coluna,planta);
+  jardineiro->menosPlantasRestantes();
+}
+
+void Simulador::moveJardineiro(int dirX, int dirY) const {
+  BocadoSolo* b = jardineiro->getLocalAtual(), *novo;
+
+  std::pair<int,int> posicao = jardim->getPosicaoBocado(b);
+  int l = posicao.first;
+  int c = posicao.second;
+
+  novo = jardim->getBocado(l + dirY,c + dirX);
+  if (novo==nullptr)
+    throw std::runtime_error("O movimento nao e possivel.");
+
+  jardineiro->move(novo);
+}
+
+void Simulador::saiDoJardim() const {
+  jardineiro->sai();
+}
+
+void Simulador::compraEAdiciona(char ferr) {
+  Ferramenta* novaFerramenta = Ferramenta::criar(ferr);
+  jardineiro->adicionarFerramenta(novaFerramenta);
+}
+
+void Simulador::pegaFerramenta(int num) {
+  jardineiro->pegaFerramenta(num);
+}
+
+
+void Simulador::corre() const {
+  interface->setLigado(true);
+  interface->inicia();
+}
+
+void Simulador::para() const {
+  interface->setLigado(false);
+}
+

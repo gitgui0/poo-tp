@@ -4,9 +4,7 @@
 
 int main() {
     Simulador sim;
-    Interface* ui = sim.devolveInterface();
-
-    ui->inicia();
+    sim.corre();
 
     return 0;
 }

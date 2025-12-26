@@ -6,10 +6,15 @@
 #include "BocadoSolo.h"
 #include "Jardim.h"
 
+
+
 class Planta : public EstaSolo {
     public:
       int obterAgua() const noexcept{ return agua; }
       int obterNutrientes() const noexcept{ return nutrientes; }
+
+      int obterInstantes() const noexcept { return countInstantes; }
+      void aumentaInstantes(int num=1) { countInstantes+=num; }
 
       void colocarAgua(int agua);
       void colocarNutrientes(int nutrientes);
@@ -27,6 +32,8 @@ class Planta : public EstaSolo {
       Planta(int agua, int nutrientes, char letra, const std::string& beleza);
 
       virtual Planta* clone() const = 0;
+
+      static Planta* criar(char planta);
 
 
     private:
