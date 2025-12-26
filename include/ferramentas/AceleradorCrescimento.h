@@ -2,24 +2,22 @@
 #define TP_ACELERADORCRESCIMENTO_H
 
 #include <BocadoSolo.h>
-
 #include "Ferramenta.h"
 
 
 class AceleradorCrescimento : public Ferramenta {
-public:
-    AceleradorCrescimento();
+    public:
+        AceleradorCrescimento();
+        ~AceleradorCrescimento() override = default;
 
-    bool aplica(BocadoSolo* b, Jardim* j) override;
-    std::string mostra() const override;
+        bool aplica(BocadoSolo* b, Jardim* j) override;
+        std::string mostra() const override;
 
-    Ferramenta* clone() const{return new AceleradorCrescimento(*this);}
+        Ferramenta* clone() const override{return new AceleradorCrescimento(*this);}
 
-    ~AceleradorCrescimento() override;
-
-private:
-    int capacidade;
+    private:
+        int capacidade;
 };
 
 
-#endif //TP_ACELERADORCRESCIMENTO_H
+#endif

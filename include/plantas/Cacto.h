@@ -2,19 +2,18 @@
 #define CACTO_H
 
 #include "Planta.h"
-#include <iostream>
+#include "Jardim.h"
 
 class Cacto : public Planta {
     public:
-      bool cadaInstante(BocadoSolo* b, Jardim* j) override;
-      void multiplica(BocadoSolo *b, Jardim* j) override;
-      BocadoSolo* geraVizinho(BocadoSolo *b, Jardim* j) const override;
+        Cacto();
+        Cacto(int agua, int nutri );
+        ~Cacto() override = default;
 
-      Planta* clone() const override {return new Cacto(*this);}
-
-      Cacto();
-      Cacto(int agua, int nutri );
-      ~Cacto() override;
+        bool cadaInstante(BocadoSolo* b, Jardim* j) override;
+        void multiplica(BocadoSolo *b, Jardim* j) override;
+        BocadoSolo* geraVizinho(BocadoSolo *b, Jardim* j) const override;
+        Planta* clone() const override {return new Cacto(*this);}
 
     private:
         int turnosAguaExcessiva;

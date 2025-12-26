@@ -6,8 +6,6 @@ using namespace std;
 
 Interface::Interface(Simulador * sim) : sim(sim), ligado(true) {}
 
-Interface::~Interface() = default;
-
 void Interface::inicia() {
     string linha;
 

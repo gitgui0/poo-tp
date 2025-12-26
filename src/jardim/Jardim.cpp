@@ -9,10 +9,6 @@
 #include "AceleradorCrescimento.h"
 
 #include "Planta.h"
-#include "Cacto.h"
-#include "ErvaDaninha.h"
-#include "Orquidea.h"
-#include "Roseira.h"
 
 using namespace std;
 

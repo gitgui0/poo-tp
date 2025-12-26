@@ -1,10 +1,11 @@
 #include "Cacto.h"
+
+#include <cmath>
 #include <iostream>
 #include <vector>
 
 Cacto::Cacto() : Planta(0,0,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrientesExcessivos(0) {};
-Cacto::Cacto(int agua, int nutrientes) : Planta(agua,nutrientes,'c',"Neutra") {};
-Cacto::~Cacto(){ std::cout << "Desconstrutor cacto " << std::endl;}
+Cacto::Cacto(int agua, int nutrientes) : Planta(agua,nutrientes,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrientesExcessivos(0){};
 
 bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
     aumentaInstantes();
@@ -19,14 +20,8 @@ bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
     else
         turnosNutrientesExcessivos=0;
 
-    // Se nutrientes do bocado de solo > 5, entao 5, se nao os nutrientes que tem.
-    int absorveNutri = ( b->getNutrientes() > 5 ? 5 : b->getNutrientes());
-
-    // Se agua do bocado de solo maior que 1, se sim - A, se nao 0
-    // A - como e um inteiro, temos que verificar se nao fica 0.9, por exemplo.
-    // Porque depois ficaria 0, e isso nao faz sentido, entao.
-    // Se nao for o caso, fica se logo com os 25% arredondados e pronto.
-    int absorveAgua = (b->getAgua() >= 1 ?  (b->getAgua() * 0.25 == 0 ? 1 : b->getAgua() * 0.25) : 0);
+    int absorveNutri = std::min(5,b->getNutrientes());
+    int absorveAgua = std::ceil(b->getAgua() * 0.25); // se a agua no solo for 0, fica absorve 0, se estiver entre 1 e 4, absorve 1
 
     //Colocar a agua e nutrientes na planta. atuais + absorvidos
     colocarNutrientes(obterNutrientes() + absorveNutri);

@@ -2,7 +2,6 @@
 #ifndef SIMULADOR_H
 #define SIMULADOR_H
 
-
 #include "Jardim.h"
 #include "Jardineiro.h"
 #include "Interface.h"
@@ -11,61 +10,60 @@
 #include <map>
 #include <memory>
 
-// ************** IMPORTANTE *********************
 // em vez do include, para nao haver um loop de includes
 class Comando;
 
 class Simulador {
 
-  public:
-    Simulador();
-    ~Simulador();
+    public:
+        Simulador();
+        ~Simulador();
 
-    void avancaInstante();
+        void avancaInstante();
+        void corre() const;
+        void para() const;
 
-    void corre() const;
-    void para() const;
+        void criaJardim(int nLinhas, int nColunas);
+        string mostraJardim() const;
 
-    void criaJardim(int nLinhas, int nColunas);
-    string mostraJardim() const;
+        const Jardim * devolveJardim() const { return jardim.get(); }
+        Jardim * devolveJardim() { return jardim.get(); }
 
-    const Jardim * devolveJardim() const { return jardim.get(); }
-    Jardim * devolveJardim() { return jardim.get(); }
+        const Jardineiro * devolveJardineiro() const { return jardineiro; }
+        Jardineiro * devolveJardineiro() { return jardineiro; }
 
-    const Jardineiro * devolveJardineiro() const { return jardineiro; }
-    Jardineiro * devolveJardineiro() { return jardineiro; }
+        void colherPlanta(char l, char c);
+        void planta(char l, char c, char planta);
 
-    void colherPlanta(char l, char c);
-    void planta(char l, char c, char planta);
+        void entraNoJardim(char l, char c) const;
+        void moveJardineiro(int dirX, int dirY) const;
+        void saiDoJardim() const;
 
-    void entraNoJardim(char l, char c) const;
-    void moveJardineiro(int dirX, int dirY) const;
-    void saiDoJardim() const;
+        //TODO: DEVIA IR PARA PRIVATE MAS AINDA ESTAO A SER UTILIZADOS NOS COMANDOS
+        static int charParaInt(char c);
+        static char intParaChar(int n);
 
-    static int charParaInt(char c);
-    static char intParaChar(int n);
+        void gravarJardim(const std::string& nome);
+        void recuperarJardim(const std::string& nome);
+        void apagarJardim(const std::string& nome);
 
-    void gravarJardim(const std::string& nome);
-    void recuperarJardim(const std::string& nome);
-    void apagarJardim(const std::string& nome);
+        void compraEAdiciona(char ferr);
+        void pegaFerramenta(int num);
 
-    void compraEAdiciona(char ferr);
-    void pegaFerramenta(int num);
+        Comando* parse(const std::string &input, std::istringstream& parametros);
+        void executa(const std::string &input);
 
-    Comando* parse(const std::string &input, std::istringstream& parametros);
-    void executa(const std::string &input);
+    private:
+        void registaComandos();
 
-  private:
-    void registaComandos();
+        std::unique_ptr<Jardim> jardim;
+        Jardineiro* jardineiro;
 
-    std::unique_ptr<Jardim> jardim;
-    Jardineiro* jardineiro;
+        std::vector<unique_ptr<Comando>> cmds;
+        int nComandos;
 
-    std::vector<unique_ptr<Comando>> cmds;
-    int nComandos;
-
-    Interface* interface;
-    std::map<string, unique_ptr<Jardim>> salvos;
+        Interface* interface;
+        std::map<string, unique_ptr<Jardim>> salvos;
 };
 
 

@@ -9,13 +9,12 @@
 
 class Regador : public Ferramenta{
     public:
-      bool aplica(BocadoSolo* b, Jardim* j) override;
-      std::string mostra() const override;
+        Regador();
+        ~Regador() override = default;
 
-      Ferramenta* clone() const{return new Regador(*this);}
-
-      Regador();
-      ~Regador() override;
+        bool aplica(BocadoSolo* b, Jardim* j) override;
+        std::string mostra() const override;
+        Ferramenta* clone() const override {return new Regador(*this);}
 
     private:
       int capacidade;

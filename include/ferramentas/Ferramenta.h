@@ -9,27 +9,21 @@ class BocadoSolo;
 class Jardim;
 
 class Ferramenta : public EstaSolo {
-  public:
-    virtual bool aplica(BocadoSolo* b, Jardim* j) = 0;
-    virtual std::string mostra() const = 0;
-    int getNumSerie() const noexcept { return numSerie; }
+    public:
+        explicit Ferramenta(char letra);
+        ~Ferramenta() override = 0;
 
-    virtual Ferramenta* clone() const = 0;
+        virtual bool aplica(BocadoSolo* b, Jardim* j) = 0;
+        virtual std::string mostra() const = 0;
+        virtual Ferramenta* clone() const = 0;
 
-    explicit Ferramenta(char letra);
+        int getNumSerie() const noexcept { return numSerie; }
+        friend std::ostream& operator<<(std::ostream& os, const Ferramenta* f);
+        static Ferramenta* criar(char ferr);
 
-  // O 'explicit' evita conversão de char para um objeto Ferramenta, por exemplo, func('a');
-
-  friend std::ostream& operator<<(std::ostream& os, const Ferramenta* f);
-
-  static Ferramenta* criar(char ferr);
-
-  ~Ferramenta() override = 0;
-
-  private:
-    static int seq;
-
-    int numSerie;
+    private:
+        static int seq;
+        int numSerie;
 
 };
 

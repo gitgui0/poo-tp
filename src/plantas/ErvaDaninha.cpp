@@ -7,14 +7,13 @@
 ErvaDaninha::ErvaDaninha() :
     Planta(Settings::ErvaDaninha::inicial_agua,Settings::ErvaDaninha::inicial_nutrientes,
         'e',"Feia"), instanteMulti(0)
-{};
+{}
 
 ErvaDaninha::ErvaDaninha(int agua, int nutrientes) :
     Planta(agua,nutrientes,
         'e',"Feia"), instanteMulti(0)
-{};
+{}
 
-ErvaDaninha::~ErvaDaninha(){ std::cout << "Destructor Erva Daninha" << std::endl;}
 
 void ErvaDaninha::multiplica(BocadoSolo *b, Jardim* j) {
     // [Mantido] Log do teu colega

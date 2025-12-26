@@ -3,21 +3,21 @@
 #define TP_ORQUIDEA_H
 
 #include "Planta.h"
-#include <iostream>
+#include "Jardim.h"
 
 class Orquidea : public Planta {
 
+    public:
+        Orquidea();
+        ~Orquidea() override = default;
 
-public:
-    Orquidea();
-    bool cadaInstante(BocadoSolo* b, Jardim* j) override;
-    void multiplica(BocadoSolo *b, Jardim* j) override;
-    BocadoSolo* geraVizinho(BocadoSolo *b, Jardim* j) const override;
+        bool cadaInstante(BocadoSolo* b, Jardim* j) override;
+        void multiplica(BocadoSolo *b, Jardim* j) override;
+        BocadoSolo* geraVizinho(BocadoSolo *b, Jardim* j) const override;
+        Planta* clone() const override {return new Orquidea(*this);}
 
-    Planta* clone() const override {return new Orquidea(*this);}
-
-private:
-    int nInstantesAguaExcessiva;
+    private:
+        int nInstantesAguaExcessiva;
 };
 
 

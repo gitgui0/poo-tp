@@ -3,12 +3,12 @@
 
 class EstaSolo {
     public:
-      explicit EstaSolo(char letra);
-      char getLetra() const noexcept;
-      virtual ~EstaSolo() = 0; // virtual, porque por exemplo, as platnas sao destruidas de maneira diferente das ferramentas
+        explicit EstaSolo(char letra);
+        char getLetra() const noexcept { return letra;};
+        virtual ~EstaSolo() = 0;
 
     private:
-      char letra;
+        char letra;
 
 };
 

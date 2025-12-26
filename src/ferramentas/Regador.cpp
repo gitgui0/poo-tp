@@ -5,7 +5,7 @@
 using namespace std;
 
 Regador::Regador() : Ferramenta('g'), capacidade(Settings::Regador::capacidade){};
-Regador::~Regador() = default;
+
 bool Regador::aplica(BocadoSolo* b, Jardim* j) {
     b->setAgua(b->getAgua() + 10);
 

@@ -7,17 +7,16 @@
 
 class Adubo : public Ferramenta{
     public:
-      bool aplica(BocadoSolo* b, Jardim* j) override;
-      std::string mostra() const override;
+        Adubo();
+        ~Adubo() override = default;
 
-      Ferramenta* clone() const{return new Adubo(*this);}
+        bool aplica(BocadoSolo* b, Jardim* j) override;
+        std::string mostra() const override;
 
-      Adubo();
-
-      ~Adubo() override;
+        Ferramenta* clone() const override {return new Adubo(*this);}
 
     private:
-      int capacidade;
+        int capacidade;
 };
 
 

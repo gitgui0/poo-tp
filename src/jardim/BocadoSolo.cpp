@@ -62,34 +62,25 @@ BocadoSolo::BocadoSolo(const BocadoSolo& other)
     }
 }
 
-//isto é pa devolver o ponteiro e limpar a variavel
+//Devolve o ponteiro e limpa a variavel, mas nao liberta a memoria
 Ferramenta* BocadoSolo::retiraFerramenta() {
     if (this->ferramenta == nullptr) {
         return nullptr;
     }
 
-    // Guarda ponteiro temporário
     Ferramenta* temp = this->ferramenta;
 
-    // Esvazia o solo
     this->ferramenta = nullptr;
 
     return temp;
 }
 
 BocadoSolo::~BocadoSolo() {
-    // Destroi a planta e a ferramenta se existirem
     delete planta;
     delete ferramenta;
 }
 
-int BocadoSolo::getAgua() const noexcept{ return agua;}
-int BocadoSolo::getNutrientes() const noexcept {return nutrientes;}
 
-bool BocadoSolo::estaJardineiro() const noexcept { return ocupado; }
-
-void BocadoSolo::colocaJardineiro(){ ocupado = true; }
-void BocadoSolo::removeJardineiro(){ ocupado = false; }
 
 char BocadoSolo::mostra() {
     if (estaJardineiro()) return '*';

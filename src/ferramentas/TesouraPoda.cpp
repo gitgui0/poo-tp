@@ -6,8 +6,7 @@
 #include <Planta.h>
 using namespace std;
 
-TesouraPoda::TesouraPoda() : Ferramenta('t') {};
-TesouraPoda::~TesouraPoda() = default;
+TesouraPoda::TesouraPoda() : Ferramenta('t') {}
 
 bool TesouraPoda::aplica(BocadoSolo* b, Jardim* j) {
     Planta *p = b->getPlanta();

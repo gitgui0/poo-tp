@@ -11,8 +11,6 @@ AceleradorCrescimento::AceleradorCrescimento() :
     capacidade(5)
 {}
 
-AceleradorCrescimento::~AceleradorCrescimento() = default;
-
 bool AceleradorCrescimento::aplica(BocadoSolo* b, Jardim* j) {
 
     Planta* p = b->getPlanta();

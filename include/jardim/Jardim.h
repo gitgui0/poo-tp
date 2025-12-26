@@ -8,47 +8,43 @@
 
 class Jardim {
 
-  public:
+    public:
 
-    Jardim() = default;
-    Jardim(int nLinhas, int nColunas);
-    explicit Jardim(const Jardim& j);
-    ~Jardim();
+        Jardim() = default;
+        Jardim(int nLinhas, int nColunas);
+        explicit Jardim(const Jardim& j);
+        ~Jardim();
 
-    Ferramenta* apanharFerramenta(BocadoSolo* solo);
-    std::pair<int,int> getPosicaoBocado(BocadoSolo* b) const noexcept;
-    int getLinhas() const noexcept;
-    int getColunas() const noexcept;
+        Ferramenta* apanharFerramenta(BocadoSolo* solo);
 
-    int getInstantes() const noexcept { return instantes;}
-    void setInstantes(int num=1) noexcept { instantes +=num; }
+        // Devolve as coordenadas de um certo bocado
+        std::pair<int,int> getPosicaoBocado(BocadoSolo* b) const noexcept;
+        BocadoSolo * getBocado(int l, int c);
+        BocadoSolo * getBocadoDoJardineiro();
 
-    void processaTurno();
+        int getLinhas() const noexcept;
+        int getColunas() const noexcept;
 
-    bool colhe(int l, int c);
-    void planta(int l, int c, char planta);
+        int getInstantes() const noexcept { return instantes;}
+        void setInstantes(int num=1) noexcept { instantes +=num; }
 
-    std::string mostraJardim() const noexcept;
+        bool colhe(int l, int c);
+        void planta(int l, int c, char planta);
 
-    BocadoSolo * getBocado(int l, int c);
-    BocadoSolo * getBocadoDoJardineiro();
+        void processaTurno();
+        std::string mostraJardim() const noexcept;
+        std::unique_ptr<Jardim> clone() const { return std::make_unique<Jardim>(*this);}
 
+    private:
+        static Ferramenta* geraFerramentaAleatoria();
+        void colocaFerramentasIniciais();
 
-    std::unique_ptr<Jardim> clone() const {
-      return std::make_unique<Jardim>(*this);
-    }
+        int nLinhas;
+        int nColunas;
 
-  private:
-    static Ferramenta* geraFerramentaAleatoria();
-    void colocaFerramentasIniciais();
+        BocadoSolo **area;
 
-    int nLinhas;
-    int nColunas;
-
-    BocadoSolo **area;
-
-    int instantes;
-
+        int instantes;
 
 };
 

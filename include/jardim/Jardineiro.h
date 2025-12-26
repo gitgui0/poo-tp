@@ -5,69 +5,64 @@
 #include <string>
 #include <vector>
 #include "Ferramenta.h"
-#include "BocadoSolo.h"
-#include "jardim.h" //por agr
 
 using namespace std;
 
 class Jardineiro {
 
-    BocadoSolo* localAtual;
-    bool dentroDoJardim;
+    public:
+        Jardineiro();
+        ~Jardineiro();
 
-    vector<Ferramenta*> ferramentas;
-    Ferramenta* ferramentaNaMao;//ativa
+        bool estaDentro() const { return dentroDoJardim;}
+        void setEstaDentro(bool s) {dentroDoJardim = s;}
+        BocadoSolo* getLocalAtual() const { return localAtual;}
+        void mudaLocal(BocadoSolo * b) { localAtual = b;}
 
-    void processarMovimento(Jardim* jardim);
-    int movimentosRestantes;
-    int colheitasRestantes;
-    int plantasRestantes;
+        void move(BocadoSolo* b);
+        void sai();
 
-    int entradasSaidasRestantes;
+        void adicionarFerramenta(Ferramenta* f);
 
-public:
-    Jardineiro();
-    ~Jardineiro();
+        void pegaFerramenta(Ferramenta* f);
+        void pegaFerramenta();
+        void pegaFerramenta(int num);
+        void largaFerramenta();
 
-    bool estaDentro() const { return dentroDoJardim;}
-    void setEstaDentro(bool s) {dentroDoJardim = s;}
-    BocadoSolo* getLocalAtual() const { return localAtual;}
-    void mudaLocal(BocadoSolo * b) { localAtual = b;}
-
-    void move(BocadoSolo* b);
-    void sai();
-
-    //pa tratar das ferramentas
-    void adicionarFerramenta(Ferramenta* f);
+        int getPlantasRestantes() const noexcept { return plantasRestantes;}
+        int getColheitasRestantes() const noexcept { return colheitasRestantes;}
+        int getMovimentosRestantes() const noexcept { return movimentosRestantes;}
+        int getEntradasSaidasRestantes() const noexcept { return entradasSaidasRestantes;}
 
 
-    void pegaFerramenta(Ferramenta* f);
-    void pegaFerramenta();
-    void pegaFerramenta(int num);
-    void largaFerramenta();
+        void menosPlantasRestantes()  { plantasRestantes--;}
+        void menosColheitasRestantes()  { colheitasRestantes--;}
+        void menosMovimentosRestantes()  { movimentosRestantes--;}
+        void menosEntradasSaidasRestantes()  { entradasSaidasRestantes--;}
 
-    int getPlantasRestantes() const noexcept { return plantasRestantes;}
-    int getColheitasRestantes() const noexcept { return colheitasRestantes;}
-    int getMovimentosRestantes() const noexcept { return movimentosRestantes;}
-    int getEntradasSaidasRestantes() const noexcept { return entradasSaidasRestantes;}
+        vector< Ferramenta* > devolveFerramentas() const noexcept{ return ferramentas;}
 
+        Ferramenta* getFerramentaNaMao() const;
 
-    void menosPlantasRestantes()  { plantasRestantes--;}
-    void menosColheitasRestantes()  { colheitasRestantes--;}
-    void menosMovimentosRestantes()  { movimentosRestantes--;}
-    void menosEntradasSaidasRestantes()  { entradasSaidasRestantes--;}
+        //acoes
+        void aplicarFerramenta(Jardim* j);
+        void resetTurno();
 
-    vector< Ferramenta* > devolveFerramentas() const noexcept{ return ferramentas;}
+        string getInfo() const;
 
-    Ferramenta* getFerramentaNaMao() const;
+    private:
 
-    //acoes
-    void aplicarFerramenta(Jardim* j);
-    void resetTurno();
+        BocadoSolo* localAtual;
+        bool dentroDoJardim;
 
-    string getInfo() const;
+        vector<Ferramenta*> ferramentas;
+        Ferramenta* ferramentaNaMao; //ativa
+
+        int movimentosRestantes;
+        int colheitasRestantes;
+        int plantasRestantes;
+
+        int entradasSaidasRestantes;
 };
-
-
 
 #endif

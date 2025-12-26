@@ -13,7 +13,7 @@ class Interface {
 
     public:
         explicit Interface(Simulador * sim);
-        ~Interface();
+        ~Interface() = default;
         void inicia(); // loop principal
         void setLigado(bool l){ligado = l;}
 

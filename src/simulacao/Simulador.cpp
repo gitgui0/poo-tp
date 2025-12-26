@@ -158,8 +158,8 @@ void Simulador::recuperarJardim(const std::string& nome) {
   /*
      Para casos em que o jardineiro estava dentro do jardim.
      Se o jardineiro estava num certo bocadosolo B, a cópia do jardim, tem esse bocadoSolo
-    igual, ou seja, se depois usamos o recupera, esse B vai ter la o jardineiro. Mesmo
-    que o jardineiro atual nao esteja la.
+     igual, ou seja, se depois usamos o recupera, esse B vai ter la o jardineiro. Mesmo
+     que o jardineiro atual nao esteja la.
 
      É o que esta parte da função faz, se houver um bocadoSolo que foi guardado com o jardineiro la,
      "sincroniza" o jardineiro atual

@@ -3,7 +3,6 @@
 
 #include "Comando.h"
 
-// Comando do tempo simulado
 class ComandoAvanca : public Comando {
 public:
     ComandoAvanca() = default;
@@ -11,8 +10,6 @@ public:
     const string getNome() override { return "avanca"; }
 };
 
-
-// gestao do jardim
 class ComandoJardim : public Comando {
 public:
     ComandoJardim() = default;
@@ -48,8 +45,6 @@ public:
     const string getNome() override { return "executa"; }
 };
 
-
-// listar
 class ComandoLPlantas : public Comando {
 public:
     ComandoLPlantas() = default;
@@ -86,7 +81,6 @@ public:
 };
 
 
-// as acoes diretas tipo colher plantar etc...
 class ComandoColhe : public Comando {
 public:
     ComandoColhe() = default;
@@ -123,7 +117,6 @@ public:
 };
 
 
-// para os movimentos do jardineiro
 class ComandoMoveEsquerda : public Comando {
 public:
     ComandoMoveEsquerda() = default;
@@ -166,8 +159,6 @@ public:
     const string getNome() override { return "sai"; }
 };
 
-
-// e termina o simulador
 class ComandoFim : public Comando {
 public:
     ComandoFim() = default;
@@ -175,4 +166,4 @@ public:
     const string getNome() override { return "fim"; }
 };
 
-#endif // COMANDOSTODOS_H
+#endif

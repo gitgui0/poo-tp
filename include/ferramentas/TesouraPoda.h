@@ -6,13 +6,13 @@
 
 class TesouraPoda : public Ferramenta {
     public:
-      bool aplica(BocadoSolo* b, Jardim* j) override;
-      std::string mostra() const override;
+        TesouraPoda();
+        ~TesouraPoda() override = default;
 
-      Ferramenta* clone() const{return new TesouraPoda(*this);}
+        bool aplica(BocadoSolo* b, Jardim* j) override;
+        std::string mostra() const override;
 
-      TesouraPoda();
-      ~TesouraPoda() override ;
+        Ferramenta* clone() const override {return new TesouraPoda(*this);}
 };
 
 

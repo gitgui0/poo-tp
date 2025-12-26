@@ -2,59 +2,50 @@
 #ifndef BOCADOSOLO_H
 #define BOCADOSOLO_H
 
-//#include "Planta.h"
 #include "Ferramenta.h"
 
-#include <string>
 class Planta;
 
 class BocadoSolo {
     public:
-      BocadoSolo();
-      BocadoSolo(const BocadoSolo& outro);
-      ~BocadoSolo();
+        BocadoSolo();
+        BocadoSolo(const BocadoSolo& outro);
+        ~BocadoSolo();
 
-     BocadoSolo& operator=(const BocadoSolo& outro);
+        BocadoSolo& operator=(const BocadoSolo& outro);
 
-    //para o "chao" saber entregar a ferramente
-    //ou ficar vazio
-      Ferramenta* retiraFerramenta();
+        // Devolve a ferramenta mas nao liberta a memoria, apenas retira do solo
+        Ferramenta* retiraFerramenta();
 
-      int getAgua() const noexcept;
-      int getNutrientes() const noexcept;
+        Planta* getPlanta() const noexcept { return planta; }
+        Ferramenta* getFerramenta() const noexcept{ return ferramenta; }
 
-      bool setAgua(int agua);
-      bool setNutrientes(int nutrientes);
+        void setPlanta(Planta* p);
+        void setFerramenta(Ferramenta* f);
 
-      bool remove(Planta* item);
+        int getAgua() const noexcept { return agua;}
+        int getNutrientes() const noexcept { return nutrientes;}
 
-      bool remove(Ferramenta* item);
+        bool setAgua(int agua);
+        bool setNutrientes(int nutrientes);
 
-      bool estaJardineiro() const noexcept;
+        bool estaJardineiro() const noexcept { return ocupado; }
+        void removeJardineiro() {ocupado = false;}
+        void colocaJardineiro() {ocupado = true;}
 
-      Planta* getPlanta() const noexcept { return planta; }
-      Ferramenta* getFerramenta() const noexcept{ return ferramenta; }
-
-      void setPlanta(Planta* p);
-      void setFerramenta(Ferramenta* f);
-
-      void colocaJardineiro();
-      void removeJardineiro();
-
-      char mostra();
+        char mostra();
 
     private:
-      int agua;
-      int nutrientes;
+        int agua;
+        int nutrientes;
 
-      bool ocupado;
+        bool ocupado;
 
-      Planta *planta;
-      Ferramenta* ferramenta;
-
+        Planta *planta;
+        Ferramenta* ferramenta;
 
 };
 
 
 
-#endif //BOCADOSOLO_H
+#endif

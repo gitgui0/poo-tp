@@ -107,11 +107,9 @@ void ComandoApaga::executa(Simulador &sim, std::istringstream &params) const {
 void ComandoExecuta::executa(Simulador &sim, std::istringstream & params) const {
     std::string nomeFicheiro;
 
-    // 1. Ler o nome do ficheiro dos parametros
     if (!(params >> nomeFicheiro))
         throw std::runtime_error("Falta o nome do ficheiro");
 
-    // 2. Tentar abrir o ficheiro
     std::ifstream ficheiro(nomeFicheiro);
     if (!ficheiro.is_open()) {
         throw std::runtime_error("Nao foi possivel abrir o ficheiro: " + nomeFicheiro);
@@ -120,28 +118,23 @@ void ComandoExecuta::executa(Simulador &sim, std::istringstream & params) const 
     std::string linha;
     std::cout << ">>> A iniciar execucao do ficheiro: " << nomeFicheiro << " <<<" << endl;
 
-    // 3. Ler linha a linha até ao fim do ficheiro
+    // le linha a linha do ficheiro
     while (std::getline(ficheiro, linha)) {
 
-        // Ignorar linhas vazias
         if (linha.empty()) continue;
 
-        // Feedback visual para saberes o que está a acontecer
         std::cout << ">> [Ficheiro] Executando: " << linha << endl;
 
         try {
-            // A magia acontece aqui: o Simulador trata a linha como se fosse escrita por ti
             sim.executa(linha);
-
         } catch (const std::exception &e) {
-            // Se um comando no ficheiro der erro, mostramos o erro mas continuamos a ler as proximas linhas
             std::cout << "Erro na linha do ficheiro: " << e.what() << endl;
         }
     }
 
     std::cout << ">>> Fim da execucao do ficheiro <<<" << endl;
 
-    // O ficheiro fecha-se sozinho quando a variavel 'ficheiro' sai de escopo
+    // o ficheiro fecha sozinho quando sai do scope
 }
 
 // listagens
@@ -200,36 +193,28 @@ void ComandoLPlanta::executa(Simulador &sim, std::istringstream & params) const 
 }
 
 void ComandoLArea::executa(Simulador &sim, std::istringstream & params) const {
-    // 1. Obter o jardim e verificar se existe
     Jardim* jardim = sim.devolveJardim();
     if (jardim == nullptr)
         throw std::runtime_error("O jardim nao existe");
 
     std::cout << "--- Listagem da Area (Apenas posicoes ocupadas) ---" << endl;
 
-    // Flag para saber se encontrámos alguma coisa no fim
     bool encontrouAlgo = false;
 
-    // 2. Percorrer todas as linhas e colunas (Duplo For)
     for (int i = 0; i < jardim->getLinhas(); i++) {
         for (int j = 0; j < jardim->getColunas(); j++) {
 
-            // 3. Obter o bocado atual
             BocadoSolo* b = jardim->getBocado(i, j);
 
-            // 4. A GRANDE CONDICAO: O bocado não está "totalmente vazio"?
-            // Verifica se tem Planta OU Ferramenta OU Jardineiro
             if (b->getPlanta() != nullptr || b->getFerramenta() != nullptr || b->estaJardineiro()) {
 
                 encontrouAlgo = true;
 
-                // Converte numeros (0,0) para letras (AA) para o print
                 char linhaChar = Simulador::intParaChar(i);
                 char colChar = Simulador::intParaChar(j);
 
                 std::cout << "[" << linhaChar << colChar << "] ";
 
-                // 5. Mostra quem está lá
                 if (b->estaJardineiro()) {
                     std::cout << "<JARDINEIRO> ";
                 }
@@ -242,9 +227,7 @@ void ComandoLArea::executa(Simulador &sim, std::istringstream & params) const {
                     std::cout << "Ferramenta: " << b->getFerramenta()->getLetra() << " ";
                 }
 
-                // 6. Mostra sempre o estado do solo (Agua/Nutrientes)
-                std::cout << "| Solo(Agua:" << b->getAgua()
-                          << ", Nutri:" << b->getNutrientes() << ")" << endl;
+                std::cout << "| Solo(Agua:" << b->getAgua() << ", Nutri:" << b->getNutrientes() << ")" << endl;
             }
         }
     }
@@ -256,20 +239,18 @@ void ComandoLArea::executa(Simulador &sim, std::istringstream & params) const {
 
 //lsolo <l><c> [n]
 void ComandoLSolo::executa(Simulador &sim, std::istringstream & params) const {
-    // 1. Validar Jardim
+
     Jardim* jardim = sim.devolveJardim();
     if (jardim == nullptr)
         throw std::runtime_error("O jardim nao existe");
 
     char l, c;
-    int n = 0; // O raio é 0 por defeito (apenas a própria célula)
+    int n = 0; // O raio é 0 por defeito
 
-    // 2. Ler os parametros obrigatórios (Linha e Coluna)
     if (!(params >> l >> c))
         throw std::runtime_error("Faltam parametros (linha coluna)");
 
-    // 3. Tentar ler o parametro opcional [n]
-    // Se não houver mais nada no stream, 'n' fica com o valor 0
+    // tenta ler o parametro opcional n
     params >> n;
 
     // Converter centro para coordenadas
@@ -280,9 +261,8 @@ void ComandoLSolo::executa(Simulador &sim, std::istringstream & params) const {
     if (jardim->getBocado(centroL, centroC) == nullptr)
         throw std::runtime_error("Posicao central invalida");
 
-    // 4. Calcular os limites do "quadrado" (Matemática para não sair do array)
-    // O std::max(0, ...) garante que não vamos para índices negativos
-    // O std::min(..., linhas-1) garante que não passamos do tamanho do jardim
+    // O std::max(0, centroL - n) garante que nao vai para índices negativos
+    // O std::min(jardim->getLinhas() - 1, centroL + n) garante que não passamos do tamanho do jardim
     int inicioL = std::max(0, centroL - n);
     int fimL = std::min(jardim->getLinhas() - 1, centroL + n);
 
@@ -291,24 +271,20 @@ void ComandoLSolo::executa(Simulador &sim, std::istringstream & params) const {
 
     std::cout << "--- Info Solo (Centro: " << l << c << " | Raio: " << n << ") ---" << endl;
 
-    // 5. Percorrer a área definida
+
     for (int i = inicioL; i <= fimL; i++) {
         for (int j = inicioC; j <= fimC; j++) {
 
             BocadoSolo* b = jardim->getBocado(i, j);
 
-            // Converter índices para letras para o output (ex: AA, AB)
             char linhaOut = Simulador::intParaChar(i);
             char colOut = Simulador::intParaChar(j);
 
             std::cout << "> [" << linhaOut << colOut << "] "
                       << "Agua: " << b->getAgua()
                       << " | Nutri: " << b->getNutrientes();
-
-            // Mostra o que ocupa o espaço, se houver algo
             if (b->estaJardineiro()) std::cout << " [Jardineiro]";
 
-            // Usamos os getters para ver se tem coisas
             if (b->getPlanta() != nullptr) {
                 std::cout << " [Planta: " << b->getPlanta()->getLetra() << "]";
             }

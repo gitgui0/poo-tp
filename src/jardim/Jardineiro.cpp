@@ -28,7 +28,8 @@ Jardineiro::~Jardineiro() {
 
 // --- Ferramentas ---
 void Jardineiro::adicionarFerramenta(Ferramenta* f) {
-    if (f!=nullptr) ferramentas.push_back(f);
+    if (f!=nullptr)
+        ferramentas.push_back(f);
 }
 
 void Jardineiro::pegaFerramenta(Ferramenta* f) {
