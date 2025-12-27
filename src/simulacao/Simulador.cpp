@@ -8,6 +8,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -247,3 +248,149 @@ void Simulador::para() const {
   interface->setLigado(false);
 }
 
+
+string Simulador::listaPlantas() const {
+    if (jardim == nullptr) throw runtime_error("O jardim nao existe.");
+
+    ostringstream oss;
+    bool encontrou = false;
+    for (int i = 0; i < jardim->getLinhas(); i++) {
+        for (int j = 0; j < jardim->getColunas(); j++) {
+            BocadoSolo* b = jardim->getBocado(i, j);
+            if (b == nullptr) continue;
+
+            Planta* p = b->getPlanta();
+
+            if (p != nullptr) {
+                encontrou = true;
+                string nomePlanta;
+                char l = p->getLetra();
+
+                // Switch simples para nomes bonitos
+                if (l == 'c') nomePlanta = "Cacto";
+                else if (l == 'e') nomePlanta = "Erva Daninha";
+                else if (l == 'x') nomePlanta = "Orquidea";
+                else if (l == 'r') nomePlanta = "Roseira";
+                else nomePlanta = "Planta Desconhecida";
+
+                oss << "Planta: " << nomePlanta << " [" << intParaChar(i) << intParaChar(j) << "]\n";
+                oss << "   Vida -> Agua: " << p->obterAgua() << " | Nutrientes: " << p->obterNutrientes() << "\n";
+                oss << "   Solo -> Agua: " << b->getAgua() << " | Nutrientes: " << b->getNutrientes() << "\n\n";
+            }
+        }
+    }
+    if (!encontrou) oss << "Nao existem plantas no jardim.\n";
+
+    // Adicionar visualizacao do jardim no fim, conforme pedido implicito em alguns enunciados
+    oss << "--- Mapa Atual ---\n" << mostraJardim();
+
+    return oss.str();
+}
+
+string Simulador::listaPlanta(char l, char c) const {
+    if (jardim == nullptr) throw runtime_error("O jardim nao existe.");
+
+    int li = charParaInt(l);
+    int ci = charParaInt(c);
+    BocadoSolo* b = jardim->getBocado(li, ci);
+
+    if (b == nullptr) throw runtime_error("Posicao invalida.");
+
+    Planta* p = b->getPlanta();
+    ostringstream oss;
+
+    if (p == nullptr) {
+        oss << "Nao existe planta na posicao " << l << c << "\n";
+        oss << "Info Solo -> Agua: " << b->getAgua() << " | Nutrientes: " << b->getNutrientes() << "\n";
+    } else {
+        oss << "--- Detalhes " << l << c << " ---\n";
+        oss << "Planta: " << p->getLetra() << " (" << p->getBeleza() << ")\n";
+        oss << "   Estado Planta -> Agua: " << p->obterAgua() << " | Nutrientes: " << p->obterNutrientes() << "\n";
+        oss << "   Estado Solo   -> Agua: " << b->getAgua() << " | Nutrientes: " << b->getNutrientes() << "\n";
+    }
+    return oss.str();
+}
+
+string Simulador::listaArea() const {
+    if (jardim == nullptr) throw runtime_error("O jardim nao existe.");
+
+    ostringstream oss;
+    oss << "--- Area Ocupada ---\n";
+    bool encontrouAlgo = false;
+
+    for (int i = 0; i < jardim->getLinhas(); i++) {
+        for (int j = 0; j < jardim->getColunas(); j++) {
+            BocadoSolo* b = jardim->getBocado(i, j);
+            // Se tiver qualquer coisa (Planta, Ferramenta ou Jardineiro)
+            if (b->getPlanta() != nullptr || b->getFerramenta() != nullptr || b->estaJardineiro()) {
+                encontrouAlgo = true;
+                oss << "[" << intParaChar(i) << intParaChar(j) << "] ";
+
+                if (b->estaJardineiro()) oss << "<JARDINEIRO> ";
+                if (b->getPlanta()) oss << "Planta(" << b->getPlanta()->getLetra() << ") ";
+                if (b->getFerramenta()) oss << "Ferr(" << b->getFerramenta()->getLetra() << ") ";
+
+                oss << "| Solo(A:" << b->getAgua() << " N:" << b->getNutrientes() << ")\n";
+            }
+        }
+    }
+    if (!encontrouAlgo) oss << "Tudo vazio.\n";
+    return oss.str();
+}
+
+string Simulador::listaSolo(char l, char c, int raio) const {
+    if (jardim == nullptr) throw runtime_error("O jardim nao existe.");
+
+    int centroL = charParaInt(l);
+    int centroC = charParaInt(c);
+    if (jardim->getBocado(centroL, centroC) == nullptr) throw runtime_error("Posicao central invalida.");
+
+    ostringstream oss;
+    oss << "--- Info Solo (Centro: " << l << c << " | Raio: " << raio << ") ---\n";
+
+    // Calcular limites garantindo que nao sai da matriz (std::max e std::min)
+    int inicioL = std::max(0, centroL - raio);
+    int fimL = std::min(jardim->getLinhas() - 1, centroL + raio);
+    int inicioC = std::max(0, centroC - raio);
+    int fimC = std::min(jardim->getColunas() - 1, centroC + raio);
+
+    for (int i = inicioL; i <= fimL; i++) {
+        for (int j = inicioC; j <= fimC; j++) {
+            BocadoSolo* b = jardim->getBocado(i, j);
+            oss << "> " << intParaChar(i) << intParaChar(j)
+                << " | A:" << b->getAgua() << " N:" << b->getNutrientes();
+
+            if (b->estaJardineiro()) oss << " [Jardineiro]";
+            if (b->getPlanta()) oss << " [" << b->getPlanta()->getLetra() << "]";
+            if (b->getFerramenta()) oss << " [" << b->getFerramenta()->getLetra() << "]";
+            oss << "\n";
+        }
+    }
+    return oss.str();
+}
+
+string Simulador::listaFerramentas() const {
+    ostringstream oss;
+
+    // Ferramenta na mao
+    Ferramenta* naMao = jardineiro->getFerramentaNaMao();
+    if (naMao != nullptr) {
+        oss << "NA MAO: " << naMao->mostra();
+    } else {
+        oss << "NA MAO: Nenhuma\n";
+    }
+
+    // Ferramentas na mochila
+    vector<Ferramenta*> mochila = jardineiro->devolveFerramentas();
+    if (mochila.empty()) {
+        oss << "MOCHILA: Vazia\n";
+    } else {
+        oss << "MOCHILA:\n";
+        for (Ferramenta* f : mochila) {
+            if (f != nullptr) {
+                oss << " - " << f->mostra();
+            }
+        }
+    }
+    return oss.str();
+}

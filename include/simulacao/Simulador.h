@@ -39,9 +39,11 @@ class Simulador {
         void moveJardineiro(int dirX, int dirY) const;
         void saiDoJardim() const;
 
-        //TODO: DEVIA IR PARA PRIVATE MAS AINDA ESTAO A SER UTILIZADOS NOS COMANDOS
-        static int charParaInt(char c);
-        static char intParaChar(int n);
+        string listaPlantas() const;
+        string listaPlanta(char l, char c) const;
+        string listaArea() const;
+        string listaSolo(char l, char c, int raio) const;
+        string listaFerramentas() const;
 
         void gravarJardim(const std::string& nome);
         void recuperarJardim(const std::string& nome);
@@ -54,6 +56,9 @@ class Simulador {
         void executa(const std::string &input);
 
     private:
+        static int charParaInt(char c);
+        static char intParaChar(int n);
+
         void registaComandos();
 
         std::unique_ptr<Jardim> jardim;
