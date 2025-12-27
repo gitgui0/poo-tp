@@ -15,6 +15,6 @@ bool Regador::aplica(BocadoSolo* b, Jardim* j) {
 
 std::string Regador::mostra() const {
     ostringstream oss;
-    oss << "Regador - " << getNumSerie() <<  "\nCapacidade: " << capacidade << endl;
+    oss << getNumSerie() << " - Regador - Capacidade - " << capacidade << endl;
     return oss.str();
 }

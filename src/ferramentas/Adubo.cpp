@@ -15,6 +15,6 @@ bool Adubo::aplica(BocadoSolo* b, Jardim* j) {
 
 string Adubo::mostra() const {
     ostringstream oss;
-    oss << "Adubo - " << getNumSerie() <<  "\nCapacidade: " << capacidade << endl;
+    oss << getNumSerie() << " - Adubo - Capacidade - " << capacidade << endl;
     return oss.str();
 }

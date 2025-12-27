@@ -220,6 +220,7 @@ void ComandoPega::executa(Simulador & sim, std::istringstream & params) const {
         throw std::runtime_error("Falta especificar o numero de serie da ferramenta");
 
     sim.pegaFerramenta(num);
+    std::cout << "A ferramente esta na mao." << endl;
 }
 void ComandoCompra::executa(Simulador & sim, std::istringstream & params) const {
     char tipo;

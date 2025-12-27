@@ -28,8 +28,7 @@ Jardineiro::~Jardineiro() {
 
 // --- Ferramentas ---
 void Jardineiro::adicionarFerramenta(Ferramenta* f) {
-    if (f!=nullptr)
-        ferramentas.push_back(f);
+    if (f!=nullptr) ferramentas.push_back(f);
 }
 
 void Jardineiro::pegaFerramenta(Ferramenta* f) {
@@ -63,8 +62,8 @@ void Jardineiro::pegaFerramenta(int num) {
         throw std::runtime_error("Essa ferramenta nao esta no inventario");
 }
 
-void Jardineiro::pegaFerramenta() {
-    Ferramenta* f = localAtual->getFerramenta();
+void Jardineiro::pegaFerramenta(Jardim* j) {
+    Ferramenta* f = j->apanharFerramenta(localAtual);
 
     if (f != nullptr) {
         adicionarFerramenta(f);

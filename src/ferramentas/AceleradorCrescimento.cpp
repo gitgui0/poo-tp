@@ -39,6 +39,6 @@ bool AceleradorCrescimento::aplica(BocadoSolo* b, Jardim* j) {
 
 std::string AceleradorCrescimento::mostra() const {
     ostringstream oss;
-    oss << "Acelerador de Crescimento -" << getNumSerie() <<  "\nCapacidade: " << capacidade << endl;
+    oss << getNumSerie() << " - Acelerador de Crescimento - Capacidade - " << capacidade << endl;
     return oss.str();
 }

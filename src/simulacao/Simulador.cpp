@@ -39,7 +39,7 @@ void Simulador::avancaInstante(){
   jardineiro->resetTurno();
 
   jardineiro->aplicarFerramenta(jardim.get());
-  jardineiro->pegaFerramenta();
+  jardineiro->pegaFerramenta(jardim.get());
 
   jardim->setInstantes();
   jardim->processaTurno();
@@ -181,9 +181,10 @@ void Simulador::apagarJardim(const std::string& nome) {
 
 
 void Simulador::entraNoJardim(char l, char c) const {
-  BocadoSolo *b = jardim->getBocado(charParaInt(l), charParaInt(c));
+    BocadoSolo *b = jardim->getBocado(charParaInt(l), charParaInt(c));
 
-  jardineiro->move(b);
+    jardineiro->move(b);
+    jardineiro->pegaFerramenta(jardim.get());
 }
 
 
@@ -212,17 +213,19 @@ void Simulador::planta(char l, char c, char planta) {
 }
 
 void Simulador::moveJardineiro(int dirX, int dirY) const {
-  BocadoSolo* b = jardineiro->getLocalAtual(), *novo;
+    BocadoSolo* b = jardineiro->getLocalAtual(), *novo;
 
-  std::pair<int,int> posicao = jardim->getPosicaoBocado(b);
-  int l = posicao.first;
-  int c = posicao.second;
+    std::pair<int,int> posicao = jardim->getPosicaoBocado(b);
+    int l = posicao.first;
+    int c = posicao.second;
 
-  novo = jardim->getBocado(l + dirY,c + dirX);
-  if (novo==nullptr)
-    throw std::runtime_error("O movimento nao e possivel.");
+    novo = jardim->getBocado(l + dirY,c + dirX);
+    if (novo==nullptr)
+        throw std::runtime_error("O movimento nao e possivel.");
 
-  jardineiro->move(novo);
+    jardineiro->move(novo);
+    jardineiro->pegaFerramenta(jardim.get());
+    jardineiro->aplicarFerramenta(jardim.get());
 }
 
 void Simulador::saiDoJardim() const {
@@ -388,7 +391,7 @@ string Simulador::listaFerramentas() const {
         oss << "MOCHILA:\n";
         for (Ferramenta* f : mochila) {
             if (f != nullptr) {
-                oss << " - " << f->mostra();
+                oss << "-> " << f->mostra();
             }
         }
     }

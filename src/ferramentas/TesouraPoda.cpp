@@ -20,6 +20,6 @@ bool TesouraPoda::aplica(BocadoSolo* b, Jardim* j) {
 
 std::string TesouraPoda::mostra() const {
     ostringstream oss;
-    oss << "Tesoura de Poda - " << getNumSerie() << endl;
+    oss << getNumSerie() << " - Tesoura de Poda" << endl;
     return oss.str();
 }
