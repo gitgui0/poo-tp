@@ -7,9 +7,10 @@ using namespace std;
 Regador::Regador() : Ferramenta('g'), capacidade(Settings::Regador::capacidade){};
 
 bool Regador::aplica(BocadoSolo* b, Jardim* j) {
-    b->setAgua(b->getAgua() + 10);
+    int dose = Settings::Regador::dose;
+    b->setAgua(b->getAgua() + dose);
 
-    capacidade = capacidade - 10;
+    capacidade -= dose;
     return capacidade <= 0;
 }
 

@@ -19,14 +19,14 @@ void Roseira::multiplica(BocadoSolo *b, Jardim* j) {
 
         if (vizinho != nullptr) {
             // criar novo
-            int aguaFilha = agua / 2;
+            int aguaFilha = agua * (Settings::Roseira::nova_agua_percentagem / 100.00);
             int nutriFilha = Settings::Roseira::nova_nutrientes;
 
             Planta* p = new Roseira(aguaFilha, nutriFilha);
             vizinho->setPlanta(p);
 
-            agua = agua / 2; // perde metade da agua
-            nutrientes = 100; // nutrientes volta a 100
+            agua = agua * (Settings::Roseira::original_agua_percentagem / 100.00);
+            nutrientes = Settings::Roseira::original_nutrientes;
         }
     }
 }
@@ -70,11 +70,12 @@ BocadoSolo* Roseira::geraVizinho(BocadoSolo *b, Jardim* j) const {
 
 bool Roseira::cadaInstante(BocadoSolo* b, Jardim* j) {
     countInstantes ++;
-    nutrientes -= 4;
-    agua -= 4;
+    nutrientes -= Settings::Roseira::perda_nutrientes;
+    agua -= Settings::Roseira::perda_nutrientes;;
 
-    int absorveNutri = ( b->getNutrientes() >= 5 ? 5 : 0);
-    int absorveAgua = (b->getAgua() >= 8 ? 8 : 0);
+    // Esta logica esta assim porque "absorve 5 unidades de água do solo (se existir)", por causa do "se existir"
+    int absorveNutri = ( b->getNutrientes() >= Settings::Roseira::absorcao_nutrientes ? Settings::Roseira::absorcao_nutrientes : 0);
+    int absorveAgua = (b->getAgua() >= Settings::Roseira::absorcao_agua  ? Settings::Roseira::absorcao_agua  : 0);
 
     nutrientes += absorveNutri;
     agua += absorveAgua;

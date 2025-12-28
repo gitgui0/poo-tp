@@ -7,9 +7,10 @@ using namespace std;
 Adubo::Adubo() : Ferramenta('a'), capacidade(Settings::Adubo::capacidade){};
 
 bool Adubo::aplica(BocadoSolo* b, Jardim* j) {
-    b->setNutrientes(b->getNutrientes() + 10);
+    int dose = Settings::Adubo::dose;
+    b->setNutrientes(b->getNutrientes() + dose);
 
-    capacidade = capacidade - 10;
+    capacidade = capacidade -= dose;
     return capacidade <= 0;
 }
 

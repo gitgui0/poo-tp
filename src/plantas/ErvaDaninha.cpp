@@ -31,8 +31,8 @@ void ErvaDaninha::multiplica(BocadoSolo *b, Jardim* j) {
         if (vizinho != nullptr) {
             // Criar a FILHA (invasora)
             // "Fica com 5 de água, e 5 de nutrientes"
-            int aguaFilha = Settings::ErvaDaninha::inicial_agua;      // 5
-            int nutriFilha = Settings::ErvaDaninha::nova_nutrientes;  // 5
+            int aguaFilha = Settings::ErvaDaninha::inicial_agua;
+            int nutriFilha = Settings::ErvaDaninha::nova_nutrientes;
 
             // Ao fazer setPlanta, se já lá estiver uma planta, o BocadoSolo
             // encarrega-se de fazer 'delete' da anterior (matando-a).
@@ -86,7 +86,7 @@ BocadoSolo* ErvaDaninha::geraVizinho(BocadoSolo *b, Jardim* j) const {
 
 
 bool ErvaDaninha::cadaInstante(BocadoSolo* b, Jardim* j) {
-    countInstantes ++;
+    countInstantes++;
 
     int absorveNutri = ( b->getNutrientes() > 0 ? Settings::ErvaDaninha::absorcao_nutrientes : 0);
     int absorveAgua = (b->getAgua() > 0 ? Settings::ErvaDaninha::absorcao_agua : 0);

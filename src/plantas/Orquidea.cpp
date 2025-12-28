@@ -11,52 +11,43 @@ Orquidea::Orquidea()
 bool Orquidea::cadaInstante(BocadoSolo* b, Jardim* j) {
     countInstantes ++;
 
-    //perde agua e nutrientes
-
-    agua -= 2;
-    nutrientes -= 1;
-
     bool estaFraca = false;
 
-    if (b->getAgua() > 80 && b->getAgua() < 30) {
+    if (b->getAgua() > Settings::Orquidea::agua_maior_perde && b->getAgua() < Settings::Orquidea::agua_menor_perde) {
         nInstantesAguaExcessiva++;
     } else {
         nInstantesAguaExcessiva = 0;
     }
 
     // se tiver fraca, ou seja, com muita agua durante mt tempo, tira nutrientes
-    if (nInstantesAguaExcessiva >= 2) {
+    if (nInstantesAguaExcessiva >= Settings::Orquidea::agua_maior_instantes) {
         estaFraca = true;
-        nutrientes -= 10;
     }
 
-    // bebe 10
-    if (b->getAgua() >= 10) {
-        b->setAgua(b->getAgua() - 10);
-        agua += 10;
+    b->setNutrientes(b->getNutrientes() - Settings::Orquidea::absorve_nutrientes);
+    nutrientes += Settings::Orquidea::absorve_nutrientes;
 
-        // se nao estiver fraca, retribui com 5 nutrientes e absorve nutrientes tambem
-        if (!estaFraca) {
-            b->setNutrientes(b->getNutrientes() + 5);
-            nutrientes += 2;
+    if (!estaFraca) {
+        b->setAgua(b->getAgua() - Settings::Orquidea::absorve_agua);
+        agua += Settings::Orquidea::absorve_agua;
+
+        // retribuicao
+        BocadoSolo* viz = geraVizinho(b,j);
+        if (viz != nullptr) {
+            viz->setNutrientes(viz->getNutrientes() + Settings::Orquidea::retribuicao_nutrientes);
         }
-    } else {
-        // se nao havia 10 aguas no solo, perde mais agua e tira nutrientes do solo
-        b->setAgua(b->getAgua() - 5);
-        agua -= 5;
-        b->setNutrientes(b->getNutrientes() - 5);
-        nutrientes -= 5;
+
+    }else {
+        b->setAgua(b->getAgua() - Settings::Orquidea::absorve_agua_fraca);
+        agua += Settings::Orquidea::absorve_agua_fraca;
     }
 
-    if (agua <= 0 || nutrientes <= 0) {
-        return true;
-    }
 
-    return false;
+    return agua <= 0 || nutrientes <= 0;
 }
 
 void Orquidea::multiplica(BocadoSolo *b, Jardim* j) {
-    if (nutrientes < 50) return;
+    if (nutrientes < Settings::Orquidea::multiplica_nutrientes_maior) return;
 
     BocadoSolo* vizinho = geraVizinho(b, j);
 
@@ -76,7 +67,8 @@ BocadoSolo* Orquidea::geraVizinho(BocadoSolo *b, Jardim* j) const {
 
     for (int i = 0; i < 4; i++) {
         BocadoSolo* viz = j->getBocado(pos.first + dr[i], pos.second + dc[i]);
-        if (viz && viz->getPlanta() == nullptr) escolhas.push_back(viz);
+        if (viz && viz->getPlanta() == nullptr && viz->getAgua() > Settings::Orquidea::multiplica_agua_maior)
+            escolhas.push_back(viz);
     }
 
     if (escolhas.empty()) return nullptr;

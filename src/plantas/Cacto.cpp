@@ -4,24 +4,27 @@
 #include <iostream>
 #include <vector>
 
+#include "Settings.h"
+
 Cacto::Cacto() : Planta(0,0,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrientesExcessivos(0) {};
 Cacto::Cacto(int agua, int nutrientes) : Planta(agua,nutrientes,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrientesExcessivos(0){};
 
 bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
     countInstantes ++;
 
-    if (b->getAgua() > 100)
+    if (b->getAgua() > Settings::Cacto::absorcao_agua_percentagem)
         turnosAguaExcessiva++;
     else
         turnosAguaExcessiva=0;
 
-    if (b->getNutrientes() <= 0)
+    if (b->getNutrientes() < Settings::Cacto::morre_nutrientes_solo_menor)
         turnosNutrientesExcessivos++;
     else
         turnosNutrientesExcessivos=0;
 
-    int absorveNutri = std::min(5,b->getNutrientes());
-    int absorveAgua = std::ceil(b->getAgua() * 0.25); // se a agua no solo for 0, fica absorve 0, se estiver entre 1 e 4, absorve 1
+    int absorveNutri = std::min(Settings::Cacto::absorcao_nutrientes,b->getNutrientes());
+    // se a agua no solo for 0, fica absorve 0, se estiver entre 1 e 4, absorve 1
+    int absorveAgua = std::ceil(b->getAgua() * (double)Settings::Cacto::absorcao_agua_percentagem /100);
 
     //Colocar a agua e nutrientes na planta. atuais + absorvidos
     nutrientes += absorveNutri;
@@ -31,7 +34,10 @@ bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
     b->setNutrientes(b->getNutrientes() - absorveNutri);
     b->setAgua(b->getAgua() - absorveAgua);
 
-    return turnosAguaExcessiva >= 3 || turnosNutrientesExcessivos >= 3;
+    return
+        turnosAguaExcessiva >= Settings::Cacto::morre_agua_solo_instantes
+        || turnosNutrientesExcessivos >= Settings::Cacto::morre_nutrientes_solo_menor
+    ;
 }
 
 void Cacto::multiplica(BocadoSolo *b, Jardim* j) {
@@ -40,7 +46,7 @@ void Cacto::multiplica(BocadoSolo *b, Jardim* j) {
 
     //Condicoes para multiplicar (neste caso e nele proprio, mas em outras plantas, a condicao
     // teria que estar ser verificada na posicao vizinha, ou seja, na funcao geraVizinho )
-    if (!( nutrientes > 100 && agua > 50 ))
+    if (!( nutrientes > Settings::Cacto::multiplica_nutrientes_maior && agua > Settings::Cacto::morre_nutrientes_solo_menor ))
         return;
 
     BocadoSolo* vizinho = geraVizinho(b,j);
