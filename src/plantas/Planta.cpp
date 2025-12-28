@@ -17,21 +17,6 @@ Planta::Planta(int agua, int nutrientes, char letra, const std::string& beleza) 
 
 Planta::~Planta() = default;
 
-
-void Planta::colocarAgua(int agua) {
-    if (agua>0)
-        this->agua = agua;
-    else
-        this->agua = 0;
-}
-void Planta::colocarNutrientes(int nutrientes) {
-    if (nutrientes > 0)
-        this->nutrientes = nutrientes;
-    else
-        this->nutrientes = 0;
-}
-
-
 Planta* Planta::criar(char planta) {
     Planta* novaPlanta = nullptr;
     switch (tolower(planta)) {

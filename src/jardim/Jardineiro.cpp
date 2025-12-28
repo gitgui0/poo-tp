@@ -90,7 +90,8 @@ void Jardineiro::aplicarFerramenta(Jardim* j) {
         return;
     acabou = ferramentaNaMao->aplica(localAtual,j);
     std::cout << ferramentaNaMao << "foi aplicada" << endl;
-    if (acabou) {
+    if (acabou){
+        std::cout << ferramentaNaMao << "acabou." << endl;
         delete ferramentaNaMao;
         ferramentaNaMao = nullptr;
     }

@@ -9,12 +9,12 @@ Orquidea::Orquidea()
 {}
 
 bool Orquidea::cadaInstante(BocadoSolo* b, Jardim* j) {
-    aumentaInstantes();
+    countInstantes ++;
 
     //perde agua e nutrientes
 
-    colocarAgua(obterAgua() - 2);
-    colocarNutrientes(obterNutrientes() - 1);
+    agua -= 2;
+    nutrientes -= 1;
 
     bool estaFraca = false;
 
@@ -27,28 +27,28 @@ bool Orquidea::cadaInstante(BocadoSolo* b, Jardim* j) {
     // se tiver fraca, ou seja, com muita agua durante mt tempo, tira nutrientes
     if (nInstantesAguaExcessiva >= 2) {
         estaFraca = true;
-        colocarNutrientes(obterNutrientes() - 10);
+        nutrientes -= 10;
     }
 
     // bebe 10
     if (b->getAgua() >= 10) {
         b->setAgua(b->getAgua() - 10);
-        colocarAgua(obterAgua() + 10);
+        agua += 10;
 
         // se nao estiver fraca, retribui com 5 nutrientes e absorve nutrientes tambem
         if (!estaFraca) {
             b->setNutrientes(b->getNutrientes() + 5);
-            colocarNutrientes(obterNutrientes() + 2);
+            nutrientes += 2;
         }
     } else {
         // se nao havia 10 aguas no solo, perde mais agua e tira nutrientes do solo
         b->setAgua(b->getAgua() - 5);
-        colocarAgua(obterAgua() - 5);
+        agua -= 5;
         b->setNutrientes(b->getNutrientes() - 5);
-        colocarNutrientes(obterNutrientes() - 5);
+        nutrientes -= 5;
     }
 
-    if (obterAgua() <= 0 || obterNutrientes() <= 0) {
+    if (agua <= 0 || nutrientes <= 0) {
         return true;
     }
 
@@ -56,14 +56,14 @@ bool Orquidea::cadaInstante(BocadoSolo* b, Jardim* j) {
 }
 
 void Orquidea::multiplica(BocadoSolo *b, Jardim* j) {
-    if (obterNutrientes() < 50) return;
+    if (nutrientes < 50) return;
 
     BocadoSolo* vizinho = geraVizinho(b, j);
 
     if (vizinho != nullptr && vizinho->getAgua() > 40 && vizinho->getAgua() < 70) {
         Planta* p = new Orquidea();
         vizinho->setPlanta(p);
-        colocarNutrientes(obterNutrientes() - 25);
+        nutrientes -= 25;
     }
 }
 

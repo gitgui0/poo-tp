@@ -22,8 +22,8 @@ void ErvaDaninha::multiplica(BocadoSolo *b, Jardim* j) {
     if (b == nullptr) return;
 
     // Regra: Nutrientes > 30 (Settings::ErvaDaninha::multiplica_nutrientes_maior) e se os inatntes desde a ultia multiplicaco > 5
-    if (obterNutrientes() > Settings::ErvaDaninha::multiplica_nutrientes_maior && obterInstantes() - instanteMulti >= Settings::ErvaDaninha::multiplica_instantes) {
-        instanteMulti = obterInstantes();
+    if (nutrientes > Settings::ErvaDaninha::multiplica_nutrientes_maior && countInstantes - instanteMulti >= Settings::ErvaDaninha::multiplica_instantes) {
+        instanteMulti = countInstantes;
 
         // O geraVizinho da ErvaDaninha (já implementado) devolve QUALQUER vizinho.
         BocadoSolo* vizinho = geraVizinho(b, j);
@@ -86,16 +86,16 @@ BocadoSolo* ErvaDaninha::geraVizinho(BocadoSolo *b, Jardim* j) const {
 
 
 bool ErvaDaninha::cadaInstante(BocadoSolo* b, Jardim* j) {
-    aumentaInstantes();
+    countInstantes ++;
 
     int absorveNutri = ( b->getNutrientes() > 0 ? Settings::ErvaDaninha::absorcao_nutrientes : 0);
     int absorveAgua = (b->getAgua() > 0 ? Settings::ErvaDaninha::absorcao_agua : 0);
 
-    colocarNutrientes(obterNutrientes() + absorveNutri);
-    colocarAgua(obterAgua() + absorveAgua);
+    nutrientes += absorveNutri;
+    agua += absorveAgua;
 
     b->setNutrientes(b->getNutrientes() - absorveNutri);
     b->setAgua(b->getAgua() - absorveAgua);
 
-    return obterNutrientes() >= Settings::ErvaDaninha::morre_instantes;
+    return nutrientes >= Settings::ErvaDaninha::morre_instantes;
 }

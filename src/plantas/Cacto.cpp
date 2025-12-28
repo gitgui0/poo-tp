@@ -8,7 +8,7 @@ Cacto::Cacto() : Planta(0,0,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrien
 Cacto::Cacto(int agua, int nutrientes) : Planta(agua,nutrientes,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrientesExcessivos(0){};
 
 bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
-    aumentaInstantes();
+    countInstantes ++;
 
     if (b->getAgua() > 100)
         turnosAguaExcessiva++;
@@ -24,8 +24,8 @@ bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
     int absorveAgua = std::ceil(b->getAgua() * 0.25); // se a agua no solo for 0, fica absorve 0, se estiver entre 1 e 4, absorve 1
 
     //Colocar a agua e nutrientes na planta. atuais + absorvidos
-    colocarNutrientes(obterNutrientes() + absorveNutri);
-    colocarAgua(obterAgua() + absorveAgua);
+    nutrientes += absorveNutri;
+    agua += absorveAgua;
 
     //Colocar a agua e nutrientes no bocado de solo (b). atuais - absorvidos
     b->setNutrientes(b->getNutrientes() - absorveNutri);
@@ -40,26 +40,19 @@ void Cacto::multiplica(BocadoSolo *b, Jardim* j) {
 
     //Condicoes para multiplicar (neste caso e nele proprio, mas em outras plantas, a condicao
     // teria que estar ser verificada na posicao vizinha, ou seja, na funcao geraVizinho )
-    if (!( obterNutrientes() > 100 && obterAgua() > 50 ))
+    if (!( nutrientes > 100 && agua > 50 ))
         return;
 
     BocadoSolo* vizinho = geraVizinho(b,j);
     if (vizinho==nullptr)
         return;
 
-    // variaveis para agua e nutrientes novos, porque o cacto fica com metade da agua
-    // e nutrientes que ja tinha, e passa metade para o novo cacto
-    int agua= obterAgua() / 2;
-    int nutrientes = obterNutrientes() / 2;
-
-
     //Criar um cacto com os nutrientes e agua do cacto "pai"
-    Planta* p  = new Cacto(agua,nutrientes);
-
+    Planta* p  = new Cacto(agua / 2,nutrientes / 2);
 
     // Atualizar a gua e nutrienttes do cacto "pai"
-    colocarAgua(agua);
-    colocarNutrientes(nutrientes);
+    agua = agua / 2;
+    nutrientes = nutrientes / 2;
 
     // Colocar no vizinho o cacto novo
     vizinho->setPlanta(p);

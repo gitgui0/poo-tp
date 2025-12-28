@@ -13,20 +13,20 @@ void Roseira::multiplica(BocadoSolo *b, Jardim* j) {
 
     if (b == nullptr) return;
 
-    if (obterNutrientes() > Settings::Roseira::multiplica_nutrientes_maior) {
+    if (nutrientes > Settings::Roseira::multiplica_nutrientes_maior) {
 
         BocadoSolo* vizinho = geraVizinho(b, j);
 
         if (vizinho != nullptr) {
             // criar novo
-            int aguaFilha = obterAgua() / 2;
+            int aguaFilha = agua / 2;
             int nutriFilha = Settings::Roseira::nova_nutrientes;
 
             Planta* p = new Roseira(aguaFilha, nutriFilha);
             vizinho->setPlanta(p);
 
-            colocarAgua(obterAgua() / 2); // perde metade da agua
-            colocarNutrientes(100); // nutrientes volta a 100
+            agua = agua / 2; // perde metade da agua
+            nutrientes = 100; // nutrientes volta a 100
         }
     }
 }
@@ -69,31 +69,31 @@ BocadoSolo* Roseira::geraVizinho(BocadoSolo *b, Jardim* j) const {
 
 
 bool Roseira::cadaInstante(BocadoSolo* b, Jardim* j) {
-    aumentaInstantes();
-    colocarNutrientes(obterNutrientes() - 4);
-    colocarAgua(obterAgua() - 4);
+    countInstantes ++;
+    nutrientes -= 4;
+    agua -= 4;
 
     int absorveNutri = ( b->getNutrientes() >= 5 ? 5 : 0);
     int absorveAgua = (b->getAgua() >= 8 ? 8 : 0);
 
-    colocarNutrientes(obterNutrientes() + absorveNutri);
-    colocarAgua(obterAgua() + absorveAgua);
+    nutrientes += absorveNutri;
+    agua += absorveAgua;
 
     b->setNutrientes(b->getNutrientes() - absorveNutri);
     b->setAgua(b->getAgua() - absorveAgua);
 
     // se a quantidade de água acumulada chegar a 0
-    if (obterAgua() < Settings::Roseira::morre_agua_menor) {
+    if (agua < Settings::Roseira::morre_agua_menor) {
         return true;
     }
 
     // se a quantidade de nutrientes acumulada chegar a 0
-    if (obterNutrientes() < Settings::Roseira::morre_nutrientes_menor) {
+    if (nutrientes < Settings::Roseira::morre_nutrientes_menor) {
         return true;
     }
 
     //  se a quantidade de nutrientes acumulada atingir 200
-    if (obterNutrientes() > Settings::Roseira::morre_nutrientes_maior) {
+    if (nutrientes > Settings::Roseira::morre_nutrientes_maior) {
         return true;
     }
 

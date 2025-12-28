@@ -17,10 +17,6 @@ class Planta : public EstaSolo {
         int obterNutrientes() const noexcept{ return nutrientes; }
         int obterInstantes() const noexcept { return countInstantes; }
 
-        void aumentaInstantes(int num=1) { countInstantes+=num; }
-        void colocarAgua(int agua);
-        void colocarNutrientes(int nutrientes);
-
         virtual bool cadaInstante(BocadoSolo* b, Jardim* j) = 0;
         virtual void multiplica(BocadoSolo* b, Jardim* j) = 0;
         virtual BocadoSolo* geraVizinho(BocadoSolo* b, Jardim* j) const = 0;
@@ -28,7 +24,7 @@ class Planta : public EstaSolo {
 
         static Planta* criar(char planta);
 
-    private:
+    protected:
         int agua;
         int nutrientes;
         int countInstantes;

@@ -56,7 +56,6 @@ Comando* Simulador::parse(const string &input, istringstream& parametros) {
   iss >> cmd;
   if (cmd.empty()) throw std::runtime_error("Esse comando nao foi encontrado");
 
-
   for(const unique_ptr<Comando> &c : cmds){
     if(c->getNome() == cmd){
       string resto;
@@ -76,6 +75,7 @@ void Simulador::executa(const string &input){
 
   if(exec == nullptr)
       throw std::runtime_error("Esse comando nao foi encontrado");
+
   string n = exec->getNome();
 
   if (jardim == nullptr && exec->getNome() != "jardim")
