@@ -77,7 +77,7 @@ void Jardineiro::aplicarFerramenta(Jardim* j) {
     if (ferramentaNaMao == nullptr)
         return;
     acabou = ferramentaNaMao->aplica(localAtual,j);
-    std::cout << "A ferramenta " << ferramentaNaMao->getLetra() << " | " << ferramentaNaMao->getNumSerie() << "foi aplicada" << endl;
+    std::cout << "A ferramenta " << ferramentaNaMao->getLetra() << " | " << ferramentaNaMao->getNumSerie() << " foi aplicada" << endl;
     if (acabou){
         std::cout << ferramentaNaMao->getLetra() << " | " << ferramentaNaMao->getNumSerie()  << " acabou." << endl;
         delete ferramentaNaMao;
