@@ -1,7 +1,6 @@
 #include "Cacto.h"
 
 #include <cmath>
-#include <iostream>
 #include <vector>
 
 #include "Settings.h"
@@ -12,7 +11,7 @@ Cacto::Cacto(int agua, int nutrientes) : Planta(agua,nutrientes,'c',"Neutra"), t
 bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
     countInstantes ++;
 
-    if (b->getAgua() > Settings::Cacto::absorcao_agua_percentagem)
+    if (b->getAgua() > Settings::Cacto::morre_agua_solo_maior)
         turnosAguaExcessiva++;
     else
         turnosAguaExcessiva=0;
@@ -22,7 +21,7 @@ bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
     else
         turnosNutrientesExcessivos=0;
 
-    int absorveNutri = std::min(Settings::Cacto::absorcao_nutrientes,b->getNutrientes());
+    int absorveNutri = std::min((int)Settings::Cacto::absorcao_nutrientes, b->getNutrientes());
     // se a agua no solo for 0, fica absorve 0, se estiver entre 1 e 4, absorve 1
     int absorveAgua = std::ceil(b->getAgua() * (double)Settings::Cacto::absorcao_agua_percentagem /100);
 
