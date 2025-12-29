@@ -34,7 +34,7 @@ BocadoSolo& BocadoSolo::operator=(const BocadoSolo& outro) {
 
     // Deep copy da planta
     if (outro.planta != nullptr) {
-        // O clone() garante que se for Cacto, cria um novo Cacto
+        // O clone() garante que se for Cacto, cria um novo Cacto, por exemplo
         this->planta = outro.planta->clone();
     } else {
         this->planta = nullptr;
@@ -50,7 +50,6 @@ BocadoSolo& BocadoSolo::operator=(const BocadoSolo& outro) {
     return *this;
 }
 
-// Nao é usado, foi criado mais para "no caso"
 BocadoSolo::BocadoSolo(const BocadoSolo& outro)
     : agua(outro.agua), nutrientes(outro.nutrientes), ocupado(outro.ocupado), planta(nullptr), ferramenta(nullptr)
 {
@@ -99,12 +98,12 @@ void BocadoSolo::setFerramenta(Ferramenta* f) {
 }
 
 bool BocadoSolo::setAgua(int aguaNovo) {
-    if (agua<0) return false;
+    if (aguaNovo<0) return false;
     this->agua = aguaNovo;
     return true;
 }
 bool BocadoSolo::setNutrientes(int nutrientesNovo) {
-    if (nutrientes<0) return false;
+    if (nutrientesNovo<0) return false;
     this->nutrientes = nutrientesNovo;
     return true;
 }

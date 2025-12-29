@@ -113,8 +113,9 @@ void ComandoExecuta::executa(Simulador &sim, std::istringstream & params) const 
     while (std::getline(ficheiro, linha)) {
 
         if (linha.empty()) continue;
+        if (linha[0] == '#') continue;
 
-        std::cout << ">> [Ficheiro] Executando: " << linha << endl;
+        std::cout << ">> [Ficheiro] A executar: " << linha << endl;
 
         try {
             sim.executa(linha);

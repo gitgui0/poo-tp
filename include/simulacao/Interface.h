@@ -20,4 +20,4 @@ class Interface {
 };
 
 
-#endif //TP_INTERFACE_H
+#endif

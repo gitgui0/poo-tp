@@ -24,25 +24,30 @@ bool Orquidea::cadaInstante(BocadoSolo* b, Jardim* j) {
         estaFraca = true;
     }
 
-    agua = std::max(0,agua - Settings::Orquidea::absorve_agua);
+    int absorveNutri = std::min((int)Settings::Orquidea::absorve_nutrientes, b->getNutrientes());
 
-    b->setNutrientes(b->getNutrientes() - Settings::Orquidea::absorve_nutrientes);
-    nutrientes += Settings::Orquidea::absorve_nutrientes;
+
+    if (b->setNutrientes(b->getNutrientes() - absorveNutri))
+        nutrientes += absorveNutri;
 
     if (!estaFraca) {
-        if (b->setAgua(b->getAgua() - Settings::Orquidea::absorve_agua))
-            agua += Settings::Orquidea::absorve_agua;
+        int absorveAgua = std::min((int)Settings::Orquidea::absorve_agua, b->getAgua());
 
-        // retribuicao
+        if (b->setAgua(b->getAgua() - absorveAgua))
+            agua += absorveAgua;
+
+        // Retribuicao
         BocadoSolo* viz = geraVizinho(b,j);
         if (viz != nullptr) {
-            viz->setNutrientes(viz->getNutrientes() + Settings::Orquidea::retribuicao_nutrientes);
-            nutrientes = std::max(0,nutrientes - Settings::Orquidea::retribuicao_nutrientes);
+            int ret = std::min(nutrientes, (int)Settings::Orquidea::retribuicao_nutrientes);
+            viz->setNutrientes(viz->getNutrientes() + ret);
+            nutrientes -= ret;
         }
 
     }else {
-        if (agua < Settings::Orquidea::agua_menor_perde && b->setAgua(b->getAgua() - Settings::Orquidea::absorve_agua_fraca))
-            agua += Settings::Orquidea::absorve_agua_fraca;
+        int absorveAgua = std::min((int)Settings::Orquidea::absorve_agua_fraca, b->getAgua());
+        if (agua < Settings::Orquidea::agua_menor_perde && b->setAgua(b->getAgua() - absorveAgua))
+            agua += absorveAgua;
     }
 
 
@@ -58,6 +63,7 @@ void Orquidea::multiplica(BocadoSolo *b, Jardim* j) {
         Planta* p = new Orquidea();
         vizinho->setPlanta(p);
         nutrientes = std::max(0,nutrientes - Settings::Orquidea::inicial_nutrientes);
+        //std::cout << "A Orquidea multiplicou-se" << std::endl;
     }
 }
 

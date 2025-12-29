@@ -1,6 +1,7 @@
 #include "Cacto.h"
 
 #include <cmath>
+#include <iostream>
 #include <vector>
 
 #include "Settings.h"
@@ -25,13 +26,12 @@ bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
     // se a agua no solo for 0, fica absorve 0, se estiver entre 1 e 4, absorve 1
     int absorveAgua = std::ceil(b->getAgua() * (double)Settings::Cacto::absorcao_agua_percentagem /100);
 
-    //Colocar a agua e nutrientes na planta. atuais + absorvidos
-    nutrientes += absorveNutri;
-    agua += absorveAgua;
 
-    //Colocar a agua e nutrientes no bocado de solo (b). atuais - absorvidos
-    b->setNutrientes(b->getNutrientes() - absorveNutri);
-    b->setAgua(b->getAgua() - absorveAgua);
+
+    if (b->setNutrientes(b->getNutrientes() - absorveNutri))
+        nutrientes += absorveNutri;
+    if (b->setAgua(b->getAgua() - absorveAgua))
+        agua += absorveAgua;
 
     bool vaiMorrer = turnosAguaExcessiva > Settings::Cacto::morre_agua_solo_instantes
     || turnosNutrientesExcessivos > Settings::Cacto::morre_nutrientes_solo_instantes;
@@ -66,6 +66,7 @@ void Cacto::multiplica(BocadoSolo *b, Jardim* j) {
 
     // Colocar no vizinho o cacto novo
     vizinho->setPlanta(p);
+    //std::cout << "O cacto multiplicou-se" << std::endl;
 }
 
 // Funcao para gerar vizinhos de uma certa posicao, varia de planta para planta, porque ha plantas que
@@ -80,11 +81,10 @@ BocadoSolo* Cacto::geraVizinho(BocadoSolo *b, Jardim* j) const {
     int l = posicao.first;
     int c = posicao.second;
 
-    // arrays auxiliares para as 4 direcoes (cima, baixo, esquerda, direita)
-    int dr[] = {-1, 1, 0, 0}; // Variacao na linha, esquerda(-1)  / direita (1)
-    int dc[] = {0, 0, -1, 1}; // Variacao na coluna, baixo(-1) / cima(1)
+    int dr[] = {-1, 1, 0, 0}; // Variacao na linha
+    int dc[] = {0, 0, -1, 1}; // Variacao na coluna
 
-    // Percorre as 4 direções possíveis
+    // Percorre as 4 direcoes possíveis
     for (int i = 0; i < 4; i++) {
         int nl = l + dr[i]; // Nova linha
         int nc = c + dc[i]; // Nova coluna
@@ -105,7 +105,6 @@ BocadoSolo* Cacto::geraVizinho(BocadoSolo *b, Jardim* j) const {
         return nullptr;
     }
 
-    // Gera um índice aleatório entre 0 e o tamanho do vetor - 1
     int indiceSorteado = rand() % escolhas.size();
 
     return escolhas[indiceSorteado];

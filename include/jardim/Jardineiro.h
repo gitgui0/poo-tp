@@ -40,10 +40,8 @@ class Jardineiro {
         void menosEntradasSaidasRestantes()  { entradasSaidasRestantes--;}
 
         vector< Ferramenta* > devolveFerramentas() const noexcept{ return ferramentas;}
-
         Ferramenta* getFerramentaNaMao() const;
 
-        //acoes
         void aplicarFerramenta(Jardim* j);
         void resetTurno();
 

@@ -16,8 +16,6 @@ ErvaDaninha::ErvaDaninha(int agua, int nutrientes) :
 
 
 void ErvaDaninha::multiplica(BocadoSolo *b, Jardim* j) {
-    // [Mantido] Log do teu colega
-    std::cout << "multiplica erva daninha" << std::endl;
 
     if (b == nullptr) return;
 
@@ -29,8 +27,9 @@ void ErvaDaninha::multiplica(BocadoSolo *b, Jardim* j) {
         BocadoSolo* vizinho = geraVizinho(b, j);
 
         if (vizinho != nullptr) {
-            // Criar a FILHA (invasora)
-            // "Fica com 5 de água, e 5 de nutrientes"
+            // A original fica igual (não perde recursos, segundo o enunciado)
+            // A nova "Fica com 5 de água, e 5 de nutrientes"
+
             int aguaFilha = Settings::ErvaDaninha::inicial_agua;
             int nutriFilha = Settings::ErvaDaninha::nova_nutrientes;
 
@@ -39,7 +38,7 @@ void ErvaDaninha::multiplica(BocadoSolo *b, Jardim* j) {
             Planta* p = new ErvaDaninha(aguaFilha, nutriFilha);
             vizinho->setPlanta(p);
 
-            // A MÃE mantém-se igual (não perde recursos, segundo o enunciado)
+            //std::cout << "Erva daninha multiplicou-se" << std::endl;
         }
     }
 }
@@ -54,11 +53,10 @@ BocadoSolo* ErvaDaninha::geraVizinho(BocadoSolo *b, Jardim* j) const {
     int l = posicao.first;
     int c = posicao.second;
 
-    // Arrays auxiliares para as 4 direções (Cima, Baixo, Esquerda, Direita)
     int dr[] = {-1, 1, 0, 0}; // Variacao na linha
     int dc[] = {0, 0, -1, 1}; // Variacao na coluna
 
-    // Percorre as 4 direções possíveis
+    // Percorre as 4 direcoes possíveis
     for (int i = 0; i < 4; i++) {
         int nl = l + dr[i]; // Nova linha
         int nc = c + dc[i]; // Nova coluna
@@ -67,18 +65,17 @@ BocadoSolo* ErvaDaninha::geraVizinho(BocadoSolo *b, Jardim* j) const {
 
             BocadoSolo* vizinho = j->getBocado(nl, nc);
 
-            //nao interessa se tem planta ou nao
+            //para a erva daninha, nao interessa se tem planta ou nao
             escolhas.push_back(vizinho);
 
         }
     }
 
-    // 3. Escolha Aleatória
+
     if (escolhas.empty()) {
-        return nullptr; // Não há vizinhos válidos (ou vazios)
+        return nullptr; // Não há vizinhos válidos
     }
 
-    // Gera um índice aleatório entre 0 e o tamanho do vetor - 1
     int indiceSorteado = rand() % escolhas.size();
 
     return escolhas[indiceSorteado];
@@ -91,11 +88,11 @@ bool ErvaDaninha::cadaInstante(BocadoSolo* b, Jardim* j) {
     int absorveNutri = std::min((int)Settings::ErvaDaninha::absorcao_nutrientes,b->getNutrientes());
     int absorveAgua = std::min((int)Settings::ErvaDaninha::absorcao_agua, b->getAgua());
 
-    nutrientes += absorveNutri;
-    agua += absorveAgua;
 
-    b->setNutrientes(b->getNutrientes() - absorveNutri);
-    b->setAgua(b->getAgua() - absorveAgua);
+    if (b->setNutrientes(b->getNutrientes() - absorveNutri))
+        nutrientes += absorveNutri;
+    if (b->setAgua(b->getAgua() - absorveAgua))
+        agua += absorveAgua;
 
     return countInstantes >= Settings::ErvaDaninha::morre_instantes;
 }

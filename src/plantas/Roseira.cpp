@@ -9,7 +9,7 @@ Roseira::Roseira() : Planta(Settings::Roseira::inicial_agua,
 Roseira::Roseira(const int agua, const int nutrientes) : Planta(agua,nutrientes,'r',"Bonita") {}
 
 void Roseira::multiplica(BocadoSolo *b, Jardim* j) {
-    std::cout << "multiplica roseira" << std::endl;
+
 
     if (b == nullptr) return;
 
@@ -27,6 +27,8 @@ void Roseira::multiplica(BocadoSolo *b, Jardim* j) {
 
             agua = agua * (Settings::Roseira::original_agua_percentagem / 100.00);
             nutrientes = Settings::Roseira::original_nutrientes;
+
+            //std::cout << "A Roseira multiplicou-se" << std::endl;
         }
     }
 }
@@ -61,7 +63,6 @@ BocadoSolo* Roseira::geraVizinho(BocadoSolo *b, Jardim* j) const {
         return nullptr;
     }
 
-    // gera um índice aleatório entre 0 e o tamanho do vetor
     int indiceSorteado = rand() % escolhas.size();
 
     return escolhas[indiceSorteado];
@@ -78,11 +79,11 @@ bool Roseira::cadaInstante(BocadoSolo* b, Jardim* j) {
     int absorveNutri = std::min((int)Settings::Roseira::absorcao_nutrientes, b->getNutrientes());
     int absorveAgua = std::min((int)Settings::Roseira::absorcao_agua, b->getAgua());
 
-    nutrientes += absorveNutri;
-    agua += absorveAgua;
+    if (b->setNutrientes(b->getNutrientes() - absorveNutri))
+        nutrientes += absorveNutri;
+    if (b->setAgua(b->getAgua() - absorveAgua))
+        agua += absorveAgua;
 
-    b->setNutrientes(b->getNutrientes() - absorveNutri);
-    b->setAgua(b->getAgua() - absorveAgua);
 
     bool vaiMorrer = false;
     if (agua < Settings::Roseira::morre_agua_menor)

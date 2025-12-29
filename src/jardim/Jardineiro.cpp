@@ -39,7 +39,7 @@ void Jardineiro::pegaFerramenta(int num) {
     for (auto it = ferramentas.begin(); it != ferramentas.end(); ++it) {
         f = *it;
         if (f->getNumSerie() == num) {
-            ferramentas.erase(it); // Remove do vetor, mas NÃO apaga o objeto da memória
+            ferramentas.erase(it); // Remove do vetor, mas nao apaga o objeto da memoria
             ferramentaNaMao = f;
             break;
         }
@@ -77,9 +77,9 @@ void Jardineiro::aplicarFerramenta(Jardim* j) {
     if (ferramentaNaMao == nullptr)
         return;
     acabou = ferramentaNaMao->aplica(localAtual,j);
-    std::cout << ferramentaNaMao << "foi aplicada" << endl;
+    std::cout << "A ferramenta " << ferramentaNaMao->getLetra() << " | " << ferramentaNaMao->getNumSerie() << "foi aplicada" << endl;
     if (acabou){
-        std::cout << ferramentaNaMao << "acabou." << endl;
+        std::cout << ferramentaNaMao->getLetra() << " | " << ferramentaNaMao->getNumSerie()  << " acabou." << endl;
         delete ferramentaNaMao;
         ferramentaNaMao = nullptr;
     }
@@ -109,7 +109,7 @@ void Jardineiro::move(BocadoSolo* b) {
 
     }else {
         if (entradasSaidasRestantes <= 0)
-            throw std::runtime_error("O jardineiro nao se pode mover mais este turno.");
+            throw std::runtime_error("O jardineiro nao pode entrar/sair mais este turno.");
 
         entradasSaidasRestantes--;
     }

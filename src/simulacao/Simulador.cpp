@@ -36,13 +36,13 @@ Simulador::~Simulador() {
 }
 
 void Simulador::avancaInstante(){
-  jardineiro->resetTurno();
-
-  jardineiro->aplicarFerramenta(jardim.get());
-  jardineiro->pegaFerramenta(jardim.get());
-
-  jardim->setInstantes();
-  jardim->processaTurno();
+    jardineiro->resetTurno();
+    if (jardineiro->estaDentro()) {
+        jardineiro->aplicarFerramenta(jardim.get());
+        jardineiro->pegaFerramenta(jardim.get());
+    }
+    jardim->setInstantes();
+    jardim->processaTurno();
 }
 
 void Simulador::criaJardim(int nLinhas, int nColunas) {
@@ -78,8 +78,9 @@ void Simulador::executa(const string &input){
 
   string n = exec->getNome();
 
-  if (jardim == nullptr && exec->getNome() != "jardim")
-      throw std::runtime_error("Nao existe jardim.");
+  if (jardim == nullptr)
+      if ( !(exec->getNome() == "jardim" || exec->getNome() == "executa") )
+            throw std::runtime_error("Nao existe jardim.");
 
   exec->executa(*this,params);
 
