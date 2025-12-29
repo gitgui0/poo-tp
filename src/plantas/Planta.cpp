@@ -6,7 +6,7 @@
 #include "Orquidea.h"
 #include "Roseira.h"
 
-Planta::Planta(int agua, int nutrientes, char letra, const std::string& beleza) :
+Planta::Planta(const int agua, const int nutrientes, const char letra, const std::string& beleza) :
     agua(agua), nutrientes(nutrientes), EstaSolo(letra)
 {
   if(beleza != "Feia" and beleza != "Bonita" and beleza != "Neutra")
@@ -17,7 +17,7 @@ Planta::Planta(int agua, int nutrientes, char letra, const std::string& beleza) 
 
 Planta::~Planta() = default;
 
-Planta* Planta::criar(char planta) {
+Planta* Planta::criar(const char planta) {
     Planta* novaPlanta = nullptr;
     switch (tolower(planta)) {
         case 'c':

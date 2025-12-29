@@ -1,10 +1,11 @@
 #include "Settings.h"
 #include "Regador.h"
-#include <iostream>
+#include <sstream>
+#include "BocadoSolo.h"
 
 using namespace std;
 
-Regador::Regador() : Ferramenta('g'), capacidade(Settings::Regador::capacidade){};
+Regador::Regador() : Ferramenta('g'), capacidade(Settings::Regador::capacidade){}
 
 bool Regador::aplica(BocadoSolo* b, Jardim* j) {
     int dose = Settings::Regador::dose;

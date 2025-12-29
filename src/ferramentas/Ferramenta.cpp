@@ -3,6 +3,8 @@
 #include "Regador.h"
 #include "TesouraPoda.h"
 #include "AceleradorCrescimento.h"
+#include <sstream>
+
 
 int Ferramenta::seq = 1;
 

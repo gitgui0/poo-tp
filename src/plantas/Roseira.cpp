@@ -4,9 +4,9 @@
 #include <vector>
 
 Roseira::Roseira() : Planta(Settings::Roseira::inicial_agua,
-                            Settings::Roseira::inicial_nutrientes,'r',"Bonita") {};
+                            Settings::Roseira::inicial_nutrientes,'r',"Bonita") {}
 
-Roseira::Roseira(int agua, int nutrientes) : Planta(agua,nutrientes,'r',"Bonita") {};
+Roseira::Roseira(const int agua, const int nutrientes) : Planta(agua,nutrientes,'r',"Bonita") {}
 
 void Roseira::multiplica(BocadoSolo *b, Jardim* j) {
     std::cout << "multiplica roseira" << std::endl;
@@ -74,7 +74,7 @@ bool Roseira::cadaInstante(BocadoSolo* b, Jardim* j) {
     //usar o max aqui, previne valores negativos
     nutrientes = std::max(0, nutrientes - (int)Settings::Roseira::perda_nutrientes);
     agua = std::max(0, agua - (int)Settings::Roseira::perda_agua);
-    
+
     int absorveNutri = std::min((int)Settings::Roseira::absorcao_nutrientes, b->getNutrientes());
     int absorveAgua = std::min((int)Settings::Roseira::absorcao_agua, b->getAgua());
 

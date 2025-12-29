@@ -26,14 +26,14 @@ class BocadoSolo {
         int getAgua() const noexcept { return agua;}
         int getNutrientes() const noexcept { return nutrientes;}
 
-        bool setAgua(int agua);
-        bool setNutrientes(int nutrientes);
+        bool setAgua(int aguaNovo);
+        bool setNutrientes(int nutrientesNovo);
 
         bool estaJardineiro() const noexcept { return ocupado; }
         void removeJardineiro() {ocupado = false;}
         void colocaJardineiro() {ocupado = true;}
 
-        char mostra();
+        char mostra() const;
 
     private:
         int agua;

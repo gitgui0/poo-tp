@@ -5,8 +5,8 @@
 
 #include "Settings.h"
 
-Cacto::Cacto() : Planta(0,0,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrientesExcessivos(0) {};
-Cacto::Cacto(int agua, int nutrientes) : Planta(agua,nutrientes,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrientesExcessivos(0){};
+Cacto::Cacto() : Planta(0,0,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrientesExcessivos(0) {}
+Cacto::Cacto(const int agua, const int nutrientes) : Planta(agua,nutrientes,'c',"Neutra"), turnosAguaExcessiva(0), turnosNutrientesExcessivos(0){}
 
 bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
     countInstantes ++;

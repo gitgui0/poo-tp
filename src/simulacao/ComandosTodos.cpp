@@ -1,22 +1,13 @@
 #include "ComandosTodos.h"
-#include "Ferramenta.h"
-#include "Adubo.h"
-#include "Regador.h"
-#include "TesouraPoda.h"
-#include "AceleradorCrescimento.h"
 
 #include "Planta.h"
-#include "Cacto.h"
-#include "ErvaDaninha.h"
-#include "Orquidea.h"
-#include "Roseira.h"
 
 #include "Jardineiro.h"
 #include "Jardim.h"
-#include "BocadoSolo.h"
 #include <iostream>
 #include <fstream>
-#include <Settings.h>
+#include <sstream>
+
 
 using namespace std;
 

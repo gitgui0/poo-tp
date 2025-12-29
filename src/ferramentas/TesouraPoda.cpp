@@ -1,9 +1,10 @@
 
 #include "TesouraPoda.h"
 
-#include <BocadoSolo.h>
-#include <iostream>
-#include <Planta.h>
+#include <sstream>
+#include "BocadoSolo.h"
+#include "Planta.h"
+
 using namespace std;
 
 TesouraPoda::TesouraPoda() : Ferramenta('t') {}

@@ -24,7 +24,6 @@ class Jardineiro {
 
         void adicionarFerramenta(Ferramenta* f);
 
-        void pegaFerramenta(Ferramenta* f);
         void pegaFerramenta(Jardim* j);
         void pegaFerramenta(int num);
         void largaFerramenta();

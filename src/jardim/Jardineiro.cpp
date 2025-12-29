@@ -24,25 +24,13 @@ Jardineiro::~Jardineiro() {
     }
     ferramentas.clear();
 
-};
+}
 
 // --- Ferramentas ---
 void Jardineiro::adicionarFerramenta(Ferramenta* f) {
     if (f!=nullptr) ferramentas.push_back(f);
 }
 
-void Jardineiro::pegaFerramenta(Ferramenta* f) {
-    if (f==nullptr) return; //TODO: MENSAGEM DE JEITO PARA METER NO THROW
-    largaFerramenta();
-
-    for (auto it = ferramentas.begin(); it != ferramentas.end(); ++it) {
-        if (*it == f) {
-            ferramentas.erase(it); // Remove do vetor, mas NÃO apaga o objeto da memória
-            break;
-        }
-    }
-    ferramentaNaMao = f;
-}
 
 void Jardineiro::pegaFerramenta(int num) {
     largaFerramenta();

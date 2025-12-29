@@ -3,7 +3,6 @@
 
 #include "EstaSolo.h"
 #include <string>
-#include <sstream>
 
 class BocadoSolo;
 class Jardim;

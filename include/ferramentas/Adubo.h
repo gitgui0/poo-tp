@@ -2,8 +2,6 @@
 #define ADUBO_H
 
 #include "Ferramenta.h"
-#include <BocadoSolo.h>
-
 
 class Adubo : public Ferramenta{
     public:

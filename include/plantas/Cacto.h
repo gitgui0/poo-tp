@@ -7,7 +7,7 @@
 class Cacto : public Planta {
     public:
         Cacto();
-        Cacto(int agua, int nutri );
+        Cacto(int agua, int nutrientes );
         ~Cacto() override = default;
 
         bool cadaInstante(BocadoSolo* b, Jardim* j) override;

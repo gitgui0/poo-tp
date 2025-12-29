@@ -1,7 +1,6 @@
 #ifndef TP_ACELERADORCRESCIMENTO_H
 #define TP_ACELERADORCRESCIMENTO_H
 
-#include <BocadoSolo.h>
 #include "Ferramenta.h"
 
 

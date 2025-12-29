@@ -5,7 +5,6 @@
 #include "Jardim.h"
 #include "Jardineiro.h"
 #include "Interface.h"
-#include <sstream>
 #include <vector>
 #include <map>
 #include <memory>

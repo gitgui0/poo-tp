@@ -2,8 +2,6 @@
 #ifndef REGADOR_H
 #define REGADOR_H
 
-#include <BocadoSolo.h>
-
 #include "Ferramenta.h"
 
 

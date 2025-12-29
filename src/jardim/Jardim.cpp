@@ -51,7 +51,7 @@ Jardim::~Jardim() {
     delete[] area;
 }
 
-Ferramenta* Jardim::apanharFerramenta(BocadoSolo* solo) {
+Ferramenta* Jardim::apanharFerramenta(BocadoSolo* solo) const {
     if (solo == nullptr) {
         return nullptr;
     }
@@ -61,12 +61,10 @@ Ferramenta* Jardim::apanharFerramenta(BocadoSolo* solo) {
 
     //Se apanhamos algo, gerar uma nova noutro local
     if (f != nullptr) {
-        int novaL, novaC;
-
         // Tenta encontrar uma posição vazia (100 tentativas)
         for(int i = 0; i < 100; i++) {
-            novaL = rand() % nLinhas;
-            novaC = rand() % nColunas;
+            int novaL = rand() % nLinhas;
+            int novaC = rand() % nColunas;
 
             // Vamos buscar o solo da nova posição aleatória
             BocadoSolo* soloDestino = getBocado(novaL, novaC);
@@ -86,7 +84,7 @@ Ferramenta* Jardim::geraFerramentaAleatoria() {
     random_device rd;
     mt19937 gen(rd());
     // 0: Regador, 1: Adubo, 2: TesouraPoda, 3: AceleradorCrescimento
-    uniform_int_distribution<int> distrib(0, 3);
+    uniform_int_distribution distrib(0, 3);
     int tipo = distrib(gen);
 
     switch (tipo) {
@@ -98,11 +96,11 @@ Ferramenta* Jardim::geraFerramentaAleatoria() {
     }
 }
 
-void Jardim::colocaFerramentasIniciais() {
+void Jardim::colocaFerramentasIniciais() const {
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<int> randL(0, nLinhas - 1); // Linhas aleatorias
-    uniform_int_distribution<int> randC(0, nColunas - 1); // Colunas aleatorias
+    uniform_int_distribution randL(0, nLinhas - 1); // Linhas aleatorias
+    uniform_int_distribution randC(0, nColunas - 1); // Colunas aleatorias
 
     int ferramentasColocadas = 0;
     int maximo = (nColunas * nLinhas < 3 ? nColunas * nLinhas : 3 );
@@ -124,8 +122,8 @@ void Jardim::colocaFerramentasIniciais() {
     }
 }
 
-int Jardim::getLinhas() const noexcept { return nLinhas; };
-int Jardim::getColunas() const noexcept { return nColunas; };
+int Jardim::getLinhas() const noexcept { return nLinhas; }
+int Jardim::getColunas() const noexcept { return nColunas; }
 
 string Jardim::mostraJardim() const noexcept {
     ostringstream oss;
@@ -150,12 +148,12 @@ string Jardim::mostraJardim() const noexcept {
     return oss.str();
 }
 
-BocadoSolo* Jardim::getBocado(int l, int c) {
+BocadoSolo* Jardim::getBocado(int l, int c) const {
     if (l > nLinhas-1 || l < 0  || c > nColunas-1 || c < 0) return nullptr;
     return &area[l][c];
 }
 
-BocadoSolo *Jardim::getBocadoDoJardineiro() {
+BocadoSolo *Jardim::getBocadoDoJardineiro() const {
     for (int i = 0; i < nLinhas; i++ ) {
         for (int j = 0; j < nColunas; j++) {
             if (area[i][j].estaJardineiro()) {
@@ -167,11 +165,11 @@ BocadoSolo *Jardim::getBocadoDoJardineiro() {
 }
 
 
-std::pair<int,int> Jardim::getPosicaoBocado(BocadoSolo* b) const noexcept {
+std::pair<int,int> Jardim::getPosicaoBocado(BocadoSolo* b) const {
     for (int i = 0; i < nLinhas; i++) {
         for (int j = 0; j < nColunas; j++) {
             if (&area[i][j] == b) {
-                return std::pair<int,int>(i,j);
+                return {i,j};
             }
         }
     }

@@ -8,8 +8,8 @@ BocadoSolo::BocadoSolo() : ocupado(false){
     std::mt19937 gen(rd());
 
     // Cria uma distribuição uniforme de inteiros
-    std::uniform_int_distribution<int> randomAgua(Settings::Jardim::agua_min,Settings::Jardim::agua_max);
-    std::uniform_int_distribution<int> randomNutri(Settings::Jardim::nutrientes_min,Settings::Jardim::nutrientes_max);
+    std::uniform_int_distribution randomAgua(Settings::Jardim::agua_min,Settings::Jardim::agua_max);
+    std::uniform_int_distribution randomNutri(Settings::Jardim::nutrientes_min,Settings::Jardim::nutrientes_max);
 
     // Gera um valor aleatório
     this->agua =  randomAgua(gen);
@@ -51,14 +51,14 @@ BocadoSolo& BocadoSolo::operator=(const BocadoSolo& outro) {
 }
 
 // Nao é usado, foi criado mais para "no caso"
-BocadoSolo::BocadoSolo(const BocadoSolo& other)
-    : agua(other.agua), nutrientes(other.nutrientes), ocupado(other.ocupado), planta(nullptr), ferramenta(nullptr)
+BocadoSolo::BocadoSolo(const BocadoSolo& outro)
+    : agua(outro.agua), nutrientes(outro.nutrientes), ocupado(outro.ocupado), planta(nullptr), ferramenta(nullptr)
 {
-    if (other.planta != nullptr) {
-        this->planta = other.planta->clone();
+    if (outro.planta != nullptr) {
+        this->planta = outro.planta->clone();
     }
-    if (other.ferramenta != nullptr) {
-        this->ferramenta = other.ferramenta->clone();
+    if (outro.ferramenta != nullptr) {
+        this->ferramenta = outro.ferramenta->clone();
     }
 }
 
@@ -82,7 +82,7 @@ BocadoSolo::~BocadoSolo() {
 
 
 
-char BocadoSolo::mostra() {
+char BocadoSolo::mostra() const{
     if (estaJardineiro()) return '*';
     if (planta) return planta->getLetra();
     if (ferramenta) return ferramenta->getLetra();
@@ -98,13 +98,13 @@ void BocadoSolo::setFerramenta(Ferramenta* f) {
     ferramenta = f;
 }
 
-bool BocadoSolo::setAgua(int agua) {
+bool BocadoSolo::setAgua(int aguaNovo) {
     if (agua<0) return false;
-    this->agua = agua;
+    this->agua = aguaNovo;
     return true;
 }
-bool BocadoSolo::setNutrientes(int nutrientes) {
+bool BocadoSolo::setNutrientes(int nutrientesNovo) {
     if (nutrientes<0) return false;
-    this->nutrientes = nutrientes;
+    this->nutrientes = nutrientesNovo;
     return true;
 }

@@ -1,10 +1,11 @@
 #include "./Adubo.h"
 #include "./Settings.h"
-#include <iostream>
+#include <sstream>
+#include "BocadoSolo.h"
 
 using namespace std;
 
-Adubo::Adubo() : Ferramenta('a'), capacidade(Settings::Adubo::capacidade){};
+Adubo::Adubo() : Ferramenta('a'), capacidade(Settings::Adubo::capacidade){}
 
 bool Adubo::aplica(BocadoSolo* b, Jardim* j) {
     int dose = Settings::Adubo::dose;

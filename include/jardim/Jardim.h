@@ -12,21 +12,21 @@ class Jardim {
 
         Jardim() = default;
         Jardim(int nLinhas, int nColunas);
-        explicit Jardim(const Jardim& j);
+        explicit Jardim(const Jardim& outro);
         ~Jardim();
 
-        Ferramenta* apanharFerramenta(BocadoSolo* solo);
+        Ferramenta* apanharFerramenta(BocadoSolo* solo) const;
 
         // Devolve as coordenadas de um certo bocado
-        std::pair<int,int> getPosicaoBocado(BocadoSolo* b) const noexcept;
-        BocadoSolo * getBocado(int l, int c);
-        BocadoSolo * getBocadoDoJardineiro();
+        std::pair<int,int> getPosicaoBocado(BocadoSolo* b) const;
+        BocadoSolo * getBocado(int l, int c) const;
+        BocadoSolo * getBocadoDoJardineiro() const;
 
         int getLinhas() const noexcept;
         int getColunas() const noexcept;
 
         int getInstantes() const noexcept { return instantes;}
-        void setInstantes(int num=1) noexcept { instantes +=num; }
+        void setInstantes(const int num=1) noexcept { instantes +=num; }
 
         bool colhe(int l, int c);
         void planta(int l, int c, char planta);
@@ -37,7 +37,7 @@ class Jardim {
 
     private:
         static Ferramenta* geraFerramentaAleatoria();
-        void colocaFerramentasIniciais();
+        void colocaFerramentasIniciais() const;
 
         int nLinhas;
         int nColunas;

@@ -1,11 +1,11 @@
 #include "AceleradorCrescimento.h"
 
 #include <BocadoSolo.h>
-#include <iostream>
+#include <sstream>
 #include <Planta.h>
 
 #include "Settings.h"
-#include "Settings.h"
+
 
 using namespace std;
 
