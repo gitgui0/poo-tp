@@ -85,22 +85,27 @@ bool Roseira::cadaInstante(BocadoSolo* b, Jardim* j) {
     b->setNutrientes(b->getNutrientes() - absorveNutri);
     b->setAgua(b->getAgua() - absorveAgua);
 
-    // se a quantidade de água acumulada chegar a 0
-    if (agua < Settings::Roseira::morre_agua_menor) {
-        return true;
+    bool vaiMorrer = false;
+    if (agua < Settings::Roseira::morre_agua_menor)
+        vaiMorrer = true;
+
+    if (nutrientes < Settings::Roseira::morre_nutrientes_menor)
+        vaiMorrer = true;
+
+    if (nutrientes > Settings::Roseira::morre_nutrientes_maior)
+        vaiMorrer = true;
+
+    // se nao devolver nada, significa que nao ha posicoes livres, entao vai morrer
+    if (geraVizinho(b,j) == nullptr)
+        vaiMorrer = true;
+
+    if (vaiMorrer) {
+        // Ao morrer deixa no solo metade dos nutrientes e metade da agua
+        b->setNutrientes(b->getNutrientes() + (this->nutrientes / 2));
+        b->setAgua(b->getAgua() + (this->agua / 2));
     }
 
-    // se a quantidade de nutrientes acumulada chegar a 0
-    if (nutrientes < Settings::Roseira::morre_nutrientes_menor) {
-        return true;
-    }
-
-    //  se a quantidade de nutrientes acumulada atingir 200
-    if (nutrientes > Settings::Roseira::morre_nutrientes_maior) {
-        return true;
-    }
-
-    return geraVizinho(b,j) == nullptr; // se nao devolver nada, significa que nao ha posicoes livres, entao vai morrer
+    return vaiMorrer;
 }
 
 

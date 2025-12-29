@@ -34,10 +34,15 @@ bool Cacto::cadaInstante(BocadoSolo* b, Jardim* j) {
     b->setNutrientes(b->getNutrientes() - absorveNutri);
     b->setAgua(b->getAgua() - absorveAgua);
 
-    return
-        turnosAguaExcessiva >= Settings::Cacto::morre_agua_solo_instantes
-        || turnosNutrientesExcessivos >= Settings::Cacto::morre_nutrientes_solo_menor
-    ;
+    bool vaiMorrer = turnosAguaExcessiva >= Settings::Cacto::morre_agua_solo_instantes
+    || turnosNutrientesExcessivos >= Settings::Cacto::morre_nutrientes_solo_instantes;
+
+    if (vaiMorrer) {
+        // Ao morrer deixa no solo todos os nutrientes
+        b->setNutrientes(b->getNutrientes() + this->nutrientes);
+    }
+    return vaiMorrer;
+
 }
 
 void Cacto::multiplica(BocadoSolo *b, Jardim* j) {
