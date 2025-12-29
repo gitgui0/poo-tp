@@ -50,7 +50,7 @@ void Cacto::multiplica(BocadoSolo *b, Jardim* j) {
 
     //Condicoes para multiplicar (neste caso e nele proprio, mas em outras plantas, a condicao
     // teria que estar ser verificada na posicao vizinha, ou seja, na funcao geraVizinho )
-    if (!( nutrientes > Settings::Cacto::multiplica_nutrientes_maior && agua > Settings::Cacto::morre_nutrientes_solo_menor ))
+    if (!( nutrientes > Settings::Cacto::multiplica_nutrientes_maior && agua > Settings::Cacto::multiplica_agua_maior ))
         return;
 
     BocadoSolo* vizinho = geraVizinho(b,j);

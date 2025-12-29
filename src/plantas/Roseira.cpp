@@ -74,10 +74,9 @@ bool Roseira::cadaInstante(BocadoSolo* b, Jardim* j) {
     //usar o max aqui, previne valores negativos
     nutrientes = std::max(0, nutrientes - (int)Settings::Roseira::perda_nutrientes);
     agua = std::max(0, agua - (int)Settings::Roseira::perda_agua);
-
-    // Esta logica esta assim porque "absorve 5 unidades de água do solo (se existir)", por causa do "se existir"
-    int absorveNutri = ( b->getNutrientes() >= Settings::Roseira::absorcao_nutrientes ? Settings::Roseira::absorcao_nutrientes : 0);
-    int absorveAgua = (b->getAgua() >= Settings::Roseira::absorcao_agua  ? Settings::Roseira::absorcao_agua  : 0);
+    
+    int absorveNutri = std::min((int)Settings::Roseira::absorcao_nutrientes, b->getNutrientes());
+    int absorveAgua = std::min((int)Settings::Roseira::absorcao_agua, b->getAgua());
 
     nutrientes += absorveNutri;
     agua += absorveAgua;
