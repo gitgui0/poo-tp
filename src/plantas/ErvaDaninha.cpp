@@ -97,5 +97,5 @@ bool ErvaDaninha::cadaInstante(BocadoSolo* b, Jardim* j) {
     b->setNutrientes(b->getNutrientes() - absorveNutri);
     b->setAgua(b->getAgua() - absorveAgua);
 
-    return nutrientes >= Settings::ErvaDaninha::morre_instantes;
+    return countInstantes >= Settings::ErvaDaninha::morre_instantes;
 }
