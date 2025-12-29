@@ -10,7 +10,7 @@ bool Adubo::aplica(BocadoSolo* b, Jardim* j) {
     int dose = Settings::Adubo::dose;
     b->setNutrientes(b->getNutrientes() + dose);
 
-    capacidade = capacidade -= dose;
+    capacidade -= dose;
     return capacidade <= 0;
 }
 

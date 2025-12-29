@@ -70,8 +70,10 @@ BocadoSolo* Roseira::geraVizinho(BocadoSolo *b, Jardim* j) const {
 
 bool Roseira::cadaInstante(BocadoSolo* b, Jardim* j) {
     countInstantes ++;
-    nutrientes -= Settings::Roseira::perda_nutrientes;
-    agua -= Settings::Roseira::perda_nutrientes;;
+
+    //usar o max aqui, previne valores negativos
+    nutrientes = std::max(0,Settings::Roseira::perda_nutrientes);
+    agua = std::max(0,Settings::Roseira::perda_nutrientes);
 
     // Esta logica esta assim porque "absorve 5 unidades de água do solo (se existir)", por causa do "se existir"
     int absorveNutri = ( b->getNutrientes() >= Settings::Roseira::absorcao_nutrientes ? Settings::Roseira::absorcao_nutrientes : 0);

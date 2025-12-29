@@ -4,11 +4,14 @@
 #include <iostream>
 #include <Planta.h>
 
+#include "Settings.h"
+#include "Settings.h"
+
 using namespace std;
 
 AceleradorCrescimento::AceleradorCrescimento() :
     Ferramenta('z'),
-    capacidade(5)
+    capacidade(Settings::AceleradorCrescimento::capacidade)
 {}
 
 bool AceleradorCrescimento::aplica(BocadoSolo* b, Jardim* j) {

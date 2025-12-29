@@ -166,7 +166,7 @@ void Simulador::recuperarJardim(const std::string& nome) {
      "sincroniza" o jardineiro atual
   */
   jardineiro->mudaLocal(jardim->getBocadoDoJardineiro());
-  jardineiro->setEstaDentro(jardineiro->getLocalAtual() == nullptr);
+  jardineiro->setEstaDentro(jardineiro->getLocalAtual() != nullptr);
 
   // Remove a copia no map. A copia ja nao tem o jardim mas mais pela memoria
   salvos.erase(it);
