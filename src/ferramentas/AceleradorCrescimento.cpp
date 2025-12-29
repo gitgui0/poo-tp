@@ -26,13 +26,6 @@ bool AceleradorCrescimento::aplica(BocadoSolo* b, Jardim* j) {
                 break;
             }
 
-            if (p->getLetra() == 'r') {
-                BocadoSolo* b = p->geraVizinho(b,j);
-                // Ou seja, nao ha nenhum vizinho sem planta
-                if (b==nullptr)
-                    b->setPlanta(nullptr);
-            }
-
         }
         capacidade--;
     }
