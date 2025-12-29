@@ -192,9 +192,11 @@ void Jardim::processaTurno() {
 
             if (plantaMorreu)
                 b->setPlanta(nullptr);
+            else if (p != nullptr) { // tenta multiplicar apenas se nao morreu
+                p->multiplica(b, this);
+            }
 
-            if (p!=nullptr)
-                p->multiplica(b,this);
+
         }
     }
 }

@@ -88,8 +88,8 @@ BocadoSolo* ErvaDaninha::geraVizinho(BocadoSolo *b, Jardim* j) const {
 bool ErvaDaninha::cadaInstante(BocadoSolo* b, Jardim* j) {
     countInstantes++;
 
-    int absorveNutri = ( b->getNutrientes() > 0 ? Settings::ErvaDaninha::absorcao_nutrientes : 0);
-    int absorveAgua = (b->getAgua() > 0 ? Settings::ErvaDaninha::absorcao_agua : 0);
+    int absorveNutri = std::min((int)Settings::ErvaDaninha::absorcao_nutrientes,b->getNutrientes());
+    int absorveAgua = std::min((int)Settings::ErvaDaninha::absorcao_agua, b->getAgua());
 
     nutrientes += absorveNutri;
     agua += absorveAgua;

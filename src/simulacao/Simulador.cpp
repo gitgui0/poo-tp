@@ -225,7 +225,7 @@ void Simulador::moveJardineiro(int dirX, int dirY) const {
 
     jardineiro->move(novo);
     jardineiro->pegaFerramenta(jardim.get());
-    jardineiro->aplicarFerramenta(jardim.get());
+
 }
 
 void Simulador::saiDoJardim() const {
