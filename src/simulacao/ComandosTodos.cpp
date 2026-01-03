@@ -220,6 +220,7 @@ void ComandoCompra::executa(Simulador & sim, std::istringstream & params) const 
         throw std::runtime_error("Falta especificar o tipo de ferramenta a comprar (g, a, t, z)");
 
     sim.compraEAdiciona(tipo);
+    std::cout << "Ferramenta comprada com sucesso" << endl;
 }
 
 

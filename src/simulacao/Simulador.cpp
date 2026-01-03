@@ -144,7 +144,8 @@ void Simulador::gravarJardim(const std::string& nome) {
     throw std::runtime_error("Nao existe nenhum jardim ativo para gravar.");
   }
   // deep copy para salvar
-  salvos[nome] = jardim->clone();
+  salvos[nome].first = jardim->clone();
+  salvos[nome].second = new Jardineiro(*jardineiro);
 }
 
 void Simulador::recuperarJardim(const std::string& nome) {
@@ -153,9 +154,10 @@ void Simulador::recuperarJardim(const std::string& nome) {
     throw std::runtime_error("Nao existe nenhum jardim salvo com esse nome.");
   }
 
-  // Se ja existisse um jardim ativo, o unique_ptr destroi-o antes de receber o recuperado
-  jardim = std::move(it->second);
-
+    // Se ja existisse um jardim ativo, o unique_ptr destroi-o antes de receber o recuperado
+    jardim = std::move(it->second.first);
+    delete jardineiro;
+    jardineiro = it->second.second;
 
   /*
      Para casos em que o jardineiro estava dentro do jardim.

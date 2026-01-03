@@ -34,6 +34,7 @@ add_executable(TP
         # Comandos
         src/simulacao/Comando.cpp
         src/simulacao/ComandosTodos.cpp
+        include/simulacao/SettingsExtra.h
 )
 
 # Atualizado para incluir as subpastas da pasta 'include'

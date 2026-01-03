@@ -67,7 +67,7 @@ class Simulador {
         int nComandos;
 
         Interface* interface;
-        std::map<string, unique_ptr<Jardim>> salvos;
+        std::map<string, pair<unique_ptr<Jardim>,Jardineiro*>> salvos;
 };
 
 

@@ -13,7 +13,10 @@ Jardineiro::Jardineiro() : ferramentaNaMao(nullptr),
                            entradasSaidasRestantes(Settings::Jardineiro::max_entradas_saidas),
                            localAtual(nullptr),
                            dentroDoJardim(false)
-{
+{}
+
+Jardineiro::Jardineiro(const Jardineiro& outro) {
+    *this = outro;
 }
 
 Jardineiro::~Jardineiro() {
@@ -24,6 +27,26 @@ Jardineiro::~Jardineiro() {
     }
     ferramentas.clear();
 
+}
+
+Jardineiro &Jardineiro::operator=(const Jardineiro &outro) {
+    movimentosRestantes = outro.movimentosRestantes;
+    colheitasRestantes = outro.colheitasRestantes;
+    plantasRestantes = outro.plantasRestantes;
+    entradasSaidasRestantes = outro.entradasSaidasRestantes;
+
+    for (Ferramenta* f : outro.ferramentas) {
+        if (f != nullptr) {
+            Ferramenta* temp = f->clone();
+            ferramentas.push_back(temp);
+        }
+    }
+
+    if (outro.ferramentaNaMao != nullptr)
+        ferramentaNaMao = outro.ferramentaNaMao->clone();
+    else
+        ferramentaNaMao = nullptr;
+    return *this;
 }
 
 // --- Ferramentas ---

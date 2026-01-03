@@ -1,17 +1,15 @@
-#include "AceleradorCrescimento.h"
-
 #include <BocadoSolo.h>
 #include <sstream>
 #include <Planta.h>
-
-#include "Settings.h"
+#include "SettingsExtra.h"
+#include "AceleradorCrescimento.h"
 
 
 using namespace std;
 
 AceleradorCrescimento::AceleradorCrescimento() :
     Ferramenta('z'),
-    capacidade(Settings::AceleradorCrescimento::capacidade)
+    capacidade(SettingsExtra::AceleradorCrescimento::capacidade)
 {}
 
 bool AceleradorCrescimento::aplica(BocadoSolo* b, Jardim* j) {

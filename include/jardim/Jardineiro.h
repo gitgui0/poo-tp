@@ -12,7 +12,10 @@ class Jardineiro {
 
     public:
         Jardineiro();
+        Jardineiro(const Jardineiro& outro);
         ~Jardineiro();
+
+        Jardineiro& operator=(const Jardineiro& outro);
 
         bool estaDentro() const { return dentroDoJardim;}
         void setEstaDentro(bool s) {dentroDoJardim = s;}

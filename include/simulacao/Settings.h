@@ -10,10 +10,6 @@ class Settings {
         static const int nutrientes_min = 40;
         static const int nutrientes_max = 50;
     };
-    class AceleradorCrescimento {
-    public:
-        static const int capacidade = 5;
-    };
     class Regador {
     public:
         static const int capacidade = 200;

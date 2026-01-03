@@ -1,10 +1,10 @@
 #include "Orquidea.h"
-#include "Settings.h"
+#include "SettingsExtra.h"
 #include <iostream>
 #include <vector>
 
 Orquidea::Orquidea()
-    : Planta(Settings::Orquidea::inicial_agua, Settings::Orquidea::inicial_nutrientes, 'x', "Bonita"),
+    : Planta(SettingsExtra::Orquidea::inicial_agua, SettingsExtra::Orquidea::inicial_nutrientes, 'x', "Bonita"),
       nInstantesAguaExcessiva(0)
 {}
 
@@ -13,25 +13,25 @@ bool Orquidea::cadaInstante(BocadoSolo* b, Jardim* j) {
 
     bool estaFraca = false;
 
-    if (b->getAgua() > Settings::Orquidea::agua_maior_perde || b->getAgua() < Settings::Orquidea::agua_menor_perde) {
+    if (b->getAgua() > SettingsExtra::Orquidea::agua_maior_perde || b->getAgua() < SettingsExtra::Orquidea::agua_menor_perde) {
         nInstantesAguaExcessiva++;
     } else {
         nInstantesAguaExcessiva = 0;
     }
 
     // se tiver fraca, ou seja, com muita agua durante mt tempo, tira nutrientes
-    if (nInstantesAguaExcessiva >= Settings::Orquidea::agua_prejudicial_instantes) {
+    if (nInstantesAguaExcessiva >= SettingsExtra::Orquidea::agua_prejudicial_instantes) {
         estaFraca = true;
     }
 
-    int absorveNutri = std::min((int)Settings::Orquidea::absorve_nutrientes, b->getNutrientes());
+    int absorveNutri = std::min((int)SettingsExtra::Orquidea::absorve_nutrientes, b->getNutrientes());
 
 
     if (b->setNutrientes(b->getNutrientes() - absorveNutri))
         nutrientes += absorveNutri;
 
     if (!estaFraca) {
-        int absorveAgua = std::min((int)Settings::Orquidea::absorve_agua, b->getAgua());
+        int absorveAgua = std::min((int)SettingsExtra::Orquidea::absorve_agua, b->getAgua());
 
         if (b->setAgua(b->getAgua() - absorveAgua))
             agua += absorveAgua;
@@ -39,30 +39,30 @@ bool Orquidea::cadaInstante(BocadoSolo* b, Jardim* j) {
         // Retribuicao
         BocadoSolo* viz = geraVizinho(b,j);
         if (viz != nullptr) {
-            int ret = std::min(nutrientes, (int)Settings::Orquidea::retribuicao_nutrientes);
+            int ret = std::min(nutrientes, (int)SettingsExtra::Orquidea::retribuicao_nutrientes);
             viz->setNutrientes(viz->getNutrientes() + ret);
             nutrientes -= ret;
         }
 
     }else {
-        int absorveAgua = std::min((int)Settings::Orquidea::absorve_agua_fraca, b->getAgua());
-        if (agua < Settings::Orquidea::agua_menor_perde && b->setAgua(b->getAgua() - absorveAgua))
+        int absorveAgua = std::min((int)SettingsExtra::Orquidea::absorve_agua_fraca, b->getAgua());
+        if (agua < SettingsExtra::Orquidea::agua_menor_perde && b->setAgua(b->getAgua() - absorveAgua))
             agua += absorveAgua;
     }
 
 
-    return nInstantesAguaExcessiva >= Settings::Orquidea::instantes_morre;
+    return nInstantesAguaExcessiva >= SettingsExtra::Orquidea::instantes_morre;
 }
 
 void Orquidea::multiplica(BocadoSolo *b, Jardim* j) {
-    if (nutrientes < Settings::Orquidea::multiplica_nutrientes_maior) return;
+    if (nutrientes < SettingsExtra::Orquidea::multiplica_nutrientes_maior) return;
 
     BocadoSolo* vizinho = geraVizinho(b, j);
 
-    if (vizinho != nullptr && vizinho->getAgua() > Settings::Orquidea::multiplica_agua_maior) {
+    if (vizinho != nullptr && vizinho->getAgua() > SettingsExtra::Orquidea::multiplica_agua_maior) {
         Planta* p = new Orquidea();
         vizinho->setPlanta(p);
-        nutrientes = std::max(0,nutrientes - Settings::Orquidea::inicial_nutrientes);
+        nutrientes = std::max(0,nutrientes - SettingsExtra::Orquidea::inicial_nutrientes);
         //std::cout << "A Orquidea multiplicou-se" << std::endl;
     }
 }
@@ -76,7 +76,7 @@ BocadoSolo* Orquidea::geraVizinho(BocadoSolo *b, Jardim* j) const {
 
     for (int i = 0; i < 4; i++) {
         BocadoSolo* viz = j->getBocado(pos.first + dr[i], pos.second + dc[i]);
-        if (viz && viz->getPlanta() == nullptr && viz->getAgua() > Settings::Orquidea::multiplica_agua_maior)
+        if (viz && viz->getPlanta() == nullptr && viz->getAgua() > SettingsExtra::Orquidea::multiplica_agua_maior)
             escolhas.push_back(viz);
     }
 
